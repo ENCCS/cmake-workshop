@@ -59,10 +59,10 @@ jobs:
           ( git branch gh-pages remotes/origin/gh-pages && git clone . --branch=gh-pages _gh-pages/ ) || mkdir _gh-pages
           rm -rf _gh-pages/.git/
           mkdir -p _gh-pages/branch/
-      # If a push and master, copy build to _gh-pages/ as the "main"
+      # If a push and main, copy build to _gh-pages/ as the "main"
       # deployment.
-      - name: Copy new build (master)
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      - name: Copy new build (main)
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         run: |
           set -x
           # Delete everything under _gh-pages/ that is from the
@@ -71,10 +71,10 @@ jobs:
           # _gh-pages itself.
           find _gh-pages/ -mindepth 1 ! -path '_gh-pages/branch*' -delete
           rsync -a _build/dirhtml/ _gh-pages/
-      # If a push and not on master, then copy the build to
+      # If a push and not on main, then copy the build to
       # _gh-pages/branch/$brname (transforming '/' into '--')
       - name: Copy new build (branch)
-        if: ${{ github.event_name == 'push' && github.ref != 'refs/heads/master' }}
+        if: ${{ github.event_name == 'push' && github.ref != 'refs/heads/main' }}
         run: |
           set -x
           #brname=$(git rev-parse --abbrev-ref HEAD)
@@ -102,7 +102,7 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' }}
-        #if: ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        #if: ${{ success() && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         with:
           publish_branch: gh-pages
           github_token: ${{ secrets.GITHUB_TOKEN }}
