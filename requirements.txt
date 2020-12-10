@@ -1,5 +1,7 @@
 Sphinx
+sphinx_book_theme
 sphinx_rtd_theme
 sphinx_rtd_theme_ext_color_contrast
 myst_nb
 sphinx-lesson
+sphinxcontrib-bibtex

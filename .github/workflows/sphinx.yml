@@ -35,16 +35,21 @@ jobs:
           echo "github.event_name:" ${{github.event_name}}
           echo "github.head_ref:" ${{github.head_ref}}
           echo "github.base_ref:" ${{github.base_ref}}
+          set -x
           git rev-parse --abbrev-ref HEAD
           git branch
           git branch -a
           git remote -v
+          python -V
+          pip list --not-required
+          pip list
 
       # Build
       - uses: ammaraskar/sphinx-problem-matcher@master
       - name: Build Sphinx docs
         run: |
           make dirhtml
+          sed -i 's/url_root="#"/url_root=""/' _build/dirhtml/index.html || true
 
 
       # The following supports building all branches and combining on
