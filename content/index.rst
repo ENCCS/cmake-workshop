@@ -52,6 +52,7 @@ deploy their codebases. You will learn how to:
    :caption: Reference
 
    quick-reference
+   zbibliography
    guide
 
 
