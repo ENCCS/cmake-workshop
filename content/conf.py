@@ -12,7 +12,8 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('.'))
+
+sys.path.insert(0, os.path.abspath("."))
 
 sys.path.insert(0, os.path.abspath("."))
 
@@ -39,6 +40,9 @@ extensions = [
     "sphinxcontrib.bibtex",
     "sphinx.ext.todo",
 ]
+
+# configure sphinxcontrib.bibtex
+bibtex_bibfiles = ["bibliography.bib"]
 
 # Settings for myst_nb:
 # https://myst-nb.readthedocs.io/en/latest/use/execute.html#triggering-notebook-execution
