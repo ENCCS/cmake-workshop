@@ -1,0 +1,50 @@
+name: Build and test examples
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Cache conda
+      uses: actions/cache@v1
+      env:
+        CACHE_NUMBER: 0  # Increase this value to reset cache if .github/workshop.yml has not changed
+      with:
+        path: ~/conda_pkgs_dir
+        key:
+          ${{ matrix.os }}-conda-${{ env.CACHE_NUMBER }}-${{ hashFiles('.github/workshop.yml') }}
+
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+          auto-update-conda: true
+          auto-activate-base: false
+          activate-environment: workshop
+          environment-file: .github/workshop.yml
+          channel-priority: true
+          python-version: 3.8
+          use-only-tar-bz2: true  # IMPORTANT: This needs to be set for caching to work properly!
+
+    - name: hello-cxx
+      shell: bash -l {0}
+      run: |
+        cd $GITHUB_WORKSPACE/content/code/solutions/hello-cxx
+        cmake -S. -Bbuild -GNinja
+
+    - name: hello-f
+      shell: bash -l {0}
+      run: |
+        cd $GITHUB_WORKSPACE/content/code/solutions/hello-f
+        cmake -S. -Bbuild -GNinja

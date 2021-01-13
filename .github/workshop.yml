@@ -1,0 +1,9 @@
+name: workshop
+channels:
+  - conda-forge
+dependencies:
+  - c-compiler
+  - cmake
+  - cxx-compiler
+  - fortran-compiler
+  - ninja
