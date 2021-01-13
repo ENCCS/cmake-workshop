@@ -1,13 +1,37 @@
 CMake
 =====
 
-Intro
+CMake is a language-agnostic, cross-platform build tool and is nowadays the *de
+facto* standard,  with large projects using it to reliably build, test, and
+deploy their codebases. You will learn how to:
+
+- Write a CMake build system for C, C++, and Fortran projects producing
+  libraries and/or executables.
+- Run tests for your code with CTest.
+- Ensure your build system will work on different platforms.
+- Detect and use external dependencies in your project.
+- Safely and effectively build mixed-language projects (Python+C/C++,
+  Python+Fortran, Fortran+C/C++)
+
+
+.. signature:: foo
+
+   .. code-block:: cmake
+
+      cmake_minimum_required(VERSION 3.12)
 
 
 
 .. prereq::
 
    prerequisites
+
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   setup
 
 
 

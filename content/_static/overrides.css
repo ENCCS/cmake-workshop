@@ -1,3 +1,24 @@
+/*
+ * colors = ['#0271AE', '#DC2830', '#FFC438',  # blue, red, light orange
+ *           '#6E3B87', '#008D5D', '#FA902D',  # purple, green, orange
+ *           '#0095B7', '#CB0C7B', '#F7E43C',  # cyan, magenta, yellow
+ *           '#88B93B', '#444F95', '#F16232']  # pea green, dark blue, dark orange
+ *
+ * To use them in rST, you need to define a command in the epilog, see conf.py
+ */
+.blue {color: #0271AE;}
+.red {color: #DC2830;}
+.orange {color: #FFC438;}
+.purple {color: #633B87;}
+.green {color: #008D5D;}
+.dkorange {color: #FA902D;}
+.cyan {color: #0095B7;}
+.magenta {color: #CB0C8B;}
+.yellow {color: #F7E43C;}
+.peagreen {color: #88B93B;}
+.darkblue {color: #444F95;}
+.darkorange {color: #F16232;}
+
 /* override colors in sphinx_lesson.css with the schemes here: https://personal.sron.nl/~pault/#sec:qualitative */
 
 /* instructor-note */
@@ -74,16 +95,4 @@
 }
 .eqno {
     float: right;
-}
-
-/* Colors and text decoration.
- * For example, :black:`text in black` or :blink:`text blinking` in rST.
- */
-
-.red {
-    color: red;
-}
-
-.blue {
-    color: blue;
 }
