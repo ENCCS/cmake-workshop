@@ -114,6 +114,7 @@ from custom import DIRECTIVES
 rst_epilog = f"""
 .. role:: red
 .. role:: blue
+.. _CMake: https://cmake.org/cmake/help/v3.19/
 """
 
 
