@@ -43,13 +43,33 @@ deploy their codebases. You will learn how to:
    :caption: The lesson
 
    hello-cmake
+   cmake-syntax
+   targets
+   hello-ctest
+   ctest-catch2
+   environment
+   probing
+   dependencies
+   cxx-fortran
+   cxx-python
 
+
+.. see also the schedule in guide.rst
 
 .. csv-table::
    :widths: auto
    :delim: ;
 
-   20 min ; :doc:`hello-cmake`
+   30 min ; :doc:`hello-cmake`
+   30 min ; :doc:`cmake-syntax`
+   30 min ; :doc:`targets`
+   30 min ; :doc:`hello-ctest`
+   30 min ; :doc:`ctest-catch2`
+   30 min ; :doc:`environment`
+   30 min ; :doc:`probing`
+   30 min ; :doc:`dependencies`
+   30 min ; :doc:`cxx-fortran`
+   30 min ; :doc:`cxx-python`
 
 
 .. toctree::
@@ -88,7 +108,7 @@ About the course
 This lesson material is developed by the `EuroCC National Competence Center
 Sweden (ENCCS) <https://enccs.se/>`_ and taught in ENCCS workshops. It is aimed
 at researchers and developers who might have had some exposure to `CMake`_ and
-want to learn how to use it effectively.
+want to learn how to use it effectively. This lesson targets **CMake >=3.14**.
 Each lesson episode has clearly defined learning objectives and includes
 multiple exercises along with solutions, and is therefore also useful for
 self-learning.
