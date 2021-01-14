@@ -107,7 +107,7 @@ todo_include_todos = True
 #    }
 
 # Our own customisation
-from custom import DIRECTIVES
+from custom import DIRECTIVES, cmake_commands
 
 
 # the epilog
@@ -115,6 +115,8 @@ rst_epilog = f"""
 .. role:: red
 .. role:: blue
 .. _CMake: https://cmake.org/cmake/help/v3.19/
+
+{cmake_commands()}
 """
 
 

@@ -127,7 +127,7 @@ We adopt a few conventions which help organize the material.
 Function signatures
    These are shown in a text block marked with a wrench emoji:
 
-   .. signature:: ``cmake_minimum_required``
+   .. signature:: |cmake_minimum_required|
 
       .. code-block:: cmake
 
