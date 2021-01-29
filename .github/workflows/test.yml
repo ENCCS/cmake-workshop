@@ -44,9 +44,9 @@ jobs:
       shell: bash -l {0}
       run: |
          if [ "${{ matrix.os }}" != "windows-latest" ]; then 
-            echo "OPTS=\"-GNinja\"" >> $GITHUB_ENV
+            echo "OPTS='-GNinja'" >> $GITHUB_ENV
          else
-            echo "OPTS=\"-Ax64 -DCMAKE_BUILD_TYPE=Release\"" >> $GITHUB_ENV
+            echo "OPTS='-Ax64 -DCMAKE_BUILD_TYPE=Release'" >> $GITHUB_ENV
          fi
       
     - name: ${{ matrix.examples }}
