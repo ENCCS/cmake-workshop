@@ -36,12 +36,22 @@ jobs:
           environment-file: .github/workshop.yml
           channel-priority: true
           python-version: 3.8
-          use-mamba: true
+          mamba-version: "*"
           use-only-tar-bz2: true  # IMPORTANT: This needs to be set for caching to work properly!
-
+          
+    - name: Select CMake CLI options
+      shell: bash -l {0}
+      run: |
+         if [ "${{ matrix.os }}" != "windows-latest" ]; then 
+            echo "OPTS=\"-GNinja\"" >> $GITHUB_ENV
+         else
+            echo "OPTS=\"-Ax64 -DCMAKE_BUILD_TYPE=Release\"" >> $GITHUB_ENV
+         fi
+      
     - name: ${{ matrix.examples }}
       if: ((contains(matrix.os, 'windows') == true) && (contains(matrix.examples, '-f') == true)) == false
       shell: bash -l {0}
       run: |
         cd $GITHUB_WORKSPACE/content/code/solutions/${{ matrix.examples }}
-        cmake -S. -Bbuild -GNinja
+        cmake -S. -Bbuild ${OPTS}
+        cmake --build build --config Release
