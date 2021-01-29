@@ -34,6 +34,7 @@ jobs:
           auto-activate-base: false
           activate-environment: workshop
           environment-file: .github/workshop.yml
+          channels: conda-forge,defaults
           channel-priority: true
           python-version: 3.8
           mamba-version: "*"
