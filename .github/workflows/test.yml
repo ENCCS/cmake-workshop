@@ -57,6 +57,5 @@ jobs:
     - name: ${{ matrix.examples }}
       shell: bash -l {0}
       run: |
-        cd $GITHUB_WORKSPACE/content/code/solutions/${{ matrix.examples }}
-        cmake -S. -Bbuild ${OPTS} -DCMAKE_BUILD_TYPE=Release
-        cmake --build build --config Release
+        cd $GITHUB_WORKSPACE/content/code/${{ matrix.examples }}
+        cmake -S. -Bbuild -GNinja
