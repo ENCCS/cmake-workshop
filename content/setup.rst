@@ -1,102 +1,70 @@
 Setting up your system
 ======================
 
-In order to follow this workshop, you will need access to compilers
-and MPI libraries. You can either use a cluster or set things up on
-your local computer - the instructions here are for installing on your
-own computer.
+In order to follow this workshop, you will need access to compilers,
+Python and CMake. You can use an HPC cluster if you have access to
+one, but the instructions here cover how to install the prerequisites
+on your own computer. We also show how you can use `Binder
+<https://mybinder.org>`_ to run in the cloud.
 
-We recommend that participants create an isolated software environment
-on their computer and install a C compiler along with MPI libraries
-inside that environment. Root-level system installation is also
-possible but will not be covered here due to the risk of various
-conflicts (or worse).
-
-These instructions are based on installing compilers and MPI via the `Conda
+These instructions are based on installing compilers and CMake via the `Conda
 package and enviroment manager <https://docs.conda.io/en/latest/>`_, as it
 provides a convenient way to install binary packages in an isolated software
 environment.
 
-Operating systems
+For Windows users
 ^^^^^^^^^^^^^^^^^
 
-The following steps are appropriate for Linux and MacOS systems. For
-Windows, it is necessary to first install the Windows Subsystem for
-Linux (see these `installation instructions for WSL
-<https://docs.microsoft.com/en-us/windows/wsl/install-win10>`_).
-Installing compilers and MPI natively on Windows is also possible
-through `Cygwin <https://www.cygwin.com/>`_ and the Microsoft
-Distribution of MPICH, but we recommend WSL which is available for
-Windows 10 and later.
+We strongly recommend to use (and install if necessary) the Windows
+Subsystem for Linux (WSL) as it is a powerful tool which will likely
+be useful also after the workshop.  Inside WSL you will need Python 3
+and the conda environment manager.  A useful guide to doing
+this is found at https://github.com/kapsakcj/win10-linux-conda-how-to.
+The installation of the required dependencies in a WSL terminal is
+documented below.
+
+For MacOS and Linux users
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+MacOS and Linux users can simply open a terminal and install 
+`Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_:
+  
+- For MacOS see https://docs.conda.io/en/latest/miniconda.html#macosx-installers
+- For Linux see https://docs.conda.io/en/latest/miniconda.html#linux-installers
+
+Creating an environment and installing packages
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once you have ``conda`` installed (and WSL if you're on Windows) you
+can use the :download:`environment.yml <../environment.yml>` file to
+install the dependencies.  First save it to your hard drive by
+clicking the link, and then in a terminal navigate to where you saved
+the file and type::
+
+  conda env create -f environment.yml
 
 
-Installing conda
-^^^^^^^^^^^^^^^^
+You then need to activate the new environment by::
 
-Begin by installing Miniconda:
+  conda activate cmake-workshop
 
-1. Download the 64-bit installer from `here
-   <https://docs.conda.io/en/latest/miniconda.html>`_ for your operating system:
 
-     - for MacOS and Linux, choose the bash installer
-     - on Windows, open a Linux-WSL terminal and type: ``wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh``.
-       If wget is not a recognised command, first install it by ``sudo apt-get install wget`` (provide the password you chose when installing WSL).
-2. In a terminal, run the installer with ``bash Miniconda3-latest-<operating-system>-x86_64.sh``
-   (replace with correct name of installer)
-3. Agree to the terms of conditions, specify the installation directory (the default is
-   usually fine), and answer "yes" to the questions "Do you wish the installer to
-   initialize Miniconda3 by running conda init?"
+Now you should have CMake, compilers, Python and a few other packages
+installed!
 
-You now have miniconda and conda installed. Make sure that it works by
-typing ``which conda`` and see that it points to where you installed
-miniconda (you may have to open a new terminal first).
 
-We recommend that you create an isolated conda environment (this is
-good practice in software development)::
+Using Binder
+^^^^^^^^^^^^
 
-  $ conda create --name mpi
-  $ conda activate mpi
+Binder (https://mybinder.org/) offers a free customizable cloud
+computing environment. You can do the CMake workshop exercises in the
+cloud by clicking the "launch binder" button at the top of the README
+file displayed at https://github.com/ENCCS/cmake-workshop.
+After a few minutes you will see a Jupyter Notebook dashboard
+which is running in the cloud. To open up a terminal, click "New" on
+the right and select Terminal. You can open a text editor (for code,
+CMake files etc) by clicking "New" and select Text File. If you prefer
+a terminal editor, you can install e.g. ``nano`` by typing
+``conda install nano`` in the terminal.
 
-This should create a new empty environment and activate it, which
-might prepend your shell prompt with the name of the conda environment.
 
-Installing a C compiler and MPI
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Now install compilers and the OpenMPI
-implementation of MPI::
-
-  (mpi) $ conda install -c conda-forge compilers
-  (mpi) $ conda install -c conda-forge openmpi
-
-If you prefer MPICH over OpenMPI (or you experience problems with OpenMPI), you can
-instead do::
-
-  (mpi) $ conda install -c conda-forge compilers
-  (mpi) $ conda install -c conda-forge mpich
-
-**Please also verify the installation.**
-
-The following commands should give version numbers::
-
-   (mpi) $ mpicc --version
-   (mpi) $ mpirun --version
-
-With OpenMPI you can also try the ``-showme`` flag to see what the ``mpicc``
-compiler wrapper does under the hood::
-
-   (mpi) $ mpicc -showme
-
-To compile an MPI code `hello_mpi.c`, you should now be able to do::
-
-  (mpi) $ mpicc -o hello_mpi.x hello_mpi.c
-  (mpi) $ mpirun -n 2 hello_mpi.x
-
-To compile with OpenMP support for hybrid MPI+OpenMP codes, you need
-to add the ``-fopenmp`` flag::
-
-  (mpi) $ mpicc -fopenmp -o hello_omp_mpi.x hello_omp_mpi.c
-  (mpi) $ export OMP_NUM_THREADS=2
-  (mpi) $ mpirun -n 2 hello_omp_mpi.x
-
-You *might* also need to explicitly link against the OpenMP runtime library.

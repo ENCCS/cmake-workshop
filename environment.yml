@@ -1,0 +1,13 @@
+name: cmake-workshop
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - compilers
+  - cmake
+  - ninja
+  - mpi
+  - python >=3.6
+  - cffi
+  - hdf5
+  - gtest
