@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+mkdir -p tarballs
 
 examples="$(find . -maxdepth 1 -mindepth 1 -type d)"
 
@@ -13,3 +14,6 @@ for dir in $examples; do
     # make tarball solutions
     tar caf "$dir"_solution.tar.bz2 "$dir"
 done
+
+# move tarballs to separate folder
+mv *.tar.bz2 tarballs
