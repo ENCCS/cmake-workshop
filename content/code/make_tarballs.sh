@@ -3,7 +3,7 @@ set -euo pipefail
 
 mkdir -p tarballs
 
-examples="$(find . -maxdepth 1 -mindepth 1 -type d)"
+examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs')"
 
 echo $examples
 

@@ -29,6 +29,11 @@ COMMANDS = [
     "target_link_libraries",
     "target_compile_options",
     "target_compile_definitions",
+    "message",
+    "cmake_print_variables",
+    "option",
+    "if",
+    "foreach",
 ]
 
 TERM = """

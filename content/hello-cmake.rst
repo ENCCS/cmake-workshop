@@ -110,6 +110,7 @@ The command-line interface to CMake
      - Switching generators ``-G`` switch
      - How to get help
      - Find how the defaults CMake will use for your system
+     - Switching compilers
 
 
 A complete toolchain
@@ -159,22 +160,6 @@ Producing libraries
          executable resulting from the ``hello-world.f90`` source file.
 
          You can download the :download:`complete, working example <code/tarballs/libraries-f_solution.tar.bz2>`.
-
-.. challenge:: Conditionals in CMake
-
-   Modify the ``CMakeLists.txt`` from the previous exercise to build either a
-   *static* or a *shared* library depending  on the value of the boolean
-   ``BUILD_SHARED_LIBS``.
-
-   .. tabs::
-
-      .. tab:: C++
-
-         You can download the :download:`complete, working example <code/tarballs/conditionals-cxx_solution.tar.bz2>`.
-
-      .. tab:: Fortran
-
-         You can download the :download:`complete, working example <code/tarballs/conditionals-f_solution.tar.bz2>`.
 
 .. keypoints::
 
