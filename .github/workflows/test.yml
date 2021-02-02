@@ -28,7 +28,7 @@ jobs:
           - options-f
         exclude:
           - os: windows-latest
-            examples: *-f
+            examples: '*-f'
 
     steps:
     - uses: actions/checkout@v2
