@@ -28,7 +28,13 @@ jobs:
           - options-f
         exclude:
           - os: windows-latest
-            examples: '*-f'
+            examples: hello-f
+          - os: windows-latest
+            examples: libraries-f
+          - os: windows-latest
+            examples: conditionals-f
+          - os: windows-latest
+            examples: options-f
 
     steps:
     - uses: actions/checkout@v2
