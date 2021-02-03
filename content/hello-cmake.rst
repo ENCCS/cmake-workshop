@@ -109,7 +109,6 @@ The command-line interface to CMake
 
      - Switching generators ``-G`` switch
      - How to get help
-     - Find how the defaults CMake will use for your system
      - Switching compilers
 
 
