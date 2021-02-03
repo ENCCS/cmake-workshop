@@ -20,6 +20,30 @@ CMake syntax and project structure
    - Understand the difference between *macros* and *functions*.
 
 
+Important variables
+-------------------
+
+.. todo::
+
+   - |PROJECT_BINARY_DIR|
+   - |PROJECT_SOURCE_DIR|
+   - |CMAKE_CURRENT_SOURCE_DIR|
+   - |CMAKE_CURRENT_LIST_DIR|
+   - |CMAKE_<LANG>_COMPILER|
+
+
+Remember: you can find the documentation for all variables, commands, and
+modules in CMake **online** *and* **offline**. For example, to inquire about the
+meaning of a variable:
+
+
+.. code-block:: bash
+
+   $ cmake --help-variable PROJECT_BINARY_DIR
+
+
+
+
 Flow control
 ------------
 

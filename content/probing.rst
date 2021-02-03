@@ -6,22 +6,44 @@ Probing compilation, linking, and execution
 
 .. questions::
 
-   - How do we use CMake to compile source files to executables?
+   - How can you add custom steps to your build system with CMake?
 
 .. objectives::
 
-   - Learn what tools available in the CMake suite.
-   - Learn how to write a simple ``CMakeLists.txt``.
-   - Learn the difference between *build systems*, *build tools*, and *build system generator*.
-   - Learn to distinguish between *configuration*, *generation*, and *build* time.
-   - Learn how CMake structures build artifacts.
+   - Learn how and when to use ``execute_process``
+   - Learn how to use ``add_custom_command`` with targets.
+   - Learn how to test compilation, linking, and execution.
 
+
+Running custom commands at *configure-time*
+-------------------------------------------
+
+.. todo::
+
+   - Pitfalls of |execute_process|
+
+
+Custom commands for your targets
+--------------------------------
+
+.. todo::
+
+   - |add_custom_command| with ``PRE_BUILD`` and ``POST_LINK``
+
+
+Testing compilation, linking, and execution
+-------------------------------------------
+
+
+.. todo::
+
+   - |try_compile| and pitfalls
+   - |check_<lang>_compiler_flag|
+   - |check_<lang>_source_runs|
 
 
 
 .. keypoints::
 
-   - CMake is a **build system generator**, not a build system.
-   - You write ``CMakeLists.txt`` to describe how the build tools will create artifacts from sources.
-   - You can use the CMake suite of tools to manage the whole lifetime: from source files to tests to deployment.
-   - The structure of the project is mirrored in the build folder.
+   - You can customize the build system by executing custom commands.
+   - CMake offers commands to probe compilation, linking, and execution.
