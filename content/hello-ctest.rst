@@ -14,6 +14,11 @@ Creating and running tests with CTest
    - Learn how to run your tests through CTest.
 
 
+Testing is an essential activity in the development cycle. A well-designed test
+suite will help you detect bugs and can also facilitate the onboarding of new
+developers.
+In this episode, we will look into how to use CTest to define and run our tests.
+
 Adding tests to your project
 ----------------------------
 

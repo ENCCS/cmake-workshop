@@ -42,6 +42,7 @@ manual = [
     "check_source_runs",
     "ctest-labels",
     "ctest-cost",
+    "ctest-catch2",
 ]
 
 
