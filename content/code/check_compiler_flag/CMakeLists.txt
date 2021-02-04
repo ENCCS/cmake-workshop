@@ -14,9 +14,8 @@ add_executable(asan-example asan-example.cpp)
 target_compile_options(asan-example
   PUBLIC
     "-g3"
-    "-01"
+    "-O1"
   )
-
 
 include(CheckCXXCompilerFlag)
 
