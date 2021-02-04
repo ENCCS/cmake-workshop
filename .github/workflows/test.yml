@@ -61,8 +61,14 @@ jobs:
         if [ "${{ matrix.os }}" == "windows-latest" ]; then
            # exclude Fortran examples on Windows
            examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -not -path './*-f' | xargs -L1 -I{} basename "{}")"
+
+           # configuration options
+           CONF_OPTS="-Ax64"
         else
            examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' | xargs -L1 -I{} basename "{}")"
+
+           # configuration options
+           CONF_OPTS="-GNinja"
         fi
 
         # report what we'll be doing
@@ -74,6 +80,6 @@ jobs:
         do
             echo ">>> Running example $x"
             cmake -S./"$x" -B./"$x"/build "$CONF_OPTS"
-            cmake --build ./"$x"/build "$BUILD_OPTS"
+            cmake --build ./"$x"/build --config Release
             echo "<<< Done with example $x"
         done
