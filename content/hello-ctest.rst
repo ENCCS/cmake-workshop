@@ -22,6 +22,17 @@ In this episode, we will look into how to use CTest to define and run our tests.
 Adding tests to your project
 ----------------------------
 
+In CMake and CTest, a test is any command returning an exit code. It does not
+really matter how the command is issued or what is run: it can be a C++
+executable or a Python script. As long as the execution returns a zero or
+non-zero exit code, CMake will be able to classify the test as succeeded or
+failed, respectively.
+
+There are two steps to perform to integrate your CMake build system with the CTest tool:
+
+1. Call the ``enable_testing`` command. This takes no arguments.
+2. Add tests with the |add_test| command.
+
 .. signature:: |add_test|
 
    .. code-block:: cmake
@@ -30,6 +41,10 @@ Adding tests to your project
          [CONFIGURATIONS <config>...]
          [WORKING_DIRECTORY <dir>]
          [COMMAND_EXPAND_LISTS])
+
+   This command accepts *named arguments*, only ``NAME`` and ``COMMAND`` are
+   mandatory.  The former specifies the identifying name of the test, while the
+   latter sets up what command to run.
 
 
 .. typealong:: Your first test project
