@@ -10,8 +10,8 @@ Probing compilation, linking, and execution
 
 .. objectives::
 
-   - Learn how and when to use ``execute_process``
-   - Learn how to use ``add_custom_command`` with targets.
+   - Learn how and when to use |execute_process|
+   - Learn how to use |add_custom_command| with targets.
    - Learn how to test compilation, linking, and execution.
 
 
@@ -74,11 +74,6 @@ Running custom commands at *configure-time*
 Custom commands for your targets
 --------------------------------
 
-.. todo::
-
-   - |add_custom_command| with ``PRE_LINK`` and ``POST_BUILD``
-
-
 .. signature:: |add_custom_command|
 
    .. code-block:: cmake
@@ -121,13 +116,6 @@ Testing compilation, linking, and execution
 -------------------------------------------
 
 
-.. todo::
-
-   - |try_compile| and pitfalls
-   - |check_<lang>_compiler_flag|
-   - |check_<lang>_source_runs|
-
-
 .. challenge:: Check that a compiler accepts a compiler flag
 
    Compilers evolve: they add and/or remove flags and sometimes you will face
@@ -168,11 +156,15 @@ Testing compilation, linking, and execution
 
       |check_c_source_compiles| requires the test source code to be passed in as
       a *string*.
+
    4. If the test is successful, link executable target against the UUID library: use the
       ``PkgConfig::UUID`` target as argument to |target_link_libraries|.
 
    You can download the :download:`complete, working example <code/tarballs/check_source_runs_solution.tar.bz2>`.
 
+.. discussion:: |try_compile| and |try_run|
+
+   FOO
 
 .. keypoints::
 

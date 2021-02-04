@@ -30,18 +30,54 @@ COMMANDS = [
     "target_compile_options",
     "target_compile_definitions",
     "message",
-    "cmake_print_variables",
     "option",
     "if",
     "foreach",
+    "cmake_host_system_information",
+    "configure_file",
+    "execute_process",
+    "add_custom_command",
+    "try_compile",
+    "try_run",
 ]
 
-TERM = """
+CTERM = """
 .. |{command}| raw:: html
 
    <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/{command}.html"><span class="xref std std-term"><code class="docutils literal notranslate">{command}</code></span></a>
 """
 
+VARIABLES = [
+    "PROJECT_BINARY_DIR",
+    "PROJECT_SOURCE_DIR",
+    "CMAKE_CURRENT_LIST_DIR",
+    "CMAKE_CURRENT_SOURCE_DIR",
+]
 
-def cmake_commands():
-    return "\n".join([TERM.format(command=x) for x in COMMANDS])
+VTERM = """
+.. |{variable}| raw:: html
+
+   <a class="reference internal" href="https://cmake.org/cmake/help/latest/variable/{variable}.html"><span class="xref std std-term"><code class="docutils literal notranslate">{variable}</code></span></a>
+"""
+
+COMMANDS_IN_MODULES = [
+    ("cmake_print_variables", "CMakePrintHelpers"),
+    ("check_cxx_source_compiles", "CheckCXXSourceCompiles"),
+    ("check_cxx_compiler_flag", "CheckCXXCompilerFlag"),
+    ("check_c_source_runs", "CheckCSourceRuns"),
+]
+
+CinMTERM = """
+.. |{command}| raw:: html
+
+   <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/{module}.html"><span class="xref std std-term"><code class="docutils literal notranslate">{command}</code></span></a>
+"""
+
+
+def cmake_glossary():
+    commands = "\n".join((CTERM.format(command=x) for x in COMMANDS))
+    variables = "\n".join((VTERM.format(variable=x) for x in VARIABLES))
+    commands_in_modules = "\n".join(
+        (CinMTERM.format(command=x[0], module=x[1]) for x in COMMANDS_IN_MODULES)
+    )
+    return commands + variables + commands_in_modules

@@ -12,11 +12,11 @@ CMake syntax and project structure
 
 .. objectives::
 
-   - Learn the syntax for conditionals in CMake: ``if`` - ``elseif`` - ``else`` - ``endif``
-   - Learn the syntax for loops in CMake: ``foreach``
+   - Learn the syntax for conditionals in CMake: |if| - ``elseif`` - ``else`` - ``endif``
+   - Learn the syntax for loops in CMake: |foreach|
    - Learn how CMake structures build artifacts.
    - Learn how to print helpful messages.
-   - Learn how to handle user-facing options: ``option`` and the role of the CMake cache.
+   - Learn how to handle user-facing options: |option| and the role of the CMake cache.
    - Understand the difference between *macros* and *functions*.
 
 
@@ -29,7 +29,7 @@ Important variables
    - |PROJECT_SOURCE_DIR|
    - |CMAKE_CURRENT_SOURCE_DIR|
    - |CMAKE_CURRENT_LIST_DIR|
-   - |CMAKE_<LANG>_COMPILER|
+   - ``CMAKE_<LANG>_COMPILER``
 
 
 Remember: you can find the documentation for all variables, commands, and

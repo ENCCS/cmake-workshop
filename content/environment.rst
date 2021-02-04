@@ -101,7 +101,7 @@ Platform- and compiler-dependent source code
    Adds one (or more) compile definitions to the given ``<target>``.
 
 
-Sometimes it is more convenient to have a single file containing all these
+It might be more convenient to have a single file containing all these
 compile-time constants, rather than passing them to preprocessor. This can be
 achieved by having a *scaffold* file and then letting CMake configure it after
 discovering the values for all the necessary compile-time constants.
@@ -120,7 +120,7 @@ discovering the values for all the necessary compile-time constants.
 
 .. challenge:: Configure a file
 
-   Let's revisit the previous exercise. Rather than print the results of
+   Let's revisit one of the previous exercises. Rather than print the results of
    querying with |cmake_host_system_information|, we want to save the results to
    a header file and then use it to print the results when running an
    executable.
@@ -128,7 +128,8 @@ discovering the values for all the necessary compile-time constants.
    1. Get the :download:`scaffold code <code/tarballs/configure.tar.bz2>`.
       The header file ``config.h.in`` contains placeholders for the values that
       CMake will detect.
-   2. Write a ``CMakeLists.txt`` to compile ``processor-info.cpp`` into an executable.
+   2. Adapt the ``CMakeLists.txt`` in the previous exercise to compile
+      ``processor-info.cpp`` into an executable.
    3. Try building. This should fail, because there is no ``config.h`` file anywhere yet!
    4. Open the help page for |configure_file|. Either in the browser or in the command-line:
 
@@ -139,6 +140,14 @@ discovering the values for all the necessary compile-time constants.
    5. Query all keys listed in the help page for |cmake_host_system_information|
       and save them to appropriately named variables.
    6. Invoke |configure_file| to produce ``config.h`` from ``config.h.in``.
+   7. Try building again. This will fail too, because the header is not in the *include path*. We can fix this with:
+
+      .. code-block:: cmake
+
+         target_include_directories(processor-info
+           PRIVATE
+             ${PROJECT_BINARY_DIR}
+           )
 
    You can download the :download:`complete, working example <code/tarballs/configure_solution.tar.bz2>`.
 
