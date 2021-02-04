@@ -66,8 +66,8 @@ jobs:
         # run examples in a loop
         for x in $examples
         do
-            echo "Running example $x"
-            cd $x
-            cmake -S. -Bbuild "$OPTS"
-            cd ..
+            echo ">>> Running example $x"
+            cmake -S./"$x" -B./"$x"/build "$OPTS"
+            cmake --build ./"$x"/build
+            echo "<<< Done with example $x"
         done
