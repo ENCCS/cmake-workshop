@@ -227,6 +227,9 @@ The licensor cannot revoke these freedoms as long as you follow these license te
 Software
 ^^^^^^^^
 
+The code samples and exercises in this lesson were adapted from the GitHub
+repository for the `**CMake Cookbook** <https://github.com/dev-cafe/cmake-cookbook>`_.
+
 Except where otherwise noted, the example programs and other software provided
 by ENCCS are made available under the `OSI <http://opensource.org/>`_-approved
 `MIT license <http://opensource.org/licenses/mit-license.html>`_.
