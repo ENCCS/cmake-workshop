@@ -1,8 +1,8 @@
 .. _cmake-syntax:
 
 
-CMake syntax and project structure
-==================================
+CMake syntax
+============
 
 .. questions::
 
@@ -17,7 +17,6 @@ CMake syntax and project structure
    - Learn how CMake structures build artifacts.
    - Learn how to print helpful messages.
    - Learn how to handle user-facing options: |option| and the role of the CMake cache.
-   - Understand the difference between *macros* and *functions*.
 
 
 Important variables
