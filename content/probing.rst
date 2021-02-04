@@ -65,11 +65,18 @@ Running custom commands at *configure-time*
    1. Get the :download:`scaffold code <code/tarballs/find_cffi.tar.bz2>`.
    2. Modify the call to |execute_process| to run the command above.
 
-   Note the use of ``find_package(Python REQUIRED)`` to obtain the ``python``
-   executable. We will revisit uses of |find_package| later on in
-   :ref:`dependencies`.
-
    You can download the :download:`complete, working example <code/tarballs/find_cffi_solution.tar.bz2>`.
+
+
+Note the use of ``find_package(Python REQUIRED)`` to obtain the ``python``
+executable. CMake comes with many modules dedicated to the detection of dependencies, such as Python. These are conventionally called ``Find<dependency>.cmake`` and you can inspect their documentation with:
+
+.. code-block:: bash
+
+   $ cmake --help-module FindPython | more
+
+We will revisit uses of |find_package| later on in :ref:`dependencies`.
+
 
 Custom commands for your targets
 --------------------------------

@@ -22,6 +22,7 @@ challenges = [
     "options-f",
     "host_system_information",
     "configure",
+    "pre_post-f",
 ]
 
 # folders to tarballs directly
@@ -31,17 +32,31 @@ typealongs = [
     "sys_preproc",
 ]
 
+# folders that require manual intervention for tarballing, e.g. to provide a meaningful scaffold
+manual = [
+    "find_cffi",
+    "check_compiler_flag",
+    "check_source_runs",
+]
+
+
 # all complete examples
-examples = challenges + typealongs
+examples = challenges + typealongs + manual
 
 for d in examples:
+    # filter out build folders
+    fs = [x for x in Path(d).iterdir() if x.name != "build"]
     with tarfile.open(out / f"{d}_solution.tar.bz2", "w:bz2") as t:
-        t.add(d)
+        for f in fs:
+            t.add(f)
 
 
 for d in challenges:
-    # filter out any CMakeLists.txt in any subfolder
-    fs = [x for x in Path(d).iterdir() if x.name != "CMakeLists.txt"]
+    # filter out build folders and any CMakeLists.txt in any subfolder
+    fs = [x for x in Path(d).iterdir() if not (x.name == "build" or x.name == "CMakeLists.txt")]
     with tarfile.open(out / f"{d}.tar.bz2", "w:bz2") as t:
         for f in fs:
             t.add(f)
+
+for d in manual:
+    print(f"Scaffold for folder {d} needs to be manually tarball-ed!!")
