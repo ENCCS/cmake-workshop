@@ -58,9 +58,9 @@ jobs:
         # select which examples to run on each platform
         if [ "${{ matrix.os }}" != "windows-latest" ]; then
            # exclude Fortran examples on Windows
-           examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -not -path './*-f')"
+           examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -not -path './*-f' | xargs -L1 -I{} basename "{}")"
         else
-           examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs')"
+           examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' | xargs -L1 -I{} basename "{}")"
         fi
 
         # run examples in a loop

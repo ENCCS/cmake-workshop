@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.13)
 # project name and language
 project(processor LANGUAGES CXX)
 
+add_executable(processor-info processor-info.cpp)
+
 include(CMakePrintHelpers)
 
 foreach(key
