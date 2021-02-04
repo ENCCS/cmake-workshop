@@ -45,9 +45,11 @@ jobs:
       shell: bash -l {0}
       run: |
         if [ "${{ matrix.os }}" != "windows-latest" ]; then
-           echo "OPTS=-GNinja" >> $GITHUB_ENV
+           echo "CONF_OPTS=-GNinja" >> $GITHUB_ENV
+           echo "BUILD_OPTS=" >> $GITHUB_ENV
         else
-           echo "OPTS=-Ax64" >> $GITHUB_ENV
+           echo "CONF_OPTS=-Ax64" >> $GITHUB_ENV
+           echo "BUILD_OPTS=\"--config Release\"" >> $GITHUB_ENV
         fi
       
     - name: Run examples
@@ -65,13 +67,13 @@ jobs:
 
         # report what we'll be doing
         echo "<<< I will be running these examples >>>"
-        echo "    $examples"
+        echo "$examples"
 
         # run examples in a loop
         for x in $examples
         do
             echo ">>> Running example $x"
-            cmake -S./"$x" -B./"$x"/build "$OPTS"
-            cmake --build ./"$x"/build
+            cmake -S./"$x" -B./"$x"/build "$CONF_OPTS"
+            cmake --build ./"$x"/build "$BUILD_OPTS"
             echo "<<< Done with example $x"
         done
