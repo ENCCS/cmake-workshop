@@ -56,12 +56,16 @@ jobs:
         cd $GITHUB_WORKSPACE/content/code
 
         # select which examples to run on each platform
-        if [ "${{ matrix.os }}" != "windows-latest" ]; then
+        if [ "${{ matrix.os }}" == "windows-latest" ]; then
            # exclude Fortran examples on Windows
            examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -not -path './*-f' | xargs -L1 -I{} basename "{}")"
         else
            examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' | xargs -L1 -I{} basename "{}")"
         fi
+
+        # report what we'll be doing
+        echo "<<< I will be running these examples >>>"
+        echo "    $examples"
 
         # run examples in a loop
         for x in $examples
