@@ -39,6 +39,8 @@ COMMANDS = [
     "add_custom_command",
     "try_compile",
     "try_run",
+    "add_test",
+    "set_tests_properties",
 ]
 
 CTERM = """

@@ -23,6 +23,8 @@ challenges = [
     "host_system_information",
     "configure",
     "pre_post-f",
+    "ctest-will-fail",
+    "ctest-timeout",
 ]
 
 # folders to tarballs directly
@@ -30,6 +32,7 @@ typealongs = [
     "OS",
     "processor",
     "sys_preproc",
+    "hello-ctest",
 ]
 
 # folders that require manual intervention for tarballing, e.g. to provide a meaningful scaffold
@@ -37,6 +40,8 @@ manual = [
     "find_cffi",
     "check_compiler_flag",
     "check_source_runs",
+    "ctest-labels",
+    "ctest-cost",
 ]
 
 

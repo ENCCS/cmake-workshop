@@ -108,7 +108,7 @@ Custom commands for your targets
    - After building, we want to check the size of the static allocations in the
      binary, by invoking the ``size`` command. We use the ``static-size.py`` Python script.
 
-   1. Get the :download:`scaffold code <code/tarballs/pre_post.tar.bz2>`.
+   1. Get the :download:`scaffold code <code/tarballs/pre_post-f.tar.bz2>`.
    2. Add CMake commands to build the ``example`` executable from the Fortran
       sources.  Find the text file with the link line under the build folder.
       Hint: have a look in ``CMakeFiles`` and keep in mind the name you gave to
@@ -116,7 +116,7 @@ Custom commands for your targets
    3. Call |add_custom_command| with ``PRE_LINK`` to invoke the ``echo.py`` Python script.
    4. Call |add_custom_command| with ``POST_BUILD`` to invoke the ``static-size.py`` Python script.
 
-   You can download the :download:`complete, working example <code/tarballs/pre_post_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/pre_post-f_solution.tar.bz2>`.
 
 
 Testing compilation, linking, and execution
