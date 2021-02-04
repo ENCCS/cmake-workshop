@@ -19,9 +19,27 @@ From sources to executables
 What is CMake?
 --------------
 
-.. todo::
+Software is everywhere and so are build systems. Whenever you run a piece of
+software,  anything from calendar apps to computationally-intensive programs,
+there was a build system involved in transforming the plain-text source code
+into binary files that could run on the device you are using.
 
-   - CMake is a build system generator: difference with ``Makefile`` or project files.
+CMake is a **build-system generator**: it provides a family of tools and a
+*domain-specific language* (DSL) to **describe** what the build system should
+achieve when the appropriate build tools are invoked.
+The DSL is platform- *and* compiler-agnostic: you can reuse the same CMake
+scripts to obtain *native* build systems on any platform.
+
+
+.. figure:: img/build-systems.svg
+   :align: center
+
+   On GNU/Linux, the native build system will be a collection of ``Makefile``-s.
+   The ``make`` build tool uses these ``Makefile``-s to transform sources to
+   executables and libraries.
+   CMake abstracts the process of generating the ``Makefile``-s away into a
+   generic DSL.
+
 
 Hello, CMake!
 -------------
@@ -120,7 +138,7 @@ A complete toolchain
 
    You can manage all the stages of a software project's lifetime with the tools provided by CMake.
    This figure shows all these stages (*times*) and which tool is appropriate for each.
-   The figure is reproduced from `**CMake Cookbook**
+   The figure is reproduced from `CMake Cookbook
    <https://github.com/dev-cafe/cmake-cookbook>`_ and is licensed under the
    terms of the `CC-BY-SA
    <https://creativecommons.org/licenses/by-sa/4.0/legalcode>`_.
