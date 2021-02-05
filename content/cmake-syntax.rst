@@ -370,14 +370,13 @@ options are only relevant *if* other options are already set to specific values:
 
       .. tab:: C++
 
-         You can download the :download:`scaffold code
-         <code/tarballs/options-cxx.tar.bz2>`_ and the :download:`complete,
-         working example <code/tarballs/options-cxx_solution.tar.bz2>`.
+         You can download the :download:`scaffold code <code/tarballs/options-cxx.tar.bz2>` and
+         the :download:`complete working example <code/tarballs/options-cxx_solution.tar.bz2>`.
 
       .. tab:: Fortran
 
          You can download the :download:`scaffold code
-         <code/tarballs/options-f.tar.bz2>`_ and the :download:`complete,
+         <code/tarballs/options-f.tar.bz2>` and the :download:`complete,
          working example <code/tarballs/options-f_solution.tar.bz2>`.
 
 
