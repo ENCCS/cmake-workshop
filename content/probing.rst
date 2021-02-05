@@ -15,13 +15,17 @@ Probing compilation, linking, and execution
    - Learn how to test compilation, linking, and execution.
 
 
+CMake lets you run arbitrary commands at any stage in the project lifecycle.
+This is yet another mechanism for fine-grained customization and we will discuss
+some of the options in this episode.
+
+
 Running custom commands at *configure-time*
 -------------------------------------------
 
-.. todo::
-
-   - Pitfalls of |execute_process|
-
+The most straightforward method is to explicitly run one (or more) child
+process(es) when invoking the ``cmake`` command.  This is achieved with the
+|execute_process| command.
 
 .. signature:: |execute_process|
 
@@ -50,6 +54,12 @@ Running custom commands at *configure-time*
    ``RESULT_VARIABLE``.
 
 
+It is important to note that any command invoked through ``execute_process``
+will only be run at **configure-time**, *i.e.* when running the ``cmake``
+command. You **should not** rely on |execute_process| to update any artifacts at
+**build-time**.
+
+
 .. challenge:: Find a Python module
 
    In this exercise, we'll use |execute_process| to check whether the `cffi
@@ -69,7 +79,9 @@ Running custom commands at *configure-time*
 
 
 Note the use of ``find_package(Python REQUIRED)`` to obtain the ``python``
-executable. CMake comes with many modules dedicated to the detection of dependencies, such as Python. These are conventionally called ``Find<dependency>.cmake`` and you can inspect their documentation with:
+executable. CMake comes with many modules dedicated to the detection of
+dependencies, such as Python. These are conventionally called
+``Find<dependency>.cmake`` and you can inspect their documentation with:
 
 .. code-block:: bash
 
@@ -80,6 +92,15 @@ We will revisit uses of |find_package| later on in :ref:`dependencies`.
 
 Custom commands for your targets
 --------------------------------
+
+As mentioned, the main problem of |execute_process| is that it will run a
+command at *configure-time*, when the ``cmake`` command is first invoked.
+It is thus *not* a viable alternative if we intend to perform some specific
+actions depending on targets or make the result of the custom commands a
+dependency for other targets.
+Both cases have real-world examples, such as when using automatically generated
+code. The CMake command |add_custom_command| can be used in some of this
+instances.
 
 .. signature:: |add_custom_command|
 
@@ -122,6 +143,17 @@ Custom commands for your targets
 Testing compilation, linking, and execution
 -------------------------------------------
 
+We also want to be able to run checks on our compilers and linkers. Or check whether a certain library can be used correctly before attempting to build our own artifacts.
+CMake provides modules and commands for these purposes:
+
+- ``Check<LANG>CompilerFlag`` providing the ``check_<LANG>_compiler_flag``
+  function, to check whether a compiler flag is valid for the compiler in use.
+- ``Check<LANG>SourceCompiles`` providing the ``check_<LANG>_source_compiles``.
+  Which check whether a given source file compiles with the compiler in use.
+- ``Check<LANG>SourceRuns`` providing the ``check_<LANG>_source_runs``, to make
+  sure that a given source snippet compiles, links, and runs.
+
+In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
 
 .. challenge:: Check that a compiler accepts a compiler flag
 
@@ -134,7 +166,12 @@ Testing compilation, linking, and execution
       ``asan-example.cpp`` source file.
    3. Check that the address sanitizer flags are available with
       |check_cxx_compiler_flag|. The flags to check are ``-fsanitize=address
-      -fno-omit-frame-pointer``.
+      -fno-omit-frame-pointer``. Find the command signature with:
+
+      .. code-block:: bash
+
+         $ cmake --help-module CMakeCXXCompilerFlag
+
    4. If the flags do work, add them to the those used to compile the executable
       target with |target_compile_options|.
 
@@ -149,7 +186,8 @@ Testing compilation, linking, and execution
 
    1. Get the :download:`scaffold code <code/tarballs/check_source_runs.tar.bz2>`.
    2. Create an executable target from the source file ``use-uuid.cpp``.
-   3. Add a check that linking against the library produces working executables. Use the following C code as test:
+   3. Add a check that linking against the library produces working executables.
+      Use the following C code as test:
 
      .. code-block:: c
 
@@ -161,17 +199,19 @@ Testing compilation, linking, and execution
           return 0;
         }
 
-      |check_c_source_compiles| requires the test source code to be passed in as
-      a *string*.
+      |check_c_source_runs| requires the test source code to be passed in as
+      a *string*. Find the command signature with:
 
-   4. If the test is successful, link executable target against the UUID library: use the
-      ``PkgConfig::UUID`` target as argument to |target_link_libraries|.
+      .. code-block:: bash
+
+         $ cmake --help-module CheckCSourceRuns
+
+   4. If the test is successful, link executable target against the UUID
+      library: use the ``PkgConfig::UUID`` target as argument to
+      |target_link_libraries|.
 
    You can download the :download:`complete, working example <code/tarballs/check_source_runs_solution.tar.bz2>`.
 
-.. discussion:: |try_compile| and |try_run|
-
-   FOO
 
 .. keypoints::
 
