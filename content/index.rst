@@ -1,5 +1,6 @@
-CMake
-=====
+CMake hands-on workshop
+=======================
+
 
 CMake is a language-agnostic, cross-platform build tool and is nowadays the *de
 facto* standard,  with large projects using it to reliably build, test, and
@@ -44,11 +45,11 @@ deploy their codebases. You will learn how to:
 
    hello-cmake
    cmake-syntax
-   targets
    hello-ctest
-   ctest-catch2
    environment
    probing
+   targets
+   ctest-catch2
    dependencies
    cxx-fortran
    cxx-python
@@ -62,11 +63,11 @@ deploy their codebases. You will learn how to:
 
    30 min ; :doc:`hello-cmake`
    30 min ; :doc:`cmake-syntax`
-   30 min ; :doc:`targets`
    30 min ; :doc:`hello-ctest`
-   30 min ; :doc:`ctest-catch2`
    30 min ; :doc:`environment`
    30 min ; :doc:`probing`
+   30 min ; :doc:`targets`
+   30 min ; :doc:`ctest-catch2`
    30 min ; :doc:`dependencies`
    30 min ; :doc:`cxx-fortran`
    30 min ; :doc:`cxx-python`
@@ -226,6 +227,9 @@ The licensor cannot revoke these freedoms as long as you follow these license te
   
 Software
 ^^^^^^^^
+
+The code samples and exercises in this lesson were adapted from the GitHub
+repository for the `**CMake Cookbook** <https://github.com/dev-cafe/cmake-cookbook>`_.
 
 Except where otherwise noted, the example programs and other software provided
 by ENCCS are made available under the `OSI <http://opensource.org/>`_-approved

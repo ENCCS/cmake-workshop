@@ -7,3 +7,4 @@ dependencies:
   - cxx-compiler
   - fortran-compiler
   - ninja
+  - libuuid

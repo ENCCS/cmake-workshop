@@ -15,12 +15,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        examples: [hello-cxx, hello-f]
-        exclude:
-          - os: windows-latest
-            examples: hello-f
-  
+        os: [ubuntu-latest, macos-latest] #, windows-latest]
+
     steps:
     - uses: actions/checkout@v2
 
@@ -48,14 +44,42 @@ jobs:
     - name: Select CMake CLI options
       shell: bash -l {0}
       run: |
-         if [ "${{ matrix.os }}" != "windows-latest" ]; then 
-            echo "OPTS=-GNinja" >> $GITHUB_ENV
-         else
-            echo "OPTS=-Ax64" >> $GITHUB_ENV
-         fi
+        if [ "${{ matrix.os }}" != "windows-latest" ]; then
+           echo "CONF_OPTS=-GNinja" >> $GITHUB_ENV
+           echo "BUILD_OPTS=" >> $GITHUB_ENV
+        else
+           echo "CONF_OPTS=-Ax64" >> $GITHUB_ENV
+           echo "BUILD_OPTS=\"--config Release\"" >> $GITHUB_ENV
+        fi
       
-    - name: ${{ matrix.examples }}
+    - name: Run examples
       shell: bash -l {0}
       run: |
-        cd $GITHUB_WORKSPACE/content/code/${{ matrix.examples }}
-        cmake -S. -Bbuild -GNinja
+        cd $GITHUB_WORKSPACE/content/code
+
+        # select which examples to run on each platform
+        if [ "${{ matrix.os }}" == "windows-latest" ]; then
+           # exclude Fortran examples on Windows
+           examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -not -path './*-f' | xargs -L1 -I{} basename "{}")"
+
+           # configuration options
+           CONF_OPTS="-Ax64"
+        else
+           examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' | xargs -L1 -I{} basename "{}")"
+
+           # configuration options
+           CONF_OPTS="-GNinja"
+        fi
+
+        # report what we'll be doing
+        echo "<<< I will be running these examples >>>"
+        echo "$examples"
+
+        # run examples in a loop
+        for x in $examples
+        do
+            echo ">>> Running example $x"
+            cmake -S./"$x" -B./"$x"/build "$CONF_OPTS"
+            cmake --build ./"$x"/build --config Release
+            echo "<<< Done with example $x"
+        done
