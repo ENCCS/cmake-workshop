@@ -14,16 +14,27 @@ Detecting your environment
    - Learn how to discover processor characteristics.
    - Learn how to handle platform- and compiler-dependent source code.
 
-.. todo::
 
-   - Find the defaults CMake will use for your system
+CMake comes pre-configured with sane defaults for a multitude of properties of
+the environments in which it can be used.  Default generator, default compilers,
+and compiler flags are few and most notable examples of this up-front
+configuration.
+Run the following:
+
+.. code-block:: bash
+
+   $ cmake --system-information | less
 
 
-Discovering the operating system
---------------------------------
+if you are curious about what kind of configuration ships for your version of
+CMake and operating system.
+
+In this episode, we will show how to use CMake to introspect the environment in
+which we are running. This is very common in build systems, since it allows to
+customize the creation of artifacts on-the-fly.
 
 
-.. typealong:: Operating system discovery
+.. typealong:: Discovering the operating system
 
    For this example, we use the special value ``NONE`` for the ``LANGUAGES``
    option: we are only interested in reporting what operating system CMake
@@ -34,6 +45,10 @@ Discovering the operating system
 
 Discovering the processor
 -------------------------
+
+A common customization is to apply processor-specific compiler flags. We can gain
+such information on the host system with the built-in
+|cmake_host_system_information| command.
 
 .. signature:: |cmake_host_system_information|
 
