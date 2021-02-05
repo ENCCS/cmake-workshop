@@ -41,6 +41,8 @@ COMMANDS = [
     "try_run",
     "add_test",
     "set_tests_properties",
+    "set",
+    "include",
 ]
 
 CTERM = """
@@ -67,6 +69,7 @@ COMMANDS_IN_MODULES = [
     ("check_cxx_source_compiles", "CheckCXXSourceCompiles"),
     ("check_cxx_compiler_flag", "CheckCXXCompilerFlag"),
     ("check_c_source_runs", "CheckCSourceRuns"),
+    ("cmake_dependent_option", "CMakeDependentOption"),
 ]
 
 CinMTERM = """
