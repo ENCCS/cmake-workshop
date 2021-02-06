@@ -43,6 +43,10 @@ COMMANDS = [
     "set_tests_properties",
     "set",
     "include",
+    "get_property",
+    "set_property",
+    "get_target_property",
+    "set_target_properties",
 ]
 
 CTERM = """

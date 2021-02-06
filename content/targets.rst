@@ -34,7 +34,7 @@ Given a target ``tgtA``, we can invoke one command in the ``target_*`` family as
 
 .. code-block:: cmake
 
-   target_*(tgtA
+   target_link_libraries(tgtA
      PRIVATE tgtB
      INTERFACE tgtC
      PUBLIC tgtD
