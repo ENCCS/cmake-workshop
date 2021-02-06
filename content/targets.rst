@@ -29,6 +29,7 @@ It's all about the targets
    source files, link libraries, and link options are properties of targets.
 
 
+It is much more robust to use targets and properties than using variables.
 Given a target ``tgtA``, we can invoke one command in the ``target_*`` family as:
 
 .. code-block:: cmake
