@@ -35,7 +35,7 @@ jobs:
           auto-activate-base: false
           activate-environment: cmake-workshop
           environment-file: environment.yml
-          channels: conda-forge,defaults
+          channels: conda-forge
           channel-priority: true
           python-version: 3.8
           mamba-version: "*"
