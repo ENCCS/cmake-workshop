@@ -8,8 +8,5 @@ dependencies:
   - graphviz
   - pkg-config
   - ninja
-  - mpi
+  - mpi=*=*openmpi
   - python >=3.6
-  - cffi
-  - hdf5
-  - gtest
