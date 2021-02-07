@@ -6,22 +6,137 @@ Mixing C++ and Fortran
 
 .. questions::
 
-   - How do we use CMake to compile source files to executables?
+   - Can we use CMake to build mixed-language projects?
 
 .. objectives::
 
-   - Learn what tools available in the CMake suite.
-   - Learn how to write a simple ``CMakeLists.txt``.
-   - Learn the difference between *build systems*, *build tools*, and *build system generator*.
-   - Learn to distinguish between *configuration*, *generation*, and *build* time.
-   - Learn how CMake structures build artifacts.
+   - Learn how the built-in ``FortranCInterface`` module can help you work with
+     projects mixing Fortran and C/C++.
 
 
+CMake has native support for many programming languages. At the time of writing,
+C, C++, Fortran, CUDA, Objective-C, ISPC, and ASM are officially supported.
+When programming applications and libraries in a scientific context, it is often
+required to mix components written in different languages. This is mostly true
+because legacy, tried-and-true components are extremely hard to replace by
+non-professional programmers.
+In this episode, we will show how to mix Fortran and C/C++.
+
+In order to use multiple languages in your project, you can declare it within
+the |project| command:
+
+.. code-block:: cmake
+
+   project(my-project LANGUAGES CXX Fortran)
+
+Languages can also be declared later on in your ``CMakeLists.txt`` with
+invocations to the ``enable_language`` command.
+
+The workhorse module for mixing C/C++ and Fortran is the built-in
+``FortranCInterface`` module.  Whether you are working in Fortran and linking a
+C/C++ library or viceversa, you should **always** check that the compilers for
+the two languages are able to talk to each other.
+That is where the |FortranCInterface_VERIFY| function comes into play:
+
+.. code-block:: cmake
+
+   include(FortranCInterface)
+
+   # if you are working with C and Fortran
+   FortranCInterface_VERIFY()
+
+   # if you are working with C++ and Fortran
+   FortranCInterface_VERIFY(CXX)
+
+
+Fortran using C/C++
+-------------------
+
+If you are using Fortran2003 (and beyond), it is fairly straightforward to
+employ C/C++ libraries. The ``iso_c_binding`` built-in module was indeed
+mandated by the standards' committee starting from the 2003 edition, and
+provides a standardized interface between C, the *de facto lingua franca* of
+programming, and Fortran.
+We will not delve into the details of ``iso_c_binding``,
+suffice it so say that interoperability between basic datatypes, pointers, and
+function call conventions is nowadays well-established. [#iso_c_binding]_
+
+.. challenge:: A Fortran executable using a C/C++ library
+
+   In this exercise, you will build a Fortran executable linking to libraries
+   written in C++ and the system library ``backtrace``, written in C.
+
+   Get the :download:`scaffold code <code/tarballs/fortran-cxx.tar.bz2>`.
+   The project has the following source tree:
+
+   .. code-block:: text
+
+      fortran-cxx/
+      └── src
+          ├── bt-randomgen-example.f90
+          ├── interfaces
+          │   ├── interface_backtrace.f90
+          │   ├── interface_randomgen.f90
+          │   └── randomgen.cpp
+          └── utils
+              └── util_strings.f90
+
+   #. Add ``CMakeLists.txt`` files where necessary. You can either declare
+      Fortran, C++, and C as project languages, or enable C++ and C in the
+      ``interfaces`` folder.
+   #. In the ``src`` folder, create an executable from the
+      ``bt-randomgen-example.f90`` file. This executable will have to be linked
+      to the libraries created in the ``utils`` and ``interfaces`` folders.
+   #. Modify the scaffold ``CMakeLists.txt`` in the ``interfaces`` folder to
+      build a shared library from the C++ and Fortran sources. **Remember**, for
+      CMake to resolve Fortran modules dependencies, you need to specify the
+      corresponding sources with ``PUBLIC`` visibility level.
+   #. Do not forget to verify that the C/C++ and Fortran compilers are compatible!
+
+   You can download the :download:`complete, working example <code/tarballs/fortran-cxx_solution.tar.bz2>`.
+
+C/C++ using Fortran
+-------------------
+
+Whenever wanting to mix C and Fortran, one needs to be aware of some fundamental
+differences between the languages:
+
+- Fortran arrays are column-major.
+- All function arguments are passed by-reference.
+- Fortran compilers *mangle* function names. Usually by adding an underscore at the end.
+- Fortran is case-insensitive.
+
+Fortran90 introduced a number of modern features: *modules*, *function
+overloading*, and *user-defined types*. These features further complicate
+interoperability: they require compilers to perform more extensive `name
+mangling <https://en.wikipedia.org/wiki/Name_mangling>`_. As the mangling is not
+standard-mandated, each vendor can decide how to perform it.
+
+The ``FortranCInterface`` module fortunately comes to the rescue!
+
+
+.. challenge:: A C/C++ executable using a Fortran library
+
+   Your goal is to link a C++ executable to a Fortran library.
+
+   Get the :download:`scaffold code <code/tarballs/cxx-fortran.tar.bz2>`.
+
+   You can download the :download:`complete, working example <code/tarballs/cxx-fortran_solution.tar.bz2>`.
 
 
 .. keypoints::
 
-   - CMake is a **build system generator**, not a build system.
-   - You write ``CMakeLists.txt`` to describe how the build tools will create artifacts from sources.
-   - You can use the CMake suite of tools to manage the whole lifetime: from source files to tests to deployment.
-   - The structure of the project is mirrored in the build folder.
+   - Always check whether the Fortran and C/C++ compilers you are using are
+     interoperable.
+   - Fortran name-mangling header files for C/C++ can be conveniently
+     autogenerated by CMake.
+
+
+
+.. rubric:: Footnotes
+
+.. [#iso_c_binding]
+
+   You can find out more about ``iso_c_binding`` and Fortran/C interoperability
+   in the `GNU Fortran manual
+   <https://gcc.gnu.org/onlinedocs/gfortran/Interoperability-with-C.html>`_.

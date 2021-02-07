@@ -49,6 +49,7 @@ manual = [
     "ctest-labels",
     "ctest-cost",
     "more-catch2",
+    "fortran-cxx",
 ]
 
 

@@ -82,6 +82,8 @@ COMMANDS_IN_MODULES = [
     ("pkg_search_module", "FindPkgConfig"),
     ("FetchContent_Declare", "FetchContent"),
     ("FetchContent_MakeAvailable", "FetchContent"),
+    ("FortranCInterface_VERIFY", "FortranCInterface"),
+    ("FortranCInterface_HEADER", "FortranCInterface"),
 ]
 
 CinMTERM = """
