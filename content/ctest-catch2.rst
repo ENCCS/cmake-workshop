@@ -13,10 +13,11 @@ C++ unit testing with Catch2
    - Learn how to integrate the `Catch2 <https://github.com/catchorg/Catch2>`_ C++ unit test framework with CMake.
 
 
-Unit testing is a valuable technique in software engineering: they can help
-identify functional regression with a very fine level of control, since they are
-meant to test isolated components in your codebase.
+Unit testing is a valuable technique in software engineering: it can help
+identify functional regressions with a very fine level of control, since each
+unit test is meant to exercise isolated components in your codebase.
 Equipping your codebase with integration *and* unit tests is very good practice.
+
 There are many unit testing frameworks for the C++ language. Each of them
 stresses a slightly different approach to unit testing and comes with its own
 peculiarities in set up and usage.
