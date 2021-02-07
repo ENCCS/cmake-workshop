@@ -23,7 +23,7 @@ jobs:
     - name: Cache conda
       uses: actions/cache@v1
       env:
-        CACHE_NUMBER: 0  # Increase this value to reset cache if .github/workshop.yml has not changed
+        CACHE_NUMBER: 0  # Increase this value to reset cache if environment.yml has not changed
       with:
         path: ~/conda_pkgs_dir
         key:
@@ -33,9 +33,9 @@ jobs:
       with:
           auto-update-conda: true
           auto-activate-base: false
-          activate-environment: workshop
-          environment-file: .github/workshop.yml
-          channels: conda-forge,defaults
+          activate-environment: cmake-workshop
+          environment-file: environment.yml
+          channels: conda-forge
           channel-priority: true
           python-version: 3.8
           mamba-version: "*"

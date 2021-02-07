@@ -25,6 +25,10 @@ COMMANDS = [
     "add_executable",
     "target_sources",
     "find_package",
+    "find_file",
+    "find_path",
+    "find_library",
+    "find_program",
     "target_include_directories",
     "target_link_libraries",
     "target_compile_options",
@@ -43,6 +47,11 @@ COMMANDS = [
     "set_tests_properties",
     "set",
     "include",
+    "get_property",
+    "set_property",
+    "get_target_property",
+    "set_target_properties",
+    "add_custom_target",
 ]
 
 CTERM = """
@@ -70,6 +79,11 @@ COMMANDS_IN_MODULES = [
     ("check_cxx_compiler_flag", "CheckCXXCompilerFlag"),
     ("check_c_source_runs", "CheckCSourceRuns"),
     ("cmake_dependent_option", "CMakeDependentOption"),
+    ("pkg_search_module", "FindPkgConfig"),
+    ("FetchContent_Declare", "FetchContent"),
+    ("FetchContent_MakeAvailable", "FetchContent"),
+    ("FortranCInterface_VERIFY", "FortranCInterface"),
+    ("FortranCInterface_HEADER", "FortranCInterface"),
 ]
 
 CinMTERM = """
