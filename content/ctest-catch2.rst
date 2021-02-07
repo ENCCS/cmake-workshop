@@ -28,7 +28,7 @@ Catch2 is distributed as a single header file, which is one of its most
 appealing features: it can easily be included in any project.
 
 
-.. challenge::
+.. challenge:: Using Catch2
 
    Get the :download:`scaffold code <code/tarballs/ctest-catch2.tar.bz2>`.
 
@@ -41,7 +41,7 @@ appealing features: it can easily be included in any project.
    7. Enable testing and add a test. You will have to check how to call a Catch2
       executable.
 
-   You can download the :download:`complete, working example <code/tarballs/ctest-labels_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/ctest-catch2_solution.tar.bz2>`.
 
 
 

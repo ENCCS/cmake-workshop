@@ -27,6 +27,9 @@ challenges = [
     "ctest-timeout",
     "automata-cxx",
     "automata-f",
+    "mpi-cxx",
+    "mpi-f",
+    "ctest-catch2",
 ]
 
 # folders to tarballs directly
@@ -35,6 +38,7 @@ typealongs = [
     "processor",
     "sys_preproc",
     "hello-ctest",
+    "taskloop",
 ]
 
 # folders that require manual intervention for tarballing, e.g. to provide a meaningful scaffold
@@ -44,7 +48,7 @@ manual = [
     "check_source_runs",
     "ctest-labels",
     "ctest-cost",
-    "ctest-catch2",
+    "more-catch2",
 ]
 
 
