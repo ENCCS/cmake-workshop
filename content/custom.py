@@ -47,6 +47,7 @@ COMMANDS = [
     "set_property",
     "get_target_property",
     "set_target_properties",
+    "add_custom_target",
 ]
 
 CTERM = """

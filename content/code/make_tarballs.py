@@ -25,6 +25,8 @@ challenges = [
     "pre_post-f",
     "ctest-will-fail",
     "ctest-timeout",
+    "automata-cxx",
+    "automata-f",
 ]
 
 # folders to tarballs directly
