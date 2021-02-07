@@ -8,7 +8,7 @@ dependencies:
   - libblas
   - liblapack
   - libuuid
-  - mpi
+  - mpi=*=*openmpi
   - ninja
   - pkg-config
   - python >=3.6
