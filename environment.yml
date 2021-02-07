@@ -5,6 +5,8 @@ dependencies:
   - cmake
   - compilers
   - graphviz
+  - libblas
+  - liblapack
   - libuuid
   - mpi
   - ninja

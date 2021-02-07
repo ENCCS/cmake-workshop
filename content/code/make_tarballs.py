@@ -50,6 +50,7 @@ manual = [
     "ctest-cost",
     "more-catch2",
     "fortran-cxx",
+    "cxx-fortran",
 ]
 
 
