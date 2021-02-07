@@ -1,12 +1,12 @@
 name: cmake-workshop
 channels:
   - conda-forge
-  - defaults
 dependencies:
-  - compilers
   - cmake
+  - compilers
   - graphviz
-  - pkg-config
+  - libuuid
+  - mpi
   - ninja
-  - mpi=*=*openmpi
+  - pkg-config
   - python >=3.6
