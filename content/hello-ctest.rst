@@ -278,7 +278,7 @@ Among the many properties that can be set on tests, we would like to highlight t
 
    .. tabs::
 
-      .. tab:: ``WILL_FAIL``
+      .. tab:: WILL_FAIL
 
          Get the :download:`scaffold code <code/tarballs/ctest-will-fail.tar.bz2>`.
 
@@ -293,7 +293,7 @@ Among the many properties that can be set on tests, we would like to highlight t
 
          You can download the :download:`complete, working example <code/tarballs/ctest-will-fail_solution.tar.bz2>`.
 
-      .. tab:: ``COST``
+      .. tab:: COST
 
          Get the :download:`scaffold code <code/tarballs/ctest-cost.tar.bz2>`.
 
@@ -305,7 +305,7 @@ Among the many properties that can be set on tests, we would like to highlight t
 
          You can download the :download:`complete, working example <code/tarballs/ctest-cost_solution.tar.bz2>`.
 
-      .. tab:: ``TIMEOUT``
+      .. tab:: TIMEOUT
 
          Get the :download:`scaffold code <code/tarballs/ctest-timeout.tar.bz2>`.
 
