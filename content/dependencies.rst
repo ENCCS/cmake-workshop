@@ -225,71 +225,6 @@ The package developers might be already prepared to help you out:
   UUID library.
 
 
-Satisfying dependencies at configure-time
------------------------------------------
-
-CMake gives you the tools to satisfy missing dependencies at *configure-time*,
-without user intervention. This is an extremely powerful mechanism, but you
-should use it with care.
-
-This is a built-in tool in CMake and will be made available by including the
-``FetchContent`` module. There are two steps in this workflow:
-
-#. *Declaring* the content to fetch with |FetchContent_Declare|. This can be a
-   tarball (local or remote), a local folder, or a version control repository
-   (Git, SVN, etc.).
-
-   .. signature:: |FetchContent_Declare|
-
-      .. code-block:: cmake
-
-         FetchContent_Declare(<name> <contentOptions>...)
-
-#. *Populating* the content with |FetchContent_MakeAvailable|. This commands
-   *adds* the targets declared in the external content to your build system.
-
-   .. signature:: |FetchContent_MakeAvailable|
-
-      .. code-block:: cmake
-
-         FetchContent_MakeAvailable( <name1> [<name2>...] )
-
-
-.. challenge:: Catch2 reloaded
-
-   In :ref:`ctest-catch2` we showed how to use the Catch2 testing framework and
-   couple it with CTest.  We permanently added a copy of the ``catch.hpp``
-   header file to the codebase. In this exercise, we want to download the header
-   at configure-time, such that we don't store external code in our won
-   repository.
-
-   Before starting, get acquainted with the documentation
-   for `declaring <https://cmake.org/cmake/help/latest/module/FetchContent.html#command:fetchcontent_declare>`_ and `making content available <https://cmake.org/cmake/help/latest/module/FetchContent.html#command:fetchcontent_makeavailable>`_.
-
-   Get the :download:`scaffold code <code/tarballs/more-catch2.tar.bz2>`.
-
-   #. Create a C++ project.
-   #. Set the C++ standard to C++14. Catch2 will work with C++11 too.
-   #. Create a library from the ``sum_integers.cpp`` source file.
-   #. Link the library into a ``sum_up`` executable.
-   #. Include the ``FetchContent`` module and declare the ``Catch2`` content. We
-      want to download the ``v2.13.4`` tag from the `official Git repository <https://github.com/catchorg/Catch2>`_.
-   #. Make the ``Catch2`` content available.
-   #. Create the ``cpp_test`` executable.
-   #. Enable testing and add a test. You will have to check how to call a Catch2
-      executable.
-
-   What differences do you note in the configuration step?
-
-   You can download the :download:`complete, working example <code/tarballs/more-catch2_solution.tar.bz2>`.
-
-.. warning::
-
-   ``FetchContent`` is a powerful module in your CMake toolbox. **Beware!**
-   Satisfying *every* dependency of your code in this way will make the duration
-   of both the configuration and build stages balloon.
-
-
 .. keypoints::
 
    - CMake has a rich ecosystem of modules for finding software dependencies. They are called ``Find<package>.cmake``.
@@ -297,7 +232,6 @@ This is a built-in tool in CMake and will be made available by including the
    - You can also use the classic Unix tool ``pkg-config`` to find software
      dependencies, but this is not as robust as the CMake-native
      ``Find<package>`` modules.
-   - You can also download dependencies at configure-time with the ``FetchContent`` module.
 
 
 
