@@ -215,4 +215,8 @@ If you write modern C++, pybind11 should be your framework of choice:
 
 .. keypoints::
 
-   - You can also download dependencies at configure-time with the ``FetchContent`` module.
+   - CMake lets you satisfy dependencies *on-the-fly*.
+   - You can do so at build-time with ``ExternalProject``, but you need to adopt
+     a superbuild framework.
+   - At configure-time, you can use the ``FetchContent`` module: it can only be
+     applied with dependencies that also use CMake.
