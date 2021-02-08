@@ -96,9 +96,14 @@ Platform- and compiler-dependent source code
    .. code-block:: c++
 
       #ifdef IS_WINDOWS
-      return std::string("Hello from Windows!");
+        return std::string("Hello from Windows!");
       #elif IS_LINUX
-      return std::string("Hello from Linux!");
+        return std::string("Hello from Linux!");
+      #elif IS_MACOS
+        return std::string("Hello from macOS!");
+      #else
+        return std::string("Hello from an unknown system!");
+      #endif
 
    We can achieve this with CMake with a combination of host system
    introspection and the |target_compile_definitions| command.
