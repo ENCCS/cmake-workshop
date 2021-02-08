@@ -19,9 +19,9 @@ sys.path.insert(0, os.path.abspath("."))
 
 # -- Project information -----------------------------------------------------
 
-project = "CMake"
+project = "CMake Workshop"
 copyright = "2020, EuroCC National Competence Centre Sweden"
-author = "Mark Abraham, Roberto Di Remigio, Kjartan Thor Wikfeldt"
+author = "Roberto Di Remigio, Kjartan Thor Wikfeldt"
 github_user = "ENCCS"
 github_repo_name = "cmake-workshop"  # auto-detected from dirname if blank
 github_version = "master"
@@ -58,6 +58,7 @@ jupyter_execute_notebooks = "cache"
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = [
+    "code*",
     "README*",
     "_build",
     "Thumbs.db",

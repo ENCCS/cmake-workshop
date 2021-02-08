@@ -50,6 +50,7 @@ manual = [
     "more-catch2",
     "fortran-cxx",
     "cxx-fortran",
+    "cxx-python",
 ]
 
 
