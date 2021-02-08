@@ -8,8 +8,17 @@ project(conditionals LANGUAGES Fortran)
 # to toggle the behavior of add_library
 set(BUILD_SHARED_LIBS OFF)
 
-add_library(message
-  message.f90
+if(BUILD_SHARED_LIBS)
+  message(STATUS "Build shared library")
+  add_library(message SHARED)
+else()
+  message(STATUS "Build static library")
+  add_library(message STATIC)
+endif()
+
+target_sources(message
+  PUBLIC
+    message.f90
   )
 
 add_executable(hello-world hello-world.f90)
