@@ -189,15 +189,15 @@ In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
    3. Add a check that linking against the library produces working executables.
       Use the following C code as test:
 
-     .. code-block:: c
+      .. code-block:: c
 
-        #include <uuid/uuid.h>
+         #include <uuid/uuid.h>
 
-        int main(int argc, char * argv[]) {
-          uuid_t uuid;
-          uuid_generate(uuid);
-          return 0;
-        }
+         int main(int argc, char * argv[]) {
+           uuid_t uuid;
+           uuid_generate(uuid);
+           return 0;
+         }
 
       |check_c_source_runs| requires the test source code to be passed in as
       a *string*. Find the command signature with:
