@@ -29,7 +29,6 @@ challenges = [
     "automata-f",
     "mpi-cxx",
     "mpi-f",
-    "ctest-catch2",
 ]
 
 # folders to tarballs directly
