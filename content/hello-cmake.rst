@@ -60,6 +60,10 @@ Hello, CMake!
 
          You can download the :download:`complete, working example <code/tarballs/hello-cxx_solution.tar.bz2>`.
 
+         Then unpack the archive::
+
+           tar xf hello-cxx_solution.tar.bz2
+
       .. tab:: Fortran
 
          Download the :download:`scaffold project <code/tarballs/hello-f.tar.bz2>`.
@@ -69,41 +73,40 @@ Hello, CMake!
 
          You can download the :download:`complete, working example <code/tarballs/hello-f_solution.tar.bz2>`.
 
-   1. We will unpack the tarball with the scaffold project:
+         Then unpack the archive::
 
-      .. code-block:: bash
+           tar xf hello-f_solution.tar.bz2
 
-         tar xjf hello-cxx.tar.bz2
-
-   2. The folder contains only the source code. We need to add a file called
+   1. The folder contains only the source code. We need to add a file called
       ``CMakeLists.txt`` to it.  CMake reads the contents of these special files
       when generating the build system.
-   3. The first thing we will do is declare the requirement on minimum version of CMake:
+
+   2. The first thing we will do is declare the requirement on minimum version of CMake:
 
       .. code-block:: cmake
 
          cmake_minimum_required(VERSION 3.13)
 
-   4. Next, we declare our project and its programming language:
+   3. Next, we declare our project and its programming language:
 
       .. code-block:: cmake
 
          project(Hello LANGUAGES CXX)
 
-   5. We create an *executable target*. CMake will generate rules in the build
+   4. We create an *executable target*. CMake will generate rules in the build
       system to compile and link our source file into an executable:
 
       .. code-block:: cmake
 
          add_executable(hello hello.cpp)
 
-   6. We are ready to call CMake and get our build system:
+   5. We are ready to call CMake and get our build system:
 
       .. code-block:: bash
 
          $ cmake -S. -Bbuild
 
-   7. And finally build our executable:
+   6. And finally build our executable:
 
       .. code-block:: bash
 
