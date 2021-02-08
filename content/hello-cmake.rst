@@ -62,7 +62,7 @@ Hello, CMake!
 
          Then unpack the archive::
 
-           tar xjf hello-cxx_solution.tar.bz2
+           tar xf hello-cxx_solution.tar.bz2
 
       .. tab:: Fortran
 
@@ -75,7 +75,7 @@ Hello, CMake!
 
          Then unpack the archive::
 
-           tar xjf hello-f_solution.tar.bz2
+           tar xf hello-f_solution.tar.bz2
 
    1. The folder contains only the source code. We need to add a file called
       ``CMakeLists.txt`` to it.  CMake reads the contents of these special files
