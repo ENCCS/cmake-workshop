@@ -2,6 +2,7 @@ name: cmake-workshop
 channels:
   - conda-forge
 dependencies:
+  - cffi
   - cmake
   - compilers
   - graphviz
