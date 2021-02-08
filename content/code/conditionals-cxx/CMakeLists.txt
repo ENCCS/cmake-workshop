@@ -8,11 +8,19 @@ project(conditionals LANGUAGES CXX)
 # to toggle the behavior of add_library
 set(BUILD_SHARED_LIBS OFF)
 
-# list sources
-list(APPEND _sources Message.hpp Message.cpp)
+if(BUILD_SHARED_LIBS)
+  message(STATUS "Build shared library")
+  add_library(message SHARED)
+else()
+  message(STATUS "Build static library")
+  add_library(message STATIC)
+endif()
 
-# generate a library from sources
-add_library(message ${_sources})
+target_sources(message
+  PUBLIC
+    Message.hpp
+    Message.cpp
+  )
 
 add_executable(hello-world hello-world.cpp)
 
