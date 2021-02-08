@@ -29,7 +29,6 @@ challenges = [
     "automata-f",
     "mpi-cxx",
     "mpi-f",
-    "ctest-catch2",
 ]
 
 # folders to tarballs directly
@@ -51,6 +50,7 @@ manual = [
     "more-catch2",
     "fortran-cxx",
     "cxx-fortran",
+    "cxx-python",
 ]
 
 

@@ -49,10 +49,9 @@ deploy their codebases. You will learn how to:
    environment
    probing
    targets
-   ctest-catch2
    dependencies
    cxx-fortran
-   cxx-python
+   fetch-content
 
 
 .. see also the schedule in guide.rst
@@ -66,11 +65,10 @@ deploy their codebases. You will learn how to:
    30 min ; :doc:`hello-ctest`
    30 min ; :doc:`environment`
    30 min ; :doc:`probing`
-   30 min ; :doc:`targets`
-   30 min ; :doc:`ctest-catch2`
-   30 min ; :doc:`dependencies`
-   30 min ; :doc:`cxx-fortran`
-   30 min ; :doc:`cxx-python`
+   40 min ; :doc:`targets`
+   40 min ; :doc:`dependencies`
+   40 min ; :doc:`cxx-fortran`
+   30 min ; :doc:`fetch-content`
 
 
 .. toctree::
@@ -229,7 +227,7 @@ Software
 ^^^^^^^^
 
 The code samples and exercises in this lesson were adapted from the GitHub
-repository for the `**CMake Cookbook** <https://github.com/dev-cafe/cmake-cookbook>`_.
+repository for the `CMake Cookbook <https://github.com/dev-cafe/cmake-cookbook>`_.
 
 Except where otherwise noted, the example programs and other software provided
 by ENCCS are made available under the `OSI <http://opensource.org/>`_-approved
