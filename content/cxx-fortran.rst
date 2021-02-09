@@ -74,6 +74,40 @@ function call conventions is nowadays well-established. [#iso_c_binding]_
    In this exercise, you will build a Fortran executable linking to libraries
    written in C++ and the system library ``backtrace``, written in C.
 
+   The final executable, ``bt-randomgen-example``, will print a few random
+   integers, produced by the C++ library, and a backtrace, obtained from the C
+   library. This is a sample output:
+
+   .. code-block:: bash
+
+      $ bt-randomgen-example
+
+       Get a random number    20
+       Get a random number    13
+       Get a random number    30
+       Get a random number    24
+       Get a random number    40
+       Get a random number    31
+       Get a random number    33
+       Get a random number    28
+       Get a random number    33
+       Get a random number    13
+       Get a random number    11
+       Get a random number    40
+       Get a random number     7
+       Get a random number    28
+       Get a random number     5
+       Get a random number    27
+       Get a random number     4
+       Get a random number    39
+       Get a random number    38
+       Get a random number    39
+      Printing backtrace
+      ./build/src/bt-randomgen-example[0x401316]
+      ./build/src/bt-randomgen-example[0x401369]
+      /nix/store/a3syww9igm49zdzq3ibzw9m8ccvsgxla-glibc-2.32/lib/libc.so.6(__libc_start_main+0xed)[0x7f87aa2b1dbd]
+      ./build/src/bt-randomgen-example[0x40110a]
+
    Get the :download:`scaffold code <code/tarballs/fortran-cxx.tar.bz2>`.
    The project has the following source tree:
 
@@ -96,10 +130,11 @@ function call conventions is nowadays well-established. [#iso_c_binding]_
       ``bt-randomgen-example.f90`` file. This executable will have to be linked
       to the libraries created in the ``utils`` and ``interfaces`` folders.
    #. Modify the scaffold ``CMakeLists.txt`` in the ``interfaces`` folder to
-      build a shared library from the C++ and Fortran sources. **Remember**, for
+      build a shared library from the C++ and Fortran sources. **Beware**, for
       CMake to resolve Fortran modules dependencies, you need to specify the
       corresponding sources with ``PUBLIC`` visibility level.
    #. Do not forget to verify that the C/C++ and Fortran compilers are compatible!
+   #. Try out the executable and **remember** that the build tree *mirrors* the source tree.
 
    You can download the :download:`complete, working example <code/tarballs/fortran-cxx_solution.tar.bz2>`.
 
@@ -137,9 +172,22 @@ needed to mangle names as appropriate for the compiler in use:
 
 .. challenge:: A C/C++ executable using a Fortran library
 
-   Your goal is to link a C++ executable to a BLAS/LAPACK implementation assumed
-   to be written in Fortran. This means that the symbols for ``DSCAL`` and
-   ``DGESV`` are mangled in a compiler-dependent way.
+   Your goal is to link a C++ executable to a BLAS/LAPACK library.  The final
+   executable will be named ``linear-algebra``: it scales a vector with
+   ``DSCAL`` and performs a linear solve with ``DGESV``.  We assume the
+   BLAS/LAPACK library to be written in Fortran.  This means that the symbols
+   for ``DSCAL`` and ``DGESV`` are mangled in a compiler-dependent way.
+   The ``linear-algebra`` executable will accept the dimension of the square
+   matrix and vector as command-line input, for example:
+
+   .. code-block:: bash
+
+      $ linear-algebra 1000
+
+      C_DSCAL done
+      C_DGESV done
+      info is 0
+      check is 4.80085e-12
 
    Get the :download:`scaffold code <code/tarballs/cxx-fortran.tar.bz2>`. The project has the following source tree:
 
@@ -158,12 +206,12 @@ needed to mangle names as appropriate for the compiler in use:
    #. Inspect the contents of the C++ sources in the ``math`` subfolder. They
       refer to a ``fc_mangle.h`` header file, which is not part of the project,
       as it will be automatically generated.
-   #. Create an executable from the ``linear-algebra.cpp`` source file. Which
-      BLAS and LAPACK functions are we using?
+   #. Create an executable from the ``linear-algebra.cpp`` source file.
    #. Complete the scaffold ``CMakeLists.txt`` in the ``math`` subfolder. In
       particular, you want to check compatibility of compilers and generate the
       ``fc_mangle.h`` header. Hint: you will have to use the ``MACRO_NAMESPACE``
       and ``SYMBOLS`` options to the |FortranCInterface_HEADER|.
+   #. Try out the executable and **remember** that the build tree *mirrors* the source tree.
 
    You can download the :download:`complete, working example <code/tarballs/cxx-fortran_solution.tar.bz2>`.
 

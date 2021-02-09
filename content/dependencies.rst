@@ -102,38 +102,9 @@ A complete list of ``Find<PackageName>.cmake`` can be found from the command-lin
 
    We want to compile the following OpenMP sample code: [#omp]_
 
-   .. code-block:: c++
 
-      #include <cstdlib>
-
-      void long_running_task(){
-          // do something
-      };
-
-      void loop_body(int i, int j){
-          // do something
-      };
-
-      void parallel_work() {
-        int i, j;
-      #pragma omp taskgroup
-        {
-      #pragma omp task
-          long_running_task(); // can execute concurrently
-
-      #pragma omp taskloop private(j) grainsize(500) nogroup
-          for (i = 0; i < 10000; i++) { // can execute concurrently
-            for (j = 0; j < i; j++) {
-              loop_body(i, j);
-            }
-          }
-        }
-      }
-
-      int main() {
-        parallel_work();
-        return EXIT_SUCCESS;
-      }
+   .. literalinclude:: code/day-2/22_taskloop/solution/taskloop.cpp
+      :language: c++
 
    Note the usage of the ``taskloop`` construct, which was introduced in OpenMP
    4.5: we need to make sure our C++ compiler is suitably compatible with *at
@@ -156,8 +127,8 @@ A complete list of ``Find<PackageName>.cmake`` can be found from the command-lin
 
       target_link_libraries(task-loop PRIVATE OpenMP::OpenMP_CXX)
 
-   We can configure and build verbosely. #[verbose]_ Notice that compiler flags, include directories,
-   and link libraries are properly resolved by CMake.
+   We can configure and build verbosely. [#verbose]_
+   Notice that compiler flags, include directories, and link libraries are properly resolved by CMake.
 
    You can download the :download:`complete working example <code/tarballs/taskloop_solution.tar.bz2>`.
 
@@ -166,8 +137,10 @@ A complete list of ``Find<PackageName>.cmake`` can be found from the command-lin
    In this exercise, you will attempt compiling a "Hello, world" program that
    uses the message passing interface (MPI).
 
-   1. Check whether a ``FindMPI.cmake`` module exists in the built-in module library.
-   2. Get acquainted with its components and the variables and imported targets it defines.
+   1. Check whether a ``FindMPI.cmake`` module exists in the built-in module
+      library.
+   2. Get acquainted with its components and the variables and imported targets
+      it defines.
 
    .. tabs::
 
