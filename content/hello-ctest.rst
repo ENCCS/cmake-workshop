@@ -50,6 +50,7 @@ There are two steps to perform to integrate your CMake build system with the CTe
 .. typealong:: Your first test project
 
    We will build a simple library to sum integers and an executable using this library.
+   We will work from a :download:`scaffold project <code/tarballs/hello-ctest.tar.bz2>`.
 
    .. code-block:: cmake
 
@@ -109,7 +110,7 @@ There are two steps to perform to integrate your CMake build system with the CTe
    Any command can be used to run tests. In this exercise, we will extend the
    previous CMake code to test the main executable within a shell script.
 
-   1. Get the :download:`scaffold code <code/tarballs/hello-ctest.tar.bz2>`.
+   1. Get the :download:`scaffold code <code/tarballs/bash-ctest.tar.bz2>`.
    2. Find the appropriate bash executable to run ``test.sh`` with. You should
       use the ``find_program`` command of CMake.
    3. Add another invocation to |add_test| that will be equivalent to running:
@@ -120,7 +121,7 @@ There are two steps to perform to integrate your CMake build system with the CTe
 
    4. Build the project and run CTest.
 
-   You can download the :download:`complete, working example <code/tarballs/hello-ctest_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/bash-ctest_solution.tar.bz2>`.
 
 .. challenge:: Running the tests through a Python script
 
@@ -128,27 +129,30 @@ There are two steps to perform to integrate your CMake build system with the CTe
    this exercise, we will add two more tests to our project. These new tests
    will run the main executable through a Python script.
 
-   1. Find the Python interpreter to run ``test.py``. You should
+   #. Get the :download:`scaffold code <code/tarballs/python-ctest.tar.bz2>`.
+   #. Find the Python interpreter to run ``test.py``. You should
       use the |find_package| command of CMake.
-   2. Add another invocation to |add_test| that will be equivalent to running:
+   #. Add another invocation to |add_test| that will be equivalent to running:
 
       .. code-block:: bash
 
          $ python test.py --executable sum_up
 
-   3. The ``test.py`` script accepts a ``--short`` command-line option. Add
+   #. The ``test.py`` script accepts a ``--short`` command-line option. Add
       another test that uses this option in the command.
-   4. Build the project and run CTest.
+   #. Build the project and run CTest.
 
-   You can download the :download:`complete, working example <code/tarballs/hello-ctest_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/python-ctest_solution.tar.bz2>`.
 
 The CTest command-line interface
 --------------------------------
 
 .. typealong:: How to use CTest effectively.
 
-   The ``ctest`` command is part of the CMake installation.
-   We can find help on its usage with:
+   We will now demonstrate the CTest command-line interface (CLI) using the
+   solution of the previous exercise.
+
+   The ``ctest`` command is part of the CMake installation. We can find help on its usage with:
 
    .. code-block:: bash
 
