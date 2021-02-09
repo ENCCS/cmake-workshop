@@ -3,11 +3,11 @@ name: Build and test examples
 on:
   push:
     paths:
-      - content/code/*
+      - content/code/*/solution/*
       - .github/workflows/test.yml
   pull_request:
     paths:
-      - content/code/*
+      - content/code/*/solution/*
       - .github/workflows/test.yml
 
 jobs:
@@ -60,12 +60,12 @@ jobs:
         # select which examples to run on each platform
         if [ "${{ matrix.os }}" == "windows-latest" ]; then
            # exclude Fortran examples on Windows
-           examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -not -path './*-f' | xargs -L1 -I{} basename "{}")"
+           examples="$(find day-1 day-2 -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -not -path '*-f' -print0 | sort -z | xargs -r0 -L1 -I{} basename "{}")"
 
            # configuration options
            CONF_OPTS="-Ax64"
         else
-           examples="$(find . -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' | xargs -L1 -I{} basename "{}")"
+           examples="$(find day-1 day-2 -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -print0 | sort -z | xargs -r0 -L1 -I{} basename "{}")"
 
            # configuration options
            CONF_OPTS="-GNinja"
@@ -79,7 +79,7 @@ jobs:
         for x in $examples
         do
             echo ">>> Running example $x"
-            cmake -S./"$x" -B./"$x"/build "$CONF_OPTS"
+            cmake -S./"$x"/solution -B./"$x"/build "$CONF_OPTS"
             cmake --build ./"$x"/build --config Release
             echo "<<< Done with example $x"
         done
