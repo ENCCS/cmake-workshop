@@ -55,7 +55,7 @@ Hello, CMake!
 
          Download  :download:`scaffold project <code/tarballs/hello-cxx.tar.bz2>`.
 
-         .. literalinclude:: code/hello-cxx/hello.cpp
+         .. literalinclude:: code/day-1/00_hello-cxx/hello.cpp
             :language: c++
 
          You can download the :download:`complete, working example <code/tarballs/hello-cxx_solution.tar.bz2>`.
@@ -68,7 +68,7 @@ Hello, CMake!
 
          Download the :download:`scaffold project <code/tarballs/hello-f.tar.bz2>`.
 
-         .. literalinclude:: code/hello-f/hello.f90
+         .. literalinclude:: code/day-1/00_hello-f/hello.f90
             :language: fortran
 
          You can download the :download:`complete, working example <code/tarballs/hello-f_solution.tar.bz2>`.
@@ -317,10 +317,11 @@ You can link libraries into executables with |target_link_libraries|:
 
          Download the :download:`scaffold project <code/tarballs/libraries-cxx.tar.bz2>`.
 
-         1. Write a ``CMakeLists.txt`` to compile the source files ``Message.hpp``
-         and  ``Message.cpp`` into a library. Do not specify the type of library, shared or static, explicitly.
-         2. Add an executable from the ``hello-world.cpp`` source file.
-         2. Link the library into the executable.
+         #. Write a ``CMakeLists.txt`` to compile the source files
+            ``Message.hpp`` and  ``Message.cpp`` into a library. Do not specify
+            the type of library, shared or static, explicitly.
+         #. Add an executable from the ``hello-world.cpp`` source file.
+         #. Link the library into the executable.
 
          You can download the :download:`complete, working example <code/tarballs/libraries-cxx_solution.tar.bz2>`.
 
@@ -328,10 +329,11 @@ You can link libraries into executables with |target_link_libraries|:
 
          Download the :download:`scaffold project <code/tarballs/libraries-f.tar.bz2>`.
 
-         1. Write a ``CMakeLists.txt`` to compile the source files ``message.f90``
-         into a library. Do not specify the type of library, shared or static, explicitly.
-         2. Add an executable from the ``hello-world.f90`` source file.
-         2. Link the library into the executabl.
+         #. Write a ``CMakeLists.txt`` to compile the source files
+            ``message.f90`` into a library. Do not specify the type of library,
+            shared or static, explicitly.
+         #. Add an executable from the ``hello-world.f90`` source file.
+         #. Link the library into the executable.
 
          You can download the :download:`complete, working example <code/tarballs/libraries-f_solution.tar.bz2>`.
 
