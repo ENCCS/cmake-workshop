@@ -250,6 +250,8 @@ visible at the level at which it is declared and all higher levels.
    folders. We will implement a relatively simple code to compute and print to
    screen elementary `cellular automata
    <https://en.wikipedia.org/wiki/Cellular_automaton#Elementary_cellular_automata>`_.
+   We separate the sources into ``src`` and ``external`` to simulate a nested project
+   which reuses an external project.
    Your goal is to:
 
    - Build a library out of the contents of ``external`` and each subfolder of
@@ -352,7 +354,7 @@ visible at the level at which it is declared and all higher levels.
      built and how their dependencies are handled.
    - Compiler flags, definitions, source files, include folders, link libraries,
      and linker options are **properties** of a target.
-   - Never use variables to express dependencies between targets: use the
+   - Avoid using variables to express dependencies between targets: use the
      visibility levels ``PRIVATE``, ``INTERFACE``, ``PUBLIC`` and let CMake
      figure out the details.
    - Use |get_property| to inquire and |set_property| to modify values of
