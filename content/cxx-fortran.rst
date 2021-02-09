@@ -108,7 +108,7 @@ function call conventions is nowadays well-established. [#iso_c_binding]_
       /nix/store/a3syww9igm49zdzq3ibzw9m8ccvsgxla-glibc-2.32/lib/libc.so.6(__libc_start_main+0xed)[0x7f87aa2b1dbd]
       ./build/src/bt-randomgen-example[0x40110a]
 
-   Get the :download:`scaffold code <code/tarballs/fortran-cxx.tar.bz2>`.
+   Get the :download:`scaffold code <code/tarballs/24_fortran-cxx.tar.bz2>`.
    The project has the following source tree:
 
    .. code-block:: text
@@ -136,7 +136,7 @@ function call conventions is nowadays well-established. [#iso_c_binding]_
    #. Do not forget to verify that the C/C++ and Fortran compilers are compatible!
    #. Try out the executable and **remember** that the build tree *mirrors* the source tree.
 
-   You can download the :download:`complete, working example <code/tarballs/fortran-cxx_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/24_fortran-cxx_solution.tar.bz2>`.
 
 
 C/C++ using Fortran
@@ -189,7 +189,7 @@ needed to mangle names as appropriate for the compiler in use:
       info is 0
       check is 4.80085e-12
 
-   Get the :download:`scaffold code <code/tarballs/cxx-fortran.tar.bz2>`. The project has the following source tree:
+   Get the :download:`scaffold code <code/tarballs/25_cxx-fortran.tar.bz2>`. The project has the following source tree:
 
    .. code-block:: text
 
@@ -213,7 +213,7 @@ needed to mangle names as appropriate for the compiler in use:
       and ``SYMBOLS`` options to the |FortranCInterface_HEADER|.
    #. Try out the executable and **remember** that the build tree *mirrors* the source tree.
 
-   You can download the :download:`complete, working example <code/tarballs/cxx-fortran_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/25_cxx-fortran_solution.tar.bz2>`.
 
 
 .. keypoints::

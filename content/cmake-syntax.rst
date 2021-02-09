@@ -201,13 +201,13 @@ string equality, and for version comparisons, such as ``VERSION_EQUAL``.
 
       .. tab:: C++
 
-         You can download the :download:`scaffold project <code/tarballs/conditionals-cxx.tar.bz2>` and the
-         :download:`complete, working example <code/tarballs/conditionals-cxx_solution.tar.bz2>`.
+         You can download the :download:`scaffold project <code/tarballs/02_conditionals-cxx.tar.bz2>` and the
+         :download:`complete, working example <code/tarballs/02_conditionals-cxx_solution.tar.bz2>`.
 
       .. tab:: Fortran
 
-         You can download the :download:`scaffold project <code/tarballs/conditionals-f.tar.bz2>` and the
-         :download:`complete, working example <code/tarballs/conditionals-f_solution.tar.bz2>`.
+         You can download the :download:`scaffold project <code/tarballs/02_conditionals-f.tar.bz2>` and the
+         :download:`complete, working example <code/tarballs/02_conditionals-f_solution.tar.bz2>`.
 
 
 You can perform the same operation on a collection of items with |foreach|:
@@ -227,7 +227,7 @@ The list of items is either space- or ;-separated. ``break()`` and
 
    In this typealong, we will show how to use |foreach| and lists in CMake.  We
    will work from a :download:`scaffold project
-   <code/tarballs/loops-cxx.tar.bz2>`.
+   <code/tarballs/03_loops-cxx.tar.bz2>`.
 
    The goal is to compile a library from a bunch of source files: some of them
    are to be compiled with ``-O3`` optimization level, while some others with
@@ -236,7 +236,7 @@ The list of items is either space- or ;-separated. ``break()`` and
    Targets and properties will be discussed at greater length in :ref:`targets`.
 
    You can download the :download:`complete, working example
-   <code/tarballs/loops-cxx_solution.tar.bz2>`.
+   <code/tarballs/03_loops-cxx_solution.tar.bz2>`.
 
 
 The build tree
@@ -375,14 +375,14 @@ options are only relevant *if* other options are already set to specific values:
 
       .. tab:: C++
 
-         You can download the :download:`scaffold code <code/tarballs/options-cxx.tar.bz2>` and
-         the :download:`complete working example <code/tarballs/options-cxx_solution.tar.bz2>`.
+         You can download the :download:`scaffold code <code/tarballs/04_options-cxx.tar.bz2>` and
+         the :download:`complete working example <code/tarballs/04_options-cxx_solution.tar.bz2>`.
 
       .. tab:: Fortran
 
          You can download the :download:`scaffold code
-         <code/tarballs/options-f.tar.bz2>` and the :download:`complete,
-         working example <code/tarballs/options-f_solution.tar.bz2>`.
+         <code/tarballs/04_options-f.tar.bz2>` and the :download:`complete,
+         working example <code/tarballs/04_options-f_solution.tar.bz2>`.
 
 
 

@@ -40,7 +40,7 @@ customize the creation of artifacts on-the-fly.
    option: we are only interested in reporting what operating system CMake
    discovers and that is independent of programming language.
 
-   You can download the :download:`complete, working example <code/tarballs/OS_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/12_OS_solution.tar.bz2>`.
 
 
 Discovering the processor
@@ -65,13 +65,13 @@ such information on the host system with the built-in
    we are only interested in reporting what CMake discovers about the host
    system and that is independent of programming language.
 
-   You can download the :download:`complete, working example <code/tarballs/processor_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/13_processor_solution.tar.bz2>`.
 
 
 .. challenge:: Get to know your host
 
    1. Get the scaffold code from the :download:`previous type-along
-      <code/tarballs/processor_solution.tar.bz2>`.
+      <code/tarballs/13_processor_solution.tar.bz2>`.
    2. Open the help page for |cmake_host_system_information|. Either in the browser or in the command-line:
 
       .. code-block:: bash
@@ -81,7 +81,7 @@ such information on the host system with the built-in
    3. Extend the scaffold code to query all keys listed in the help page and
       print them out.
 
-   You can download the :download:`complete, working example <code/tarballs/host_system_information_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/14_host_system_information_solution.tar.bz2>`.
 
 
 Platform- and compiler-dependent source code
@@ -108,7 +108,7 @@ Platform- and compiler-dependent source code
    We can achieve this with CMake with a combination of host system
    introspection and the |target_compile_definitions| command.
 
-   You can download the :download:`complete, working example <code/tarballs/sys_preproc_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/15_sys_preproc_solution.tar.bz2>`.
 
 .. signature:: |target_compile_definitions|
 
@@ -145,7 +145,7 @@ discovering the values for all the necessary compile-time constants.
    a header file and then use it to print the results when running an
    executable.
 
-   1. Get the :download:`scaffold code <code/tarballs/configure.tar.bz2>`.
+   1. Get the :download:`scaffold code <code/tarballs/16_configure.tar.bz2>`.
       The header file ``config.h.in`` contains placeholders for the values that
       CMake will detect.
    2. Adapt the ``CMakeLists.txt`` in the previous exercise to compile
@@ -169,7 +169,7 @@ discovering the values for all the necessary compile-time constants.
              ${PROJECT_BINARY_DIR}
            )
 
-   You can download the :download:`complete, working example <code/tarballs/configure_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/16_configure_solution.tar.bz2>`.
 
 
 .. keypoints::

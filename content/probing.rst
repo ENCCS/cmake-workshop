@@ -72,10 +72,10 @@ command. You **should not** rely on |execute_process| to update any artifacts at
 
    Your goal is to replicate the same in CMake.
 
-   1. Get the :download:`scaffold code <code/tarballs/find_cffi.tar.bz2>`.
+   1. Get the :download:`scaffold code <code/tarballs/17_find_cffi.tar.bz2>`.
    2. Modify the call to |execute_process| to run the command above.
 
-   You can download the :download:`complete, working example <code/tarballs/find_cffi_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/17_find_cffi_solution.tar.bz2>`.
 
 
 Note the use of ``find_package(Python REQUIRED)`` to obtain the ``python``
@@ -129,7 +129,7 @@ instances.
    - After building, we want to check the size of the static allocations in the
      binary, by invoking the ``size`` command. We use the ``static-size.py`` Python script.
 
-   1. Get the :download:`scaffold code <code/tarballs/pre_post-f.tar.bz2>`.
+   1. Get the :download:`scaffold code <code/tarballs/18_pre_post-f.tar.bz2>`.
    2. Add CMake commands to build the ``example`` executable from the Fortran
       sources.  Find the text file with the link line under the build folder.
       Hint: have a look in ``CMakeFiles`` and keep in mind the name you gave to
@@ -137,7 +137,7 @@ instances.
    3. Call |add_custom_command| with ``PRE_LINK`` to invoke the ``echo.py`` Python script.
    4. Call |add_custom_command| with ``POST_BUILD`` to invoke the ``static-size.py`` Python script.
 
-   You can download the :download:`complete, working example <code/tarballs/pre_post-f_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/18_pre_post-f_solution.tar.bz2>`.
 
 
 Testing compilation, linking, and execution
@@ -161,7 +161,7 @@ In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
    the need to test whether some flags are available before using them in your
    build.
 
-   1. Get the :download:`scaffold code <code/tarballs/check_compiler_flag.tar.bz2>`.
+   1. Get the :download:`scaffold code <code/tarballs/19_check_compiler_flag.tar.bz2>`.
    2. Implement a ``CMakeLists.txt`` to build an executable from the
       ``asan-example.cpp`` source file.
    3. Check that the address sanitizer flags are available with
@@ -175,7 +175,7 @@ In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
    4. If the flags do work, add them to the those used to compile the executable
       target with |target_compile_options|.
 
-   You can download the :download:`complete, working example <code/tarballs/check_compiler_flag_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/19_check_compiler_flag_solution.tar.bz2>`.
 
 
 .. challenge:: Testing runtime capabilities
@@ -184,7 +184,7 @@ In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
    compiling an object files, but also linking an executable and running it
    successfully.
 
-   1. Get the :download:`scaffold code <code/tarballs/check_source_runs.tar.bz2>`.
+   1. Get the :download:`scaffold code <code/tarballs/20_check_source_runs.tar.bz2>`.
    2. Create an executable target from the source file ``use-uuid.cpp``.
    3. Add a check that linking against the library produces working executables.
       Use the following C code as test:
@@ -210,7 +210,7 @@ In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
       library: use the ``PkgConfig::UUID`` target as argument to
       |target_link_libraries|.
 
-   You can download the :download:`complete, working example <code/tarballs/check_source_runs_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/20_check_source_runs_solution.tar.bz2>`.
 
 
 .. keypoints::

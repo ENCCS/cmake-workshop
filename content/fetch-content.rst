@@ -109,7 +109,7 @@ download the header file and adding it to our codebase, we can use
    exercise, we will download the Catch2 project at configure-time from its
    `GitHub repository <https://github.com/catchorg/Catch2>`_.
 
-   Get the :download:`scaffold code <code/tarballs/more-catch2.tar.bz2>`.
+   Get the :download:`scaffold code <code/tarballs/26_more-catch2.tar.bz2>`.
 
    #. Create a C++ project.
    #. Set the C++ standard to C++14. Catch2 will work with C++11 too.
@@ -133,7 +133,7 @@ download the header file and adding it to our codebase, we can use
 
         $ cmake --build build --target help
 
-   You can download the :download:`complete, working example <code/tarballs/more-catch2_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/26_more-catch2_solution.tar.bz2>`.
 
 Mixing C++ and Python with pybind11
 +++++++++++++++++++++++++++++++++++
@@ -168,7 +168,7 @@ If you write modern C++, pybind11 should be your framework of choice:
    bank account. The pybind11 dependency will be satisfied at configure-time
    using ``FetchContent``.
 
-   Get the :download:`scaffold code <code/tarballs/cxx-python.tar.bz2>`.
+   Get the :download:`scaffold code <code/tarballs/27_cxx-python.tar.bz2>`.
    The source tree is as follows:
 
    .. code-block:: text
@@ -194,7 +194,7 @@ If you write modern C++, pybind11 should be your framework of choice:
       for version 2.6.2 of pybind11.
    #. Configure, build, and run the test.
 
-   You can download the :download:`complete, working example <code/tarballs/cxx-python_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/27_cxx-python_solution.tar.bz2>`.
 
    **Note** that:
 

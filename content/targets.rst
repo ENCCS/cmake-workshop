@@ -258,8 +258,8 @@ visible at the level at which it is declared and all higher levels.
      levels*.
    - Build the main executable. Where is it located in the build tree? Remember
      that CMake generates a build tree mirroring the source tree.
-   - The executable will accept 3 arguments: the length, number of steps, and automaton rule.
-     You can run it with:
+   - The executable will accept 3 arguments: the length, number of steps, and
+     automaton rule.  You can run it with:
 
      .. code-block:: bash
 
@@ -283,7 +283,7 @@ visible at the level at which it is declared and all higher levels.
 
       .. tab:: C++
 
-         You can download the :download:`scaffold code <code/tarballs/automata-cxx.tar.bz2>`.
+         You can download the :download:`scaffold code <code/tarballs/21_automata-cxx.tar.bz2>`.
 
          The sources are organized in a tree:
 
@@ -314,11 +314,11 @@ visible at the level at which it is declared and all higher levels.
             (``${CMAKE_CURRENT_LIST_DIR}/parser.cpp``) or relative
             (``parser.cpp``) paths make any difference?
 
-         Download the :download:`complete working example <code/tarballs/automata-cxx_solution.tar.bz2>`.
+         Download the :download:`complete working example <code/tarballs/21_automata-cxx_solution.tar.bz2>`.
 
       .. tab:: Fortran
 
-         You can download the :download:`scaffold code <code/tarballs/automata-f.tar.bz2>`.
+         You can download the :download:`scaffold code <code/tarballs/21_automata-f.tar.bz2>`.
 
          The sources are organized in a tree:
 
@@ -347,7 +347,7 @@ visible at the level at which it is declared and all higher levels.
             Fortran modules without further intervention. Where are the ``.mod``
             files?
 
-         Download the :download:`complete working example <code/tarballs/automata-f_solution.tar.bz2>`.
+         Download the :download:`complete working example <code/tarballs/21_automata-f_solution.tar.bz2>`.
 
       .. tab:: Bonus
 

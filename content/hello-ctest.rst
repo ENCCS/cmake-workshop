@@ -50,7 +50,7 @@ There are two steps to perform to integrate your CMake build system with the CTe
 .. typealong:: Your first test project
 
    We will build a simple library to sum integers and an executable using this library.
-   We will work from a :download:`scaffold project <code/tarballs/hello-ctest.tar.bz2>`.
+   We will work from a :download:`scaffold project <code/tarballs/05_hello-ctest.tar.bz2>`.
 
    .. code-block:: cmake
 
@@ -103,14 +103,14 @@ There are two steps to perform to integrate your CMake build system with the CTe
       $ cmake --build .
       $ ctest
 
-   You can download the :download:`complete, working example <code/tarballs/hello-ctest.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/05_hello-ctest.tar.bz2>`.
 
 .. challenge:: Running the tests through a shell script
 
    Any command can be used to run tests. In this exercise, we will extend the
    previous CMake code to test the main executable within a shell script.
 
-   1. Get the :download:`scaffold code <code/tarballs/bash-ctest.tar.bz2>`.
+   1. Get the :download:`scaffold code <code/tarballs/06_bash-ctest.tar.bz2>`.
    2. Find the appropriate bash executable to run ``test.sh`` with. You should
       use the ``find_program`` command of CMake.
    3. Add another invocation to |add_test| that will be equivalent to running:
@@ -121,7 +121,7 @@ There are two steps to perform to integrate your CMake build system with the CTe
 
    4. Build the project and run CTest.
 
-   You can download the :download:`complete, working example <code/tarballs/bash-ctest_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/06_bash-ctest_solution.tar.bz2>`.
 
 .. challenge:: Running the tests through a Python script
 
@@ -129,7 +129,7 @@ There are two steps to perform to integrate your CMake build system with the CTe
    this exercise, we will add two more tests to our project. These new tests
    will run the main executable through a Python script.
 
-   #. Get the :download:`scaffold code <code/tarballs/python-ctest.tar.bz2>`.
+   #. Get the :download:`scaffold code <code/tarballs/07_python-ctest.tar.bz2>`.
    #. Find the Python interpreter to run ``test.py``. You should
       use the |find_package| command of CMake.
    #. Add another invocation to |add_test| that will be equivalent to running:
@@ -142,7 +142,7 @@ There are two steps to perform to integrate your CMake build system with the CTe
       another test that uses this option in the command.
    #. Build the project and run CTest.
 
-   You can download the :download:`complete, working example <code/tarballs/python-ctest_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/07_python-ctest_solution.tar.bz2>`.
 
 The CTest command-line interface
 --------------------------------
@@ -236,7 +236,7 @@ available properties.
    - ``quick`` for tests with a very short execution time.
    - ``long`` for benchmarking tests with a longer execution time.
 
-   Get the :download:`scaffold code <code/tarballs/ctest-labels.tar.bz2>`.
+   Get the :download:`scaffold code <code/tarballs/08_ctest-labels.tar.bz2>`.
 
    .. tabs::
 
@@ -260,7 +260,7 @@ available properties.
          You might need to apply some filename manipulations: check out the
          ``file`` command.
 
-   You can download the :download:`complete, working example <code/tarballs/ctest-labels_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/08_ctest-labels_solution.tar.bz2>`.
    
 
 Among the many properties that can be set on tests, we would like to highlight the following:
@@ -284,7 +284,7 @@ Among the many properties that can be set on tests, we would like to highlight t
 
       .. tab:: WILL_FAIL
 
-         Get the :download:`scaffold code <code/tarballs/ctest-will-fail.tar.bz2>`.
+         Get the :download:`scaffold code <code/tarballs/09_ctest-will-fail.tar.bz2>`.
 
          1. Create a project with no language.
          2. Find the Python interpreter.
@@ -295,11 +295,11 @@ Among the many properties that can be set on tests, we would like to highlight t
          ``WILL_FAIL`` property to true and observe what changes when running
          the tests.
 
-         You can download the :download:`complete, working example <code/tarballs/ctest-will-fail_solution.tar.bz2>`.
+         You can download the :download:`complete, working example <code/tarballs/09_ctest-will-fail_solution.tar.bz2>`.
 
       .. tab:: COST
 
-         Get the :download:`scaffold code <code/tarballs/ctest-cost.tar.bz2>`.
+         Get the :download:`scaffold code <code/tarballs/10_ctest-cost.tar.bz2>`.
 
          1. Enable testing in the ``CMakeLists.txt`` file.
          2. Add tests running each of the scripts in the ``test`` folder.
@@ -307,11 +307,11 @@ Among the many properties that can be set on tests, we would like to highlight t
          4. Re-run the tests and observe how CTest orders their execution.
          5. Now set the ``COST`` property. What has changed when re-running the tests.
 
-         You can download the :download:`complete, working example <code/tarballs/ctest-cost_solution.tar.bz2>`.
+         You can download the :download:`complete, working example <code/tarballs/10_ctest-cost_solution.tar.bz2>`.
 
       .. tab:: TIMEOUT
 
-         Get the :download:`scaffold code <code/tarballs/ctest-timeout.tar.bz2>`.
+         Get the :download:`scaffold code <code/tarballs/11_ctest-timeout.tar.bz2>`.
 
          1. Create a project with no language.
          2. Find the Python interpreter.
@@ -322,7 +322,7 @@ Among the many properties that can be set on tests, we would like to highlight t
          Now set the ``TIMEOUT`` property to a value *less* than what you just
          observed and re-run the tests.
 
-         You can download the :download:`complete, working example <code/tarballs/ctest-timeout_solution.tar.bz2>`.
+         You can download the :download:`complete, working example <code/tarballs/11_ctest-timeout_solution.tar.bz2>`.
 
 
 For a complete list of properties that can be set on tests search for

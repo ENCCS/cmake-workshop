@@ -130,7 +130,7 @@ A complete list of ``Find<PackageName>.cmake`` can be found from the command-lin
    We can configure and build verbosely. [#verbose]_
    Notice that compiler flags, include directories, and link libraries are properly resolved by CMake.
 
-   You can download the :download:`complete working example <code/tarballs/taskloop_solution.tar.bz2>`.
+   You can download the :download:`complete working example <code/tarballs/22_taskloop_solution.tar.bz2>`.
 
 .. challenge:: Using MPI
 
@@ -146,23 +146,23 @@ A complete list of ``Find<PackageName>.cmake`` can be found from the command-lin
 
       .. tab:: C++
 
-         Download the :download:`scaffold code <code/tarballs/mpi-cxx.tar.bz2>`.
+         Download the :download:`scaffold code <code/tarballs/23_mpi-cxx.tar.bz2>`.
 
          #. Compile the source file to an executable.
          #. Link against the MPI imported target.
          #. Invoke a verbose build and observe how CMake compiles and links.
 
-         You can download the :download:`complete working example <code/tarballs/mpi-cxx_solution.tar.bz2>`.
+         You can download the :download:`complete working example <code/tarballs/23_mpi-cxx_solution.tar.bz2>`.
 
       .. tab:: Fortran
 
-         Download the :download:`scaffold code <code/tarballs/mpi-f.tar.bz2>`.
+         Download the :download:`scaffold code <code/tarballs/23_mpi-f.tar.bz2>`.
 
          #. Compile the source file to an executable.
          #. Link against the MPI imported target.
          #. Invoke a verbose build and observe how CMake compiles and links.
 
-         You can download the :download:`complete working example <code/tarballs/mpi-f_solution.tar.bz2>`.
+         You can download the :download:`complete working example <code/tarballs/23_mpi-f_solution.tar.bz2>`.
 
 
 Alternatives: ``Config`` scripts and ``pkg-config``
