@@ -354,7 +354,7 @@ visible at the level at which it is declared and all higher levels.
      built and how their dependencies are handled.
    - Compiler flags, definitions, source files, include folders, link libraries,
      and linker options are **properties** of a target.
-   - Never use variables to express dependencies between targets: use the
+   - Avoid using variables to express dependencies between targets: use the
      visibility levels ``PRIVATE``, ``INTERFACE``, ``PUBLIC`` and let CMake
      figure out the details.
    - Use |get_property| to inquire and |set_property| to modify values of
