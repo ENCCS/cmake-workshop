@@ -256,8 +256,28 @@ visible at the level at which it is declared and all higher levels.
      ``src``. Use |add_library| together with |target_sources| and, for C++,
      |target_include_directories|. Think carefully about the *visibility
      levels*.
-   - Build the main executable.
-   - Observe how the structure of the build tree mirrors that of the source tree.
+   - Build the main executable. Where is it located in the build tree? Remember
+     that CMake generates a build tree mirroring the source tree.
+   - The executable will accept 3 arguments: the length, number of steps, and automaton rule.
+     You can run it with:
+
+     .. code-block:: bash
+
+        $ automata 40 5 30
+
+     This is the output:
+
+     .. code-block:: text
+
+        length: 40
+        number of steps: 5
+        rule: 30
+                            *
+                           ***
+                          **  *
+                         ** ****
+                        **  *   *
+                       ** **** ***
 
    .. tabs::
 
@@ -331,19 +351,34 @@ visible at the level at which it is declared and all higher levels.
 
       .. tab:: Bonus
 
-         You can visualize the dependencies between the targets in your project with Graphviz:
+         You can decide where executables, static and shared libraries, and
+         Fortran ``.mod`` files will be stored within the build tree.
+         The relevant variables are:
 
-        .. code-block:: bash
+         - ``CMAKE_RUNTIME_OUTPUT_DIRECTORY``, for executables.
+         - ``CMAKE_ARCHIVE_OUTPUT_DIRECTORY``, for static libraries.
+         - ``CMAKE_LIBRARY_OUTPUT_DIRECTORY``, for shared libraries.
+         - ``CMAKE_Fortran_MODULE_DIRECTORY``, for Fortran ``.mod`` files.
 
-           $ cd build
-           $ cmake --graphviz=project.dot ..
-           $ dot -T svg project.dot -o project.svg
+         Modify your ``CMakeLists.txt`` to output the ``automata`` executable in
+         ``build/bin`` and the libraries in ``build/lib``.
 
 
-        .. figure:: img/project.svg
-           :align: center
+.. callout:: The internal dependency tree
 
-           The dependencies between targets in the cellular automata project.
+   You can visualize the dependencies between the targets in your project with Graphviz:
+
+  .. code-block:: bash
+
+     $ cd build
+     $ cmake --graphviz=project.dot ..
+     $ dot -T svg project.dot -o project.svg
+
+
+  .. figure:: img/project.svg
+     :align: center
+
+     The dependencies between targets in the cellular automata project.
 
 
 .. keypoints::
