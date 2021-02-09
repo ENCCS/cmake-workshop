@@ -8,16 +8,11 @@ set(MAKE_SHARED_LIBRARY OFF)
 
 if(MAKE_SHARED_LIBRARY)
   message(STATUS "Build shared library")
-  add_library(message SHARED)
+  add_library(message SHARED message.f90)
 else()
   message(STATUS "Build static library")
-  add_library(message STATIC)
+  add_library(message STATIC message.f90) 
 endif()
-
-target_sources(message
-  PUBLIC
-    message.f90
-  )
 
 add_executable(hello-world hello-world.f90)
 
