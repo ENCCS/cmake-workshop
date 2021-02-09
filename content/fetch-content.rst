@@ -122,6 +122,7 @@ download the header file and adding it to our codebase, we can use
    #. Enable testing and add a test. You will have to check how to call a Catch2
       executable in the `documentation
       <https://github.com/catchorg/Catch2/blob/v2.x/docs/command-line.md#specifying-which-tests-to-run>`_.
+   #. Try running your tests.
 
    - What differences do you note in the configuration step?
    - What happens if you forget to issue the |FetchContent_MakeAvailable| command?
@@ -195,13 +196,13 @@ If you write modern C++, pybind11 should be your framework of choice:
 
    You can download the :download:`complete, working example <code/tarballs/cxx-python_solution.tar.bz2>`.
 
-   Note that:
+   **Note** that:
 
-   - The ``pybind11_add_module`` funciton is a convenience wrapper to
+   - The ``pybind11_add_module`` function is a convenience wrapper to
      |add_library| to generate Python extension modules. It is offered by
      pybind11 and you can read more about it `here
      <https://pybind11.readthedocs.io/en/stable/compiling.html#pybind11-add-module>`_.
-   - The special syntax used in the definition of the test's command will set
+   - The special syntax used in the definition of the test command will set
      the location of the Python extension as an environment variable.
 
 
