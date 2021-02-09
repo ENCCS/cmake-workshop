@@ -109,7 +109,7 @@ download the header file and adding it to our codebase, we can use
    exercise, we will download the Catch2 project at configure-time from its
    `GitHub repository <https://github.com/catchorg/Catch2>`_.
 
-   Get the :download:`scaffold code <code/tarballs/more-catch2.tar.bz2>`.
+   Get the :download:`scaffold code <code/tarballs/26_more-catch2.tar.bz2>`.
 
    #. Create a C++ project.
    #. Set the C++ standard to C++14. Catch2 will work with C++11 too.
@@ -122,6 +122,7 @@ download the header file and adding it to our codebase, we can use
    #. Enable testing and add a test. You will have to check how to call a Catch2
       executable in the `documentation
       <https://github.com/catchorg/Catch2/blob/v2.x/docs/command-line.md#specifying-which-tests-to-run>`_.
+   #. Try running your tests.
 
    - What differences do you note in the configuration step?
    - What happens if you forget to issue the |FetchContent_MakeAvailable| command?
@@ -132,7 +133,7 @@ download the header file and adding it to our codebase, we can use
 
         $ cmake --build build --target help
 
-   You can download the :download:`complete, working example <code/tarballs/more-catch2_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/26_more-catch2_solution.tar.bz2>`.
 
 Mixing C++ and Python with pybind11
 +++++++++++++++++++++++++++++++++++
@@ -167,7 +168,7 @@ If you write modern C++, pybind11 should be your framework of choice:
    bank account. The pybind11 dependency will be satisfied at configure-time
    using ``FetchContent``.
 
-   Get the :download:`scaffold code <code/tarballs/cxx-python.tar.bz2>`.
+   Get the :download:`scaffold code <code/tarballs/27_cxx-python.tar.bz2>`.
    The source tree is as follows:
 
    .. code-block:: text
@@ -193,15 +194,15 @@ If you write modern C++, pybind11 should be your framework of choice:
       for version 2.6.2 of pybind11.
    #. Configure, build, and run the test.
 
-   You can download the :download:`complete, working example <code/tarballs/cxx-python_solution.tar.bz2>`.
+   You can download the :download:`complete, working example <code/tarballs/27_cxx-python_solution.tar.bz2>`.
 
-   Note that:
+   **Note** that:
 
-   - The ``pybind11_add_module`` funciton is a convenience wrapper to
+   - The ``pybind11_add_module`` function is a convenience wrapper to
      |add_library| to generate Python extension modules. It is offered by
      pybind11 and you can read more about it `here
      <https://pybind11.readthedocs.io/en/stable/compiling.html#pybind11-add-module>`_.
-   - The special syntax used in the definition of the test's command will set
+   - The special syntax used in the definition of the test command will set
      the location of the Python extension as an environment variable.
 
 

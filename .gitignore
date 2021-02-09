@@ -6,4 +6,4 @@ jupyter_execute
 /content/__pycache__/
 /.ccls-cache/
 /content/.auctex-auto/
-/content/code/*/build
+/content/code/*/solution/build*
