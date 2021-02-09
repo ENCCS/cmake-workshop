@@ -250,6 +250,8 @@ visible at the level at which it is declared and all higher levels.
    folders. We will implement a relatively simple code to compute and print to
    screen elementary `cellular automata
    <https://en.wikipedia.org/wiki/Cellular_automaton#Elementary_cellular_automata>`_.
+   We separate the sources into ``src`` and ``external`` to simulate a nested project
+   which reuses an external project.
    Your goal is to:
 
    - Build a library out of the contents of ``external`` and each subfolder of
