@@ -56,15 +56,47 @@ installed!
 Using Binder
 ^^^^^^^^^^^^
 
-Binder (https://mybinder.org/) offers a free customizable cloud
+`MyBinder <https://mybinder.org/>`_ offers a free customizable cloud
 computing environment. You can do the CMake workshop exercises in the
 cloud by clicking the "launch binder" button at the top of the README
 file displayed at https://github.com/ENCCS/cmake-workshop.
-After a few minutes you will see a Jupyter Notebook dashboard
-which is running in the cloud. To open up a terminal, click "New" on
-the right and select Terminal. You can open a text editor (for code,
-CMake files etc) by clicking "New" and select Text File. If you prefer
-a terminal editor, you can install e.g. ``nano`` by typing
-``conda install nano`` in the terminal.
 
+.. figure:: img/launch_binder_button.png
+   :scale: 70%
+   :alt: Launching the binder
+   :align: center
 
+This will bring you to the loading page for the binder notebook, which might
+take a few minutes to start up. Don't despair!
+
+.. figure:: img/binder_loading.png
+   :scale: 50%
+   :alt: The binder is loading
+   :align: center
+
+Once loaded, you will see a Jupyter Notebook dashboard which is running in the
+cloud.
+
+.. figure:: img/binder_landing_page.png
+   :scale: 50%
+   :alt: The notebook dashboard
+   :align: center
+
+To open up a terminal, click "New" on the right and select Terminal.
+
+.. figure:: img/open_terminal_in_binder.png
+   :scale: 50%
+   :alt: The notebook dashboard
+   :align: center
+
+You can browse the whole content of the workshop with ``ls content``. The code
+exercises are in ``content/code``.
+
+.. figure:: img/terminal_and_contents.png
+   :scale: 50%
+   :alt: A cloud terminal
+   :align: center
+
+You can open a text editor (for code, CMake files etc) by clicking "New" and
+select Text File. If you prefer a terminal editor, you can use ``nano`` or
+``vim`` or ``emacs``.
