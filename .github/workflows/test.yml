@@ -60,12 +60,12 @@ jobs:
         # select which examples to run on each platform
         if [ "${{ matrix.os }}" == "windows-latest" ]; then
            # exclude Fortran examples on Windows
-           examples="$(find day-1 day-2 -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -not -path '*-f' -print0 | sort -z | xargs -r0 -L1)"
+           examples="$(find day-1 day-2 -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -not -path '*-f' -print0 | sort -z | xargs -0 -L1)"
 
            # configuration options
            CONF_OPTS="-Ax64"
         else
-           examples="$(find day-1 day-2 -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -print0 | sort -z | xargs -r0 -L1)"
+           examples="$(find day-1 day-2 -maxdepth 1 -mindepth 1 -type d -not -path './tarballs' -print0 | sort -z | xargs -0 -L1)"
 
            # configuration options
            CONF_OPTS="-GNinja"
