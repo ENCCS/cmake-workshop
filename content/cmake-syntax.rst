@@ -191,9 +191,9 @@ string equality, and for version comparisons, such as ``VERSION_EQUAL``.
 
    Modify the ``CMakeLists.txt`` from the previous exercise to build either a
    *static* or a *shared* library depending on the value of the boolean
-   ``BUILD_SHARED_LIBS``:
+   ``MAKE_SHARED_LIBRARY``:
 
-   1. Define the ``BUILD_SHARED_LIBS`` variable.
+   1. Define the ``MAKE_SHARED_LIBRARY`` variable.
    2. Write a conditional checking the variable. In each branch call
       |add_library| appropriately.
 
@@ -201,11 +201,13 @@ string equality, and for version comparisons, such as ``VERSION_EQUAL``.
 
       .. tab:: C++
 
-         You can download the :download:`complete, working example <code/tarballs/conditionals-cxx_solution.tar.bz2>`.
+         You can download the :download:`scaffold project <code/tarballs/conditionals-cxx.tar.bz2>` and the
+         :download:`complete, working example <code/tarballs/conditionals-cxx_solution.tar.bz2>`.
 
       .. tab:: Fortran
 
-         You can download the :download:`complete, working example <code/tarballs/conditionals-f_solution.tar.bz2>`.
+         You can download the :download:`scaffold project <code/tarballs/conditionals-f.tar.bz2>` and the
+         :download:`complete, working example <code/tarballs/conditionals-f_solution.tar.bz2>`.
 
 
 You can perform the same operation on a collection of items with |foreach|:
@@ -223,7 +225,10 @@ The list of items is either space- or ;-separated. ``break()`` and
 
 .. typealong:: Loops in CMake
 
-   In this typealong, we will show how to use |foreach| and lists in CMake.
+   In this typealong, we will show how to use |foreach| and lists in CMake.  We
+   will work from a :download:`scaffold project
+   <code/tarballs/loops-cxx.tar.bz2>`.
+
    The goal is to compile a library from a bunch of source files: some of them
    are to be compiled with ``-O3`` optimization level, while some others with
    ``-O2``.

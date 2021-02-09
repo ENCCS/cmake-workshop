@@ -2,13 +2,11 @@
 cmake_minimum_required(VERSION 3.13)
 
 # project name and language
-project(conditionals LANGUAGES Fortran)
+project(conditionals LANGUAGES CXX)
 
-# BUILD_SHARED_LIBS is a global flag offered by CMake
-# to toggle the behavior of add_library
-set(BUILD_SHARED_LIBS OFF)
+set(MAKE_SHARED_LIBRARY OFF)
 
-if(BUILD_SHARED_LIBS)
+if(MAKE_SHARED_LIBRARY)
   message(STATUS "Build shared library")
   add_library(message SHARED)
 else()
@@ -18,9 +16,10 @@ endif()
 
 target_sources(message
   PUBLIC
-    message.f90
+    Message.hpp
+    Message.cpp
   )
 
-add_executable(hello-world hello-world.f90)
+add_executable(hello-world hello-world.cpp)
 
 target_link_libraries(hello-world PRIVATE message)
