@@ -24,7 +24,7 @@ copyright = "2020, EuroCC National Competence Centre Sweden"
 author = "Roberto Di Remigio, Kjartan Thor Wikfeldt"
 github_user = "ENCCS"
 github_repo_name = "cmake-workshop"  # auto-detected from dirname if blank
-github_version = "master"
+github_version = "main"
 conf_py_path = "/content/"  # with leading and trailing slash
 
 # -- General configuration ---------------------------------------------------
