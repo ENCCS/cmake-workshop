@@ -7,7 +7,6 @@ FortranCInterface_VERIFY(CXX)
 
 FortranCInterface_HEADER(
   fc_mangle.h
-  MACRO_NAMESPACE "FC_"
   SYMBOLS DSCAL DGESV
   )
 
