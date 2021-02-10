@@ -12,8 +12,6 @@ Finding and using dependencies
 
    - Learn how to use |find_package|.
    - Learn what other detection alternatives exist.
-   - Learn how to use the ``FetchContent`` module to retrieve dependencies at
-     configure-time.
 
 The vast majority of software projects do not happen in a vacuum: they will have
 dependencies on existing frameworks and libraries.  Good documentation will
