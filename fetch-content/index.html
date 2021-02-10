@@ -1,0 +1,456 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Automated dependency handling with FetchContent &mdash; CMake Workshop</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Quick Reference" href="../quick-reference/" />
+    <link rel="prev" title="Mixing C++ and Fortran" href="../cxx-fortran/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../" class="icon icon-home"> CMake Workshop
+          
+
+          
+            
+            <img src="../_static/ENCCS.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/">Setting up your system</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hello-cmake/">From sources to executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-syntax/">CMake syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-ctest/">Creating and running tests with CTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environment/">Detecting your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../probing/">Probing compilation, linking, and execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../targets/">Target-based build systems with CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Finding and using dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cxx-fortran/">Mixing C++ and Fortran</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-fetchcontent-module">The <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#unit-testing-with-catch2">Unit testing with Catch2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mixing-c-and-python-with-pybind11">Mixing C++ and Python with pybind11</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography/">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor’s guide</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">CMake Workshop</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ENCCS/cmake-workshop/blob/main/content/fetch-content.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="automated-dependency-handling-with-fetchcontent">
+<span id="fetch-content"></span><h1>Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code><a class="headerlink" href="#automated-dependency-handling-with-fetchcontent" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-questions questions admonition">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>Is there a way to automatically satisfy the dependencies of our code?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Learn how to download your dependencies at configure-time with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>.</p></li>
+<li><p>Learn how fetched content can be used natively within your build system.</p></li>
+</ul>
+</div>
+<p>CMake offers <strong>two modules</strong> to satisfy missing dependencies on-the-fly:
+the <code class="docutils literal notranslate"><span class="pre">ExternalProject</span></code> and <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> modules.</p>
+<dl class="simple">
+<dt>Using <code class="docutils literal notranslate"><span class="pre">ExternalProject</span></code></dt><dd><ul class="simple">
+<li><p>The download step happens at <a class="reference external" href="https://cmake.org/cmake/help/latest/module/ExternalProject.html">project build-time</a>.</p></li>
+<li><p>You can handle dependencies that <strong>do not</strong> use CMake.</p></li>
+<li><p>You need to rewrite your whole build system as a <a class="reference external" href="https://github.com/dev-cafe/cmake-cookbook/blob/master/chapter-08/README.md">superbuild</a>.</p></li>
+</ul>
+</dd>
+<dt>Using <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></dt><dd><ul class="simple">
+<li><p>The download step happens at <a class="reference external" href="https://cmake.org/cmake/help/latest/module/FetchContent.html">project configure-time</a>.</p></li>
+<li><p>You can only manage dependencies that use CMake.</p></li>
+<li><p>It’s an well-delimited change to an existing CMake build system.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Both are extremely powerful mechanisms, but you should use them with care.
+Often, comprehensive documentation will suffice to help users set up their
+environment to build your code successfully!  In this episode, we will discuss
+the <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> module.</p>
+<div class="section" id="the-fetchcontent-module">
+<h2>The <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> module<a class="headerlink" href="#the-fetchcontent-module" title="Permalink to this headline">¶</a></h2>
+<p>To fetch dependencies on-the-fly at configure-time you will include the built-in
+CMake module <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>.  This module has been part of CMake since its
+3.11 version and has been steadily improved since then.</p>
+<p>There are two steps in a <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>-based workflow:</p>
+<ol class="arabic">
+<li><p><strong>Declaring</strong> the content to fetch with <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_Declare</code></span></a>. This can be a
+tarball (local or remote), a local folder, or a version control repository
+(Git, SVN, etc.).</p>
+<div class="admonition-fetchcontent-declare signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_Declare</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">FetchContent_Declare</span><span class="p">(</span><span class="s">&lt;name&gt;</span> <span class="s">&lt;contentOptions&gt;...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The command accepts as <code class="docutils literal notranslate"><span class="pre">&lt;contentOptions&gt;</span></code> the same options one would give
+to <code class="docutils literal notranslate"><span class="pre">ExternalProject_Add</span></code> in the <em>download</em> and <em>update/patch</em> <a class="reference external" href="https://cmake.org/cmake/help/latest/module/ExternalProject.html#command:externalproject_add">steps</a>.</p>
+<p>To download code from a Git repository, you would set the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GIT_REPOSITORY</span></code>, the location of the repository.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GIT_TAG</span></code>, the revision (tag, branch name, commit hash) to check out.</p></li>
+</ul>
+<p>whereas to download a tarball you only need set:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">URL</span></code>, the online location of the tarball.</p></li>
+</ul>
+</div>
+</li>
+<li><p><strong>Populating</strong> the content with <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_MakeAvailable</code></span></a>. This commands
+<em>adds</em> the targets declared in the external content to your build system.</p>
+<div class="admonition-fetchcontent-makeavailable signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_MakeAvailable</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">FetchContent_MakeAvailable</span><span class="p">(</span> <span class="s">&lt;name1&gt;</span> <span class="s">[&lt;name2&gt;...]</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Since targets from the external project are added to your own project, you
+will be able to use them in the same way you would when obtaining them
+through a call to <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>: you can use <em>found</em> and <em>fetched</em> content
+in the same exact way.
+If you need to set options for building the external project, you will set
+them as CMake variables <em>before</em> calling <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_MakeAvailable</code></span></a>.</p>
+</li>
+</ol>
+<div class="section" id="unit-testing-with-catch2">
+<h3>Unit testing with Catch2<a class="headerlink" href="#unit-testing-with-catch2" title="Permalink to this headline">¶</a></h3>
+<p>Unit testing is a valuable technique in software engineering: it can help
+identify functional regressions with a very fine level of control, since each
+unit test is meant to exercise isolated components in your codebase.
+Equipping your codebase with integration <em>and</em> unit tests is very good practice.</p>
+<p>There are many unit testing frameworks for the C++ language. Each of them
+stresses a slightly different approach to unit testing and comes with its own
+peculiarities in set up and usage.
+In this episode, we will show how to use <a class="reference external" href="https://github.com/catchorg/Catch2">Catch2</a> a very popular unit testing framework
+which emphasizes a test-driven development workflow.
+Catch2 is distributed as a single header file, which is one of its most
+appealing features: it can easily be included in any project. Rather than
+download the header file and adding it to our codebase, we can use
+<code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> to satisfy this dependency for us when needed.</p>
+<div class="admonition-catch2-reloaded challenge admonition">
+<p class="admonition-title">Catch2 reloaded</p>
+<p>We want to use the Catch2 unit testing framework for our code.  In this
+exercise, we will download the Catch2 project at configure-time from its
+<a class="reference external" href="https://github.com/catchorg/Catch2">GitHub repository</a>.</p>
+<p>Get the <a class="reference download internal" download="" href="../_downloads/ccfa229c625791113a1efab242a5b0f3/26_more-catch2.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">scaffold</span> <span class="pre">code</span></code></a>.</p>
+<ol class="arabic simple">
+<li><p>Create a C++ project.</p></li>
+<li><p>Set the C++ standard to C++14. Catch2 will work with C++11 too.</p></li>
+<li><p>Create a library from the <code class="docutils literal notranslate"><span class="pre">sum_integers.cpp</span></code> source file.</p></li>
+<li><p>Link the library into a <code class="docutils literal notranslate"><span class="pre">sum_up</span></code> executable.</p></li>
+<li><p>Include the <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> module and declare the <code class="docutils literal notranslate"><span class="pre">Catch2</span></code> content. We
+want to download the <code class="docutils literal notranslate"><span class="pre">v2.13.4</span></code> tag from the <a class="reference external" href="https://github.com/catchorg/Catch2">official Git repository</a>.</p></li>
+<li><p>Make the <code class="docutils literal notranslate"><span class="pre">Catch2</span></code> content available.</p></li>
+<li><p>Create the <code class="docutils literal notranslate"><span class="pre">cpp_test</span></code> executable.</p></li>
+<li><p>Enable testing and add a test. You will have to check how to call a Catch2
+executable in the <a class="reference external" href="https://github.com/catchorg/Catch2/blob/v2.x/docs/command-line.md#specifying-which-tests-to-run">documentation</a>.</p></li>
+<li><p>Try running your tests.</p></li>
+</ol>
+<ul>
+<li><p>What differences do you note in the configuration step?</p></li>
+<li><p>What happens if you forget to issue the <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FetchContent.html"><span class="xref std std-term"><code class="docutils literal notranslate">FetchContent_MakeAvailable</code></span></a> command?</p></li>
+<li><p>What targets are built in the project? Which ones are from Catch2? You can
+use the following command to obtain a list of all available targets:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --build build --target <span class="nb">help</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>You can download the <a class="reference download internal" download="" href="../_downloads/c1df79a18420f9048638d5705ebd6402/26_more-catch2_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete,</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div>
+</div>
+<div class="section" id="mixing-c-and-python-with-pybind11">
+<h3>Mixing C++ and Python with pybind11<a class="headerlink" href="#mixing-c-and-python-with-pybind11" title="Permalink to this headline">¶</a></h3>
+<p>Python is an extremely flexible dynamic programming language. Since Python
+itself is written in the C programming language, it is possible to write
+<em>extension</em> modules in a compiled language. One gets all the flexibility, while
+avoiding performance penalties inherent to interpreted languages.
+Many frameworks are available to bridge the gap between compiled languages and
+Python. All of them rely on some form of automatic code generation:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://swig.org/">SWIG</a>. Possibly the framework with the longest history.</p></li>
+<li><p><a class="reference external" href="https://cython.org/">Cython</a>. Works with C and can require a lot of effort.</p></li>
+<li><p><a class="reference external" href="https://www.boost.org/doc/libs/1_75_0/libs/python/doc/html/index.html">Boost.Python</a>.
+Tailored for C++ and relies on template metaprogramming to generate bindings
+at compile-time.</p></li>
+<li><p><a class="reference external" href="https://pybind11.readthedocs.io/en/stable/index.html">pybind11</a>. Same
+philosophy as Boost.Python, but designed for C++11 and beyond.</p></li>
+</ul>
+<p>If you write modern C++, pybind11 should be your framework of choice:</p>
+<ul class="simple">
+<li><p>It is a header-only library and thus a rather easy dependency to satisfy.</p></li>
+<li><p>The binding code will be quite compact: you won’t have to maintain an
+excessively large codebase.</p></li>
+<li><p>It has excellent integration with CMake.</p></li>
+</ul>
+<div class="admonition-banking-code-with-c-and-python challenge admonition">
+<p class="admonition-title">Banking code with C++ and Python</p>
+<p>Our goal is to compile Python wrappers to a small C++ library simulating a
+bank account. The pybind11 dependency will be satisfied at configure-time
+using <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code>.</p>
+<p>Get the <a class="reference download internal" download="" href="../_downloads/048ffc266cf6bbe7e5299c361c10cd8a/27_cxx-python.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">scaffold</span> <span class="pre">code</span></code></a>.
+The source tree is as follows:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cxx-python
+└── account
+    ├── account.cpp
+    ├── account.hpp
+    └── test.py
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the root of the program, with minimum CMake requirement and project.</p></li>
+<li><p>Find the Python with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>. Request at least version 3.6 with the
+<code class="docutils literal notranslate"><span class="pre">REQUIRED</span></code> keyword and the interpreter and development headers with the
+<code class="docutils literal notranslate"><span class="pre">COMPONENTS</span></code> keyword. Refer to the documentation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module FindPython <span class="p">|</span> less
+</pre></div>
+</div>
+</li>
+<li><p>Enable testing and add the <code class="docutils literal notranslate"><span class="pre">account</span></code> folder.</p></li>
+<li><p>Complete the scaffold <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the <code class="docutils literal notranslate"><span class="pre">account</span></code> folder,
+following the <code class="docutils literal notranslate"><span class="pre">FIXME</span></code> prompts. We want to download the released tarball
+for version 2.6.2 of pybind11.</p></li>
+<li><p>Configure, build, and run the test.</p></li>
+</ol>
+<p>You can download the <a class="reference download internal" download="" href="../_downloads/9540ea60bf36a45b8a2eb3d723403265/27_cxx-python_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete,</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+<p><strong>Note</strong> that:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">pybind11_add_module</span></code> function is a convenience wrapper to
+<a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a> to generate Python extension modules. It is offered by
+pybind11 and you can read more about it <a class="reference external" href="https://pybind11.readthedocs.io/en/stable/compiling.html#pybind11-add-module">here</a>.</p></li>
+<li><p>The special syntax used in the definition of the test command will set
+the location of the Python extension as an environment variable.</p></li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> is a powerful module in your CMake toolbox. <strong>Beware!</strong>
+Satisfying <em>every</em> dependency of your code in this way will make the duration
+of both the configuration and build stages balloon.</p>
+</div>
+<div class="admonition-keypoints keypoints admonition">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>CMake lets you satisfy dependencies <em>on-the-fly</em>.</p></li>
+<li><p>You can do so at build-time with <code class="docutils literal notranslate"><span class="pre">ExternalProject</span></code>, but you need to adopt
+a superbuild framework.</p></li>
+<li><p>At configure-time, you can use the <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code> module: it can only be
+applied with dependencies that also use CMake.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../quick-reference/" class="btn btn-neutral float-right" title="Quick Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../cxx-fortran/" class="btn btn-neutral float-left" title="Mixing C++ and Fortran" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, EuroCC National Competence Centre Sweden.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,482 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Finding and using dependencies &mdash; CMake Workshop</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script src="../_static/tabs.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Mixing C++ and Fortran" href="../cxx-fortran/" />
+    <link rel="prev" title="Target-based build systems with CMake" href="../targets/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../" class="icon icon-home"> CMake Workshop
+          
+
+          
+            
+            <img src="../_static/ENCCS.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/">Setting up your system</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hello-cmake/">From sources to executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-syntax/">CMake syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-ctest/">Creating and running tests with CTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environment/">Detecting your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../probing/">Probing compilation, linking, and execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../targets/">Target-based build systems with CMake</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Finding and using dependencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#finding-dependencies">Finding dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-find-package">Using <code class="docutils literal notranslate"><span class="pre">find_package</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#alternatives-config-scripts-and-pkg-config">Alternatives: <code class="docutils literal notranslate"><span class="pre">Config</span></code> scripts and <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cxx-fortran/">Mixing C++ and Fortran</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fetch-content/">Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography/">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor’s guide</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">CMake Workshop</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Finding and using dependencies</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ENCCS/cmake-workshop/blob/main/content/dependencies.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="finding-and-using-dependencies">
+<span id="dependencies"></span><h1>Finding and using dependencies<a class="headerlink" href="#finding-and-using-dependencies" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-questions questions admonition">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How can I use CMake to detect and use the dependencies of my project?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Learn how to use <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>.</p></li>
+<li><p>Learn what other detection alternatives exist.</p></li>
+</ul>
+</div>
+<p>The vast majority of software projects do not happen in a vacuum: they will have
+dependencies on existing frameworks and libraries.  Good documentation will
+instruct your users to ensure that these are satisfied in their programming
+environment. The build system is the appropriate place to check that these
+preconditions are met and that your project can be built correctly.
+In this episode, we will show you few examples of how to detect and use
+dependencies in your CMake build system.</p>
+<div class="section" id="finding-dependencies">
+<h2>Finding dependencies<a class="headerlink" href="#finding-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>CMake offers a family of commands to find artifacts installed on your system:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_file.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_file</code></span></a> to retrieve the full path to a file.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_library</code></span></a> to find a library, shared or static.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> to find and load settings from an external project.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_path.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_path</code></span></a> to find the directory containing a file.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_program.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_program</code></span></a> to find an executable.</p></li>
+</ul>
+<p>The workhorse of dependency discovery is <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>, which will cover your
+needs in almost all use cases.</p>
+<div class="admonition-find-package signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">&lt;PackageName&gt;</span> <span class="s">[version]</span> <span class="s">[EXACT]</span> <span class="s">[QUIET]</span> <span class="s">[MODULE]</span>
+       <span class="s">[REQUIRED]</span> <span class="s">[[COMPONENTS]</span> <span class="s">[components...]]</span>
+       <span class="s">[OPTIONAL_COMPONENTS</span> <span class="s">components...]</span>
+       <span class="s">[NO_POLICY_SCOPE]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This command will attempt finding the package with name <code class="docutils literal notranslate"><span class="pre">&lt;PackageName&gt;</span></code> by
+searching in a number of <a class="reference external" href="https://cmake.org/cmake/help/latest/command/find_package.html?highlight=find_package#search-procedure">predefined folders</a>.
+It is possible to ask for a minimum or exact version. If <code class="docutils literal notranslate"><span class="pre">REQUIRED</span></code> is
+given, a failed search will trigger a fatal error.  The rules for the search
+are obtained from modules named <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code>.
+Packages can also have <em>components</em> and you can ask to detect just a handful of them.</p>
+</div>
+<p>We cannot stress this enough: you should <strong>only</strong> use the other commands in the
+<code class="docutils literal notranslate"><span class="pre">find_</span></code> family in very special, very narrow circumstances.  Why so?</p>
+<ol class="arabic">
+<li><p>For a large selection of common dependencies, the <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code>
+modules shipped with CMake work flawlessly and are maintained by the CMake
+developers. This lifts the burden of programming your own dependency
+detection tricks.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> will set up <strong>imported targets</strong>: targets defined <em>outside</em>
+your project that you can use with your own targets.  The properties on
+imported targets defines <em>usage requirements</em> for the dependencies. A command
+such as:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">your-target</span>
+  <span class="s">PUBLIC</span>
+    <span class="s">imported-target</span>
+  <span class="p">)</span>
+</pre></div>
+</div>
+<p>will set compiler flags, definitions, include directories, and link libraries
+from <code class="docutils literal notranslate"><span class="pre">imported-target</span></code> to <code class="docutils literal notranslate"><span class="pre">your-target</span></code> <em>and</em> to all other targets in
+your project that will use <code class="docutils literal notranslate"><span class="pre">your-target</span></code>.</p>
+</li>
+</ol>
+<p>These two points simplify <strong>enormously</strong> the burden of dependency detection and
+consistent usage within a multi-folder project.</p>
+<div class="section" id="using-find-package">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">find_package</span></code><a class="headerlink" href="#using-find-package" title="Permalink to this headline">¶</a></h3>
+<p>When attempting dependency detection with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a>, you should make sure that:</p>
+<ul class="simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> module exists,</p></li>
+<li><p>Which components, if any, it provides, and</p></li>
+<li><p>What imported targets it will set up.</p></li>
+</ul>
+<p>A complete list of <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> can be found from the command-line interface:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module-list <span class="p">|</span> grep <span class="s2">&quot;Find&quot;</span>
+</pre></div>
+</div>
+<div class="admonition-using-openmp typealong toggle-shown dropdown admonition">
+<p class="admonition-title">Using OpenMP</p>
+<p>We want to compile the following OpenMP sample code: <a class="footnote-reference brackets" href="#omp" id="id1">1</a></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// example adapted from</span>
+<span class="c1">// http://www.openmp.org/wp-content/uploads/openmp-examples-4.5.0.pdf page 85</span>
+
+<span class="cp">#include</span> <span class="cpf">&lt;cstdlib&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="kt">void</span> <span class="nf">long_running_task</span><span class="p">(){</span>
+  <span class="c1">// do something</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;long_running_task&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> 
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">loop_body</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">){</span>
+  <span class="c1">// do something</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;i = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; j = &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">j</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> 
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">parallel_work</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">;</span>
+<span class="cp">#pragma omp taskgroup</span>
+  <span class="p">{</span>
+<span class="cp">#pragma omp task</span>
+    <span class="n">long_running_task</span><span class="p">();</span> <span class="c1">// can execute concurrently</span>
+
+<span class="cp">#pragma omp taskloop private(j) grainsize(500) nogroup</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// can execute concurrently</span>
+      <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">loop_body</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">parallel_work</span><span class="p">();</span>
+  <span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Note the usage of the <code class="docutils literal notranslate"><span class="pre">taskloop</span></code> construct, which was introduced in OpenMP
+4.5: we need to make sure our C++ compiler is suitably compatible with <em>at
+least</em> that version of the standard.</p>
+<p>From the documentation of the <code class="docutils literal notranslate"><span class="pre">FindOpenMP.cmake</span></code> module:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module FindOpenMP <span class="p">|</span> less
+</pre></div>
+</div>
+<p>we find that the module provides the components <code class="docutils literal notranslate"><span class="pre">C</span></code>, <code class="docutils literal notranslate"><span class="pre">CXX</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">Fortran</span></code> and that <code class="docutils literal notranslate"><span class="pre">OpenMP::OpenMP_CXX</span></code> target will be provided, if
+detection is successful.
+Thus, we do the following:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">OpenMP</span> <span class="s">4.5</span> <span class="s">REQUIRED</span> <span class="s">COMPONENTS</span> <span class="s">CXX</span><span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">task-loop</span> <span class="s">PRIVATE</span> <span class="s">OpenMP::OpenMP_CXX</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can configure and build verbosely. <a class="footnote-reference brackets" href="#verbose" id="id2">2</a>
+Notice that compiler flags, include directories, and link libraries are properly resolved by CMake.</p>
+<p>You can download the <a class="reference download internal" download="" href="../_downloads/4aeba38be3a87c223a17062596d33112/22_taskloop_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div>
+<div class="admonition-using-mpi challenge admonition">
+<p class="admonition-title">Using MPI</p>
+<p>In this exercise, you will attempt compiling a “Hello, world” program that
+uses the message passing interface (MPI).</p>
+<ol class="arabic simple">
+<li><p>Check whether a <code class="docutils literal notranslate"><span class="pre">FindMPI.cmake</span></code> module exists in the built-in module
+library.</p></li>
+<li><p>Get acquainted with its components and the variables and imported targets
+it defines.</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>Download the <a class="reference download internal" download="" href="../_downloads/57ecbc4ad941fe059cd7474b676fc9bb/23_mpi-cxx.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">scaffold</span> <span class="pre">code</span></code></a>.</p>
+<ol class="arabic simple">
+<li><p>Compile the source file to an executable.</p></li>
+<li><p>Link against the MPI imported target.</p></li>
+<li><p>Invoke a verbose build and observe how CMake compiles and links.</p></li>
+</ol>
+<p>You can download the <a class="reference download internal" download="" href="../_downloads/de63bed00a1958a48a0300cc81438d1e/23_mpi-cxx_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Download the <a class="reference download internal" download="" href="../_downloads/b016479ea5219646a391a10af0022dbe/23_mpi-f.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">scaffold</span> <span class="pre">code</span></code></a>.</p>
+<ol class="arabic simple">
+<li><p>Compile the source file to an executable.</p></li>
+<li><p>Link against the MPI imported target.</p></li>
+<li><p>Invoke a verbose build and observe how CMake compiles and links.</p></li>
+</ol>
+<p>You can download the <a class="reference download internal" download="" href="../_downloads/c16e253c52d5a691406a8691160265ac/23_mpi-f_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div></div>
+</div>
+</div>
+<div class="section" id="alternatives-config-scripts-and-pkg-config">
+<h3>Alternatives: <code class="docutils literal notranslate"><span class="pre">Config</span></code> scripts and <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code><a class="headerlink" href="#alternatives-config-scripts-and-pkg-config" title="Permalink to this headline">¶</a></h3>
+<p>What to do when there is no built-in <code class="docutils literal notranslate"><span class="pre">Find&lt;PackageName&gt;.cmake</span></code> module for a package you depend on?
+The package developers might be already prepared to help you out:</p>
+<ul>
+<li><p>They ship the CMake-specific file <code class="docutils literal notranslate"><span class="pre">&lt;PackageName&gt;Config.cmake</span></code> which
+describes how the imported target should be made for their package.
+In this case, you need to point CMake to the folder containing the <code class="docutils literal notranslate"><span class="pre">Config</span></code> file using the
+special <code class="docutils literal notranslate"><span class="pre">&lt;PackageName&gt;_DIR</span></code> variable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake -S. -Bbuild -D&lt;PackageName&gt;_DIR<span class="o">=</span>/folder/containing/&lt;PackageName&gt;Config.cmake
+</pre></div>
+</div>
+</li>
+<li><p>They include a <code class="docutils literal notranslate"><span class="pre">.pc</span></code> file, which, on Unix-like platforms, can be detected
+with the <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> utility. You can then leverage <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> through CMake:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># find pkg-config</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">PkgConfig</span> <span class="s">REQUIRED</span><span class="p">)</span>
+<span class="c"># ask pkg-config to find the UUID library and prepare an imported target</span>
+<span class="nb">pkg_search_module</span><span class="p">(</span><span class="s">UUID</span> <span class="s">REQUIRED</span> <span class="s">uuid</span> <span class="s">IMPORTED_TARGET</span><span class="p">)</span>
+<span class="c"># use the imported target</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">TARGET</span> <span class="s">PkgConfig::UUID</span><span class="p">)</span>
+  <span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span> <span class="s2">&quot;Found libuuid&quot;</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This was the strategy adopted in <a class="reference internal" href="../probing/#probing"><span class="std std-ref">Probing compilation, linking, and execution</span></a> when testing the use of the
+UUID library.</p>
+</li>
+</ul>
+<div class="admonition-keypoints keypoints admonition">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>CMake has a rich ecosystem of modules for finding software dependencies. They are called <code class="docutils literal notranslate"><span class="pre">Find&lt;package&gt;.cmake</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Find&lt;package&gt;.cmake</span></code> modules are used through <code class="docutils literal notranslate"><span class="pre">find_package(&lt;package&gt;)</span></code>.</p></li>
+<li><p>You can also use the classic Unix tool <code class="docutils literal notranslate"><span class="pre">pkg-config</span></code> to find software
+dependencies, but this is not as robust as the CMake-native
+<code class="docutils literal notranslate"><span class="pre">Find&lt;package&gt;</span></code> modules.</p></li>
+</ul>
+</div>
+<p class="rubric">Footnotes</p>
+<dl class="footnote brackets">
+<dt class="label" id="omp"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Example adapted from page 85 in <a class="reference external" href="http://www.openmp.org/wp-content/uploads/openmp-examples-4.5.0.pdf">OpenMP 4.5 examples</a>.</p>
+</dd>
+<dt class="label" id="verbose"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>The way in which to trigger a verbose build depends on the native build tool you are using.
+For Unix Makefiles:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --build build -- <span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>For Ninja:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --build build -- -v
+</pre></div>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../cxx-fortran/" class="btn btn-neutral float-right" title="Mixing C++ and Fortran" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../targets/" class="btn btn-neutral float-left" title="Target-based build systems with CMake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, EuroCC National Competence Centre Sweden.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

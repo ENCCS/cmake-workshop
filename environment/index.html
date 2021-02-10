@@ -1,0 +1,401 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Detecting your environment &mdash; CMake Workshop</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Probing compilation, linking, and execution" href="../probing/" />
+    <link rel="prev" title="Creating and running tests with CTest" href="../hello-ctest/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../" class="icon icon-home"> CMake Workshop
+          
+
+          
+            
+            <img src="../_static/ENCCS.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/">Setting up your system</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hello-cmake/">From sources to executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-syntax/">CMake syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-ctest/">Creating and running tests with CTest</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Detecting your environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#discovering-the-processor">Discovering the processor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#platform-and-compiler-dependent-source-code">Platform- and compiler-dependent source code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../probing/">Probing compilation, linking, and execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../targets/">Target-based build systems with CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Finding and using dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cxx-fortran/">Mixing C++ and Fortran</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fetch-content/">Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography/">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor’s guide</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">CMake Workshop</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Detecting your environment</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ENCCS/cmake-workshop/blob/main/content/environment.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="detecting-your-environment">
+<span id="environment"></span><h1>Detecting your environment<a class="headerlink" href="#detecting-your-environment" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-questions questions admonition">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How does CMake interact with the host environment?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Learn how to discover the operating system.</p></li>
+<li><p>Learn how to discover processor characteristics.</p></li>
+<li><p>Learn how to handle platform- and compiler-dependent source code.</p></li>
+</ul>
+</div>
+<p>CMake comes pre-configured with sane defaults for a multitude of properties of
+the environments in which it can be used.  Default generator, default compilers,
+and compiler flags are few and most notable examples of this up-front
+configuration.
+Run the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --system-information <span class="p">|</span> less
+</pre></div>
+</div>
+<p>if you are curious about what kind of configuration ships for your version of
+CMake and operating system.</p>
+<p>In this episode, we will show how to use CMake to introspect the environment in
+which we are running. This is very common in build systems, since it allows to
+customize the creation of artifacts on-the-fly.</p>
+<div class="admonition-discovering-the-operating-system typealong toggle-shown dropdown admonition">
+<p class="admonition-title">Discovering the operating system</p>
+<p>For this example, we use the special value <code class="docutils literal notranslate"><span class="pre">NONE</span></code> for the <code class="docutils literal notranslate"><span class="pre">LANGUAGES</span></code>
+option: we are only interested in reporting what operating system CMake
+discovers and that is independent of programming language.</p>
+<p>You can download the <a class="reference download internal" download="" href="../_downloads/2f1584647c5003cc8c2e2c08d1fa7ba1/12_OS_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete,</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div>
+<div class="section" id="discovering-the-processor">
+<h2>Discovering the processor<a class="headerlink" href="#discovering-the-processor" title="Permalink to this headline">¶</a></h2>
+<p>A common customization is to apply processor-specific compiler flags. We can gain
+such information on the host system with the built-in
+<a class="reference internal" href="https://cmake.org/cmake/help/latest/command/cmake_host_system_information.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_host_system_information</code></span></a> command.</p>
+<div class="admonition-cmake-host-system-information signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/cmake_host_system_information.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_host_system_information</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_host_system_information</span><span class="p">(</span><span class="s">RESULT</span> <span class="s">variable</span> <span class="s">QUERY</span> <span class="s">&lt;key&gt;</span> <span class="s">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This commands accepts one or more queries on the host system and returns the result in the <code class="docutils literal notranslate"><span class="pre">variable</span></code>.</p>
+</div>
+<div class="admonition-processor-discovery typealong toggle-shown dropdown admonition">
+<p class="admonition-title">Processor discovery</p>
+<p>Once again, we use the special value <code class="docutils literal notranslate"><span class="pre">NONE</span></code> for the <code class="docutils literal notranslate"><span class="pre">LANGUAGES</span></code> option:
+we are only interested in reporting what CMake discovers about the host
+system and that is independent of programming language.</p>
+<p>You can download the <a class="reference download internal" download="" href="../_downloads/643aefc083a84430dc347ca66c50bc79/13_processor_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete,</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div>
+<div class="admonition-get-to-know-your-host challenge admonition">
+<p class="admonition-title">Get to know your host</p>
+<ol class="arabic">
+<li><p>Get the scaffold code from the <a class="reference download internal" download="" href="../_downloads/643aefc083a84430dc347ca66c50bc79/13_processor_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">previous</span> <span class="pre">type-along</span></code></a>.</p></li>
+<li><p>Open the help page for <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/cmake_host_system_information.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_host_system_information</code></span></a>. Either in the browser or in the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-command cmake_host_system_information
+</pre></div>
+</div>
+</li>
+<li><p>Extend the scaffold code to query all keys listed in the help page and
+print them out.</p></li>
+</ol>
+<p>You can download the <a class="reference download internal" download="" href="../_downloads/96a3cf688ad45a3c9991387c83df2bcc/14_host_system_information_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete,</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div>
+</div>
+<div class="section" id="platform-and-compiler-dependent-source-code">
+<h2>Platform- and compiler-dependent source code<a class="headerlink" href="#platform-and-compiler-dependent-source-code" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-conditional-compilation-with-preprocessor-definitions typealong toggle-shown dropdown admonition">
+<p class="admonition-title">Conditional compilation with preprocessor definitions</p>
+<p>Sometimes we need to write code that performs different operations based on
+compile-time constants:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifdef IS_WINDOWS</span>
+  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from Windows!&quot;</span><span class="p">);</span>
+<span class="cp">#elif IS_LINUX</span>
+  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from Linux!&quot;</span><span class="p">);</span>
+<span class="cp">#elif IS_MACOS</span>
+  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from macOS!&quot;</span><span class="p">);</span>
+<span class="cp">#else</span>
+  <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&quot;Hello from an unknown system!&quot;</span><span class="p">);</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>We can achieve this with CMake with a combination of host system
+introspection and the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_compile_definitions.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_compile_definitions</code></span></a> command.</p>
+<p>You can download the <a class="reference download internal" download="" href="../_downloads/8ce86d5ad9ad399be6338e20de0e28a5/15_sys_preproc_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete,</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div>
+<div class="admonition-target-compile-definitions signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_compile_definitions.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_compile_definitions</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_compile_definitions</span><span class="p">(</span><span class="s">&lt;target&gt;</span>
+  <span class="s">&lt;INTERFACE|PUBLIC|PRIVATE&gt;</span> <span class="s">[items1...]</span>
+  <span class="s">[&lt;INTERFACE|PUBLIC|PRIVATE&gt;</span> <span class="s">[items2...]</span> <span class="s">...]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Adds one (or more) compile definitions to the given <code class="docutils literal notranslate"><span class="pre">&lt;target&gt;</span></code>.</p>
+</div>
+<p>It might be more convenient to have a single file containing all these
+compile-time constants, rather than passing them to preprocessor. This can be
+achieved by having a <em>scaffold</em> file and then letting CMake configure it after
+discovering the values for all the necessary compile-time constants.</p>
+<div class="admonition-configure-file signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/configure_file.html"><span class="xref std std-term"><code class="docutils literal notranslate">configure_file</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">configure_file</span><span class="p">(</span><span class="s">&lt;input&gt;</span> <span class="s">&lt;output&gt;</span>
+               <span class="s">[COPYONLY]</span> <span class="s">[ESCAPE_QUOTES]</span> <span class="s">[@ONLY]</span>
+               <span class="s">[NEWLINE_STYLE</span> <span class="s">[UNIX|DOS|WIN32|LF|CRLF]</span> <span class="s">]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Copies the <code class="docutils literal notranslate"><span class="pre">&lt;input&gt;</span></code> file to another file <code class="docutils literal notranslate"><span class="pre">&lt;output&gt;</span></code>, modifying its content.</p>
+</div>
+<div class="admonition-configure-a-file challenge admonition">
+<p class="admonition-title">Configure a file</p>
+<p>Let’s revisit one of the previous exercises. Rather than print the results of
+querying with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/cmake_host_system_information.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_host_system_information</code></span></a>, we want to save the results to
+a header file and then use it to print the results when running an
+executable.</p>
+<ol class="arabic">
+<li><p>Get the <a class="reference download internal" download="" href="../_downloads/27dbaae30d4b8e77f4ae28e42b26e3b7/16_configure.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">scaffold</span> <span class="pre">code</span></code></a>.
+The header file <code class="docutils literal notranslate"><span class="pre">config.h.in</span></code> contains placeholders for the values that
+CMake will detect.</p></li>
+<li><p>Adapt the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the previous exercise to compile
+<code class="docutils literal notranslate"><span class="pre">processor-info.cpp</span></code> into an executable.</p></li>
+<li><p>Try building. This should fail, because there is no <code class="docutils literal notranslate"><span class="pre">config.h</span></code> file anywhere yet!</p></li>
+<li><p>Open the help page for <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/configure_file.html"><span class="xref std std-term"><code class="docutils literal notranslate">configure_file</code></span></a>. Either in the browser or in the command-line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-command configure_file
+</pre></div>
+</div>
+</li>
+<li><p>Query all keys listed in the help page for <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/cmake_host_system_information.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_host_system_information</code></span></a>
+and save them to appropriately named variables.</p></li>
+<li><p>Invoke <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/configure_file.html"><span class="xref std std-term"><code class="docutils literal notranslate">configure_file</code></span></a> to produce <code class="docutils literal notranslate"><span class="pre">config.h</span></code> from <code class="docutils literal notranslate"><span class="pre">config.h.in</span></code>.</p></li>
+<li><p>Try building again. This will fail too, because the header is not in the <em>include path</em>. We can fix this with:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">target_include_directories</span><span class="p">(</span><span class="s">processor-info</span>
+  <span class="s">PRIVATE</span>
+    <span class="o">${</span><span class="nv">PROJECT_BINARY_DIR</span><span class="o">}</span>
+  <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>You can download the <a class="reference download internal" download="" href="../_downloads/d91ba906f024569a809e006bbab80e86/16_configure_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete,</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div>
+<div class="admonition-keypoints keypoints admonition">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>CMake can <em>introspect</em> the host system.</p></li>
+<li><p>You can build source code differently, based on the OS, the processor, the
+compiler, or any combination thereof.</p></li>
+<li><p>You can generate source code when configuring the project with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/configure_file.html"><span class="xref std std-term"><code class="docutils literal notranslate">configure_file</code></span></a>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../probing/" class="btn btn-neutral float-right" title="Probing compilation, linking, and execution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../hello-ctest/" class="btn btn-neutral float-left" title="Creating and running tests with CTest" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, EuroCC National Competence Centre Sweden.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

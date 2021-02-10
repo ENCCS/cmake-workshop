@@ -1,0 +1,326 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Setting up your system &mdash; CMake Workshop</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="From sources to executables" href="../hello-cmake/" />
+    <link rel="prev" title="CMake hands-on workshop" href="../" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../" class="icon icon-home"> CMake Workshop
+          
+
+          
+            
+            <img src="../_static/ENCCS.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting up your system</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#for-windows-users">For Windows users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#for-macos-and-linux-users">For MacOS and Linux users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-an-environment-and-installing-packages">Creating an environment and installing packages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-binder">Using Binder</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">The lesson</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hello-cmake/">From sources to executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-syntax/">CMake syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-ctest/">Creating and running tests with CTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environment/">Detecting your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../probing/">Probing compilation, linking, and execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../targets/">Target-based build systems with CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Finding and using dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cxx-fortran/">Mixing C++ and Fortran</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fetch-content/">Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography/">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor’s guide</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">CMake Workshop</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Setting up your system</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ENCCS/cmake-workshop/blob/main/content/setup.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="setting-up-your-system">
+<h1>Setting up your system<a class="headerlink" href="#setting-up-your-system" title="Permalink to this headline">¶</a></h1>
+<p>In order to follow this workshop, you will need access to compilers,
+Python and CMake. You can use an HPC cluster if you have access to
+one, but the instructions here cover how to install the prerequisites
+on your own computer. We also show how you can use <a class="reference external" href="https://mybinder.org">Binder</a> to run in the cloud.</p>
+<p>These instructions are based on installing compilers and CMake via the <a class="reference external" href="https://docs.conda.io/en/latest/">Conda
+package and enviroment manager</a>, as it
+provides a convenient way to install binary packages in an isolated software
+environment.</p>
+<div class="section" id="for-windows-users">
+<h2>For Windows users<a class="headerlink" href="#for-windows-users" title="Permalink to this headline">¶</a></h2>
+<p>We strongly recommend to use (and install if necessary) the Windows
+Subsystem for Linux (WSL) as it is a powerful tool which will likely
+be useful also after the workshop.  Inside WSL you will need Python 3
+and the conda environment manager.  A useful guide to doing
+this is found at <a class="reference external" href="https://github.com/kapsakcj/win10-linux-conda-how-to">https://github.com/kapsakcj/win10-linux-conda-how-to</a>.
+The installation of the required dependencies in a WSL terminal is
+documented below.</p>
+</div>
+<div class="section" id="for-macos-and-linux-users">
+<h2>For MacOS and Linux users<a class="headerlink" href="#for-macos-and-linux-users" title="Permalink to this headline">¶</a></h2>
+<p>MacOS and Linux users can simply open a terminal and install
+<a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>:</p>
+<ul class="simple">
+<li><p>For MacOS see <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html#macosx-installers">https://docs.conda.io/en/latest/miniconda.html#macosx-installers</a></p></li>
+<li><p>For Linux see <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html#linux-installers">https://docs.conda.io/en/latest/miniconda.html#linux-installers</a></p></li>
+</ul>
+</div>
+<div class="section" id="creating-an-environment-and-installing-packages">
+<h2>Creating an environment and installing packages<a class="headerlink" href="#creating-an-environment-and-installing-packages" title="Permalink to this headline">¶</a></h2>
+<p>Once you have <code class="docutils literal notranslate"><span class="pre">conda</span></code> installed (and WSL if you’re on Windows) you
+can use the <a class="reference download internal" download="" href="../_downloads/1e955aa7952605b36c4491740042f7a7/environment.yml"><code class="xref download docutils literal notranslate"><span class="pre">environment.yml</span></code></a> file to
+install the dependencies.  First save it to your hard drive by
+clicking the link, and then in a terminal navigate to where you saved
+the file and type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
+</div>
+<p>You then need to activate the new environment by:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">cmake</span><span class="o">-</span><span class="n">workshop</span>
+</pre></div>
+</div>
+<p>Now you should have CMake, compilers, Python and a few other packages
+installed!</p>
+</div>
+<div class="section" id="using-binder">
+<h2>Using Binder<a class="headerlink" href="#using-binder" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://mybinder.org/">MyBinder</a> offers a free customizable cloud
+computing environment. You can do the CMake workshop exercises in the
+cloud by clicking the “launch binder” button at the top of the README
+file displayed at <a class="reference external" href="https://github.com/ENCCS/cmake-workshop">https://github.com/ENCCS/cmake-workshop</a>.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/launch_binder_button.png"><img alt="Launching the binder" src="../_images/launch_binder_button.png" style="width: 219.1px; height: 107.1px;" /></a>
+</div>
+<p>This will bring you to the loading page for the binder notebook, which might
+take a few minutes to start up. Don’t despair!</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/binder_loading.png"><img alt="The binder is loading" src="../_images/binder_loading.png" style="width: 483.0px; height: 244.0px;" /></a>
+</div>
+<p>Once loaded, you will see a Jupyter Notebook dashboard which is running in the
+cloud.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/binder_landing_page.png"><img alt="The notebook dashboard" src="../_images/binder_landing_page.png" style="width: 725.5px; height: 270.5px;" /></a>
+</div>
+<p>To open up a terminal, click “New” on the right and select Terminal.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/open_terminal_in_binder.png"><img alt="The notebook dashboard" src="../_images/open_terminal_in_binder.png" style="width: 281.5px; height: 178.5px;" /></a>
+</div>
+<p>You can browse the whole content of the workshop with <code class="docutils literal notranslate"><span class="pre">ls</span> <span class="pre">content</span></code>. The code
+exercises are in <code class="docutils literal notranslate"><span class="pre">content/code</span></code>.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/terminal_and_contents.png"><img alt="A cloud terminal" src="../_images/terminal_and_contents.png" style="width: 737.0px; height: 92.5px;" /></a>
+</div>
+<p>You can open a text editor (for code, CMake files etc) by clicking “New” and
+select Text File. If you prefer a terminal editor, you can use <code class="docutils literal notranslate"><span class="pre">nano</span></code> or
+<code class="docutils literal notranslate"><span class="pre">vim</span></code> or <code class="docutils literal notranslate"><span class="pre">emacs</span></code>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../hello-cmake/" class="btn btn-neutral float-right" title="From sources to executables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../" class="btn btn-neutral float-left" title="CMake hands-on workshop" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, EuroCC National Competence Centre Sweden.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

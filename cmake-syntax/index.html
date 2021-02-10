@@ -1,0 +1,587 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>CMake syntax &mdash; CMake Workshop</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/mystnb.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/tabs.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/sphinx_lesson.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/overrides.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/togglebutton.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script src="../_static/tabs.js"></script>
+        <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Creating and running tests with CTest" href="../hello-ctest/" />
+    <link rel="prev" title="From sources to executables" href="../hello-cmake/" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../" class="icon icon-home"> CMake Workshop
+          
+
+          
+            
+            <img src="../_static/ENCCS.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/">Setting up your system</a></li>
+</ul>
+<p class="caption"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hello-cmake/">From sources to executables</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CMake syntax</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-cmake-dsl">The CMake DSL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commands">Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#flow-control">Flow control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-build-tree">The build tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#printing-messages">Printing messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controlling-the-build-with-options">Controlling the build with options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-ctest/">Creating and running tests with CTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environment/">Detecting your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../probing/">Probing compilation, linking, and execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../targets/">Target-based build systems with CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Finding and using dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cxx-fortran/">Mixing C++ and Fortran</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fetch-content/">Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a></li>
+</ul>
+<p class="caption"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography/">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor’s guide</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">CMake Workshop</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>CMake syntax</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ENCCS/cmake-workshop/blob/main/content/cmake-syntax.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="cmake-syntax">
+<span id="id1"></span><h1>CMake syntax<a class="headerlink" href="#cmake-syntax" title="Permalink to this headline">¶</a></h1>
+<div class="admonition-questions questions admonition">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How can we achieve more control over the build system generated by CMake?</p></li>
+<li><p>Is it possible to let the user decide what to generate?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Learn the syntax for conditionals in CMake: <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a> - <code class="docutils literal notranslate"><span class="pre">elseif</span></code> - <code class="docutils literal notranslate"><span class="pre">else</span></code> - <code class="docutils literal notranslate"><span class="pre">endif</span></code></p></li>
+<li><p>Learn the syntax for loops in CMake: <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a></p></li>
+<li><p>Learn how CMake structures build artifacts.</p></li>
+<li><p>Learn how to print helpful messages.</p></li>
+<li><p>Learn how to handle user-facing options: <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/option.html"><span class="xref std std-term"><code class="docutils literal notranslate">option</code></span></a> and the role of the CMake cache.</p></li>
+</ul>
+</div>
+<p>CMake offers a <em>domain-specific language</em> (DSL) to describe how to generate a
+build system native to the specific platform you might be running on.
+In this episode, we will get acquainted with its syntax.</p>
+<div class="section" id="the-cmake-dsl">
+<h2>The CMake DSL<a class="headerlink" href="#the-cmake-dsl" title="Permalink to this headline">¶</a></h2>
+<p>Remember that the DSL is <em>case-insensitive</em>. We will now have a look at its main elements.</p>
+<div class="section" id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
+<p>These are either CMake- or user-defined. You can obtain the list of CMake-defined variables with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-variable-list
+</pre></div>
+</div>
+<p>You can create a new variable with the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a> command:</p>
+<div class="admonition-set signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">&lt;variable&gt;</span> <span class="s">&lt;value&gt;...</span> <span class="s">[PARENT_SCOPE]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Variables in CMake are always of string type, but certain commands can interpret
+them as other types.  If you want to declare a <em>list</em> variable, you will have to
+provide it as a ;-separated string. Lists can be manipulated with the <code class="docutils literal notranslate"><span class="pre">list</span></code>
+family of commands.
+You can inspect the value of a variable by <em>dereferencing</em> it with the <code class="docutils literal notranslate"><span class="pre">${}</span></code>
+operator, as in bash shell.</p>
+<p>One of the most confusing aspects in CMake is the scoping of variables. There are three variable scopes in the DSL:</p>
+<ul>
+<li><p>Function. In effect when a variable is <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a> within a function: the variable
+will be visible within the function, but not outside.</p></li>
+<li><p>Directory. In effect when processing a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in a directory:
+variables in the parent folder will be available, but any that is <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a> in the
+current folder will not be propagated to the parent.</p></li>
+<li><p>Cache. These variables are <strong>persistent</strong> across calls to <code class="docutils literal notranslate"><span class="pre">cmake</span></code> and
+available to all scopes in the project.
+Modifying a cache variable requires using a special form of the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a> function:</p>
+<div class="admonition-set signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set.html"><span class="xref std std-term"><code class="docutils literal notranslate">set</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span><span class="p">(</span><span class="s">&lt;variable&gt;</span> <span class="s">&lt;value&gt;...</span> <span class="s">CACHE</span> <span class="s">&lt;type&gt;</span> <span class="s">&lt;docstring&gt;</span> <span class="s">[FORCE]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</li>
+</ul>
+<p>Here is a list of few CMake-defined variables:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/variable/PROJECT_BINARY_DIR.html"><span class="xref std std-term"><code class="docutils literal notranslate">PROJECT_BINARY_DIR</code></span></a>. This is the build folder for the project.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/variable/PROJECT_SOURCE_DIR.html"><span class="xref std std-term"><code class="docutils literal notranslate">PROJECT_SOURCE_DIR</code></span></a>. This is the location of the root <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the project.</p></li>
+<li><p><a class="reference internal" href="https://cmake.org/cmake/help/latest/variable/CMAKE_CURRENT_LIST_DIR.html"><span class="xref std std-term"><code class="docutils literal notranslate">CMAKE_CURRENT_LIST_DIR</code></span></a>. This is the folder for the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> currently being processed.</p></li>
+</ul>
+<p>Help on a specific built-in variable can be obtained with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-variable PROJECT_BINARY_DIR
+</pre></div>
+</div>
+</div>
+<div class="section" id="commands">
+<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h3>
+<p>These are provided by CMake and are the essential building blocks of the DSL, as they allow you to manipulate variables.
+They include control flow constructs and the <code class="docutils literal notranslate"><span class="pre">target_*</span></code> family of commands.
+You can find a complete list of available commands with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-command-list
+</pre></div>
+</div>
+<p><strong>Functions</strong> and <strong>macros</strong> are build on top of the basic built-in commands and
+are either CMake- or user-defined.
+These prove useful to avoid repetition in your CMake scripts.
+The difference between a function and a macro is their <em>scope</em>:</p>
+<ol class="arabic simple">
+<li><p>Functions have their own scope: variables defined inside a function are not
+propagated back to the caller.</p></li>
+<li><p>Macros do not have thei own scope: variables from the parent scope can be
+modified and new variables in the parent scope can be set.</p></li>
+</ol>
+<p>Help on a specific built-in command, function or macro can be obtained with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-command target_link_libraries
+</pre></div>
+</div>
+</div>
+<div class="section" id="modules">
+<h3>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h3>
+<p>These are collections of functions and macros and are either CMake- or user-defined.
+CMake comes with a rich ecosystem of modules and you will probably write a few
+of your own to encapulate frequently used functions or macros in your CMake
+scripts.
+You will have to include the module to use its contents, for example:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">CMakePrintHelpers</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The full list of built-in modules is available with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module-list
+</pre></div>
+</div>
+<p>Help on a specific built-in module can be obtained with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ cmake --help-module CMakePrintHelpers
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="flow-control">
+<h2>Flow control<a class="headerlink" href="#flow-control" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a> and <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a> commands are available as flow control constructs in the
+CMake DSL and you are surely familiar with their use in other programming
+languages.</p>
+<p>Since <em>all</em> variables in CMake are strings, the syntax for <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a> and <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a>
+appears in a few different variants.</p>
+<div class="admonition-if signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">if</span><span class="p">(</span><span class="s">&lt;condition&gt;</span><span class="p">)</span>
+  <span class="c"># &lt;commands&gt;</span>
+<span class="nb">elseif</span><span class="p">(</span><span class="s">&lt;condition&gt;</span><span class="p">)</span> <span class="c"># optional block, can be repeated</span>
+  <span class="c"># &lt;commands&gt;</span>
+<span class="nb">else</span><span class="p">()</span>              <span class="c"># optional block</span>
+  <span class="c"># &lt;commands&gt;</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The truth value of the conditions in the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a> and <code class="docutils literal notranslate"><span class="pre">elseif</span></code> blocks is
+determined by boolean operators. In the CMake DSL:</p>
+<ul class="simple">
+<li><p>True is any expression evaluating to: <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">ON</span></code>, <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, <code class="docutils literal notranslate"><span class="pre">YES</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">Y</span></code>.</p></li>
+<li><p>False is any expression evaluating to: <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">OFF</span></code>, <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>, <code class="docutils literal notranslate"><span class="pre">NO</span></code>,
+<code class="docutils literal notranslate"><span class="pre">N</span></code>, <code class="docutils literal notranslate"><span class="pre">IGNORE</span></code>, and <code class="docutils literal notranslate"><span class="pre">NOTFOUND</span></code>.</p></li>
+</ul>
+<p>CMake offers boolean operator for string comparisons, such as <code class="docutils literal notranslate"><span class="pre">STREQUAL</span></code> for
+string equality, and for version comparisons, such as <code class="docutils literal notranslate"><span class="pre">VERSION_EQUAL</span></code>.</p>
+<div class="admonition-variable-expansions-in-conditionals callout admonition">
+<p class="admonition-title">Variable expansions in conditionals</p>
+<p>The <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/if.html"><span class="xref std std-term"><code class="docutils literal notranslate">if</code></span></a> command expands the contents of variables before evaluating their
+truth value.
+See the <a class="reference external" href="https://cmake.org/cmake/help/latest/command/if.html?highlight=#variable-expansion">official documentation</a>
+for further details.</p>
+</div>
+<div class="admonition-conditionals-in-cmake challenge admonition">
+<p class="admonition-title">Conditionals in CMake</p>
+<p>Modify the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> from the previous exercise to build either a
+<em>static</em> or a <em>shared</em> library depending on the value of the boolean
+<code class="docutils literal notranslate"><span class="pre">MAKE_SHARED_LIBRARY</span></code>:</p>
+<ol class="arabic simple">
+<li><p>Define the <code class="docutils literal notranslate"><span class="pre">MAKE_SHARED_LIBRARY</span></code> variable.</p></li>
+<li><p>Write a conditional checking the variable. In each branch call
+<a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_library.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_library</code></span></a> appropriately.</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>You can download the <a class="reference download internal" download="" href="../_downloads/643501d133ed4bb51b1dc7fdcc2cbcfa/02_conditionals-cxx.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">scaffold</span> <span class="pre">project</span></code></a> and the
+<a class="reference download internal" download="" href="../_downloads/81fcb5b96f6fe018839fd8c8c2e5a001/02_conditionals-cxx_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete,</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>You can download the <a class="reference download internal" download="" href="../_downloads/6a93b6a04ffce58adadd1efec8e0f3a9/02_conditionals-f.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">scaffold</span> <span class="pre">project</span></code></a> and the
+<a class="reference download internal" download="" href="../_downloads/fea18cc21b691efe3ad84c43de1a873a/02_conditionals-f_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete,</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div></div>
+</div>
+<p>You can perform the same operation on a collection of items with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a>:</p>
+<div class="admonition-foreach signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">foreach</span><span class="p">(</span><span class="s">&lt;loop_var&gt;</span> <span class="s">&lt;items&gt;</span><span class="p">)</span>
+  <span class="c"># &lt;commands&gt;</span>
+<span class="nb">endforeach</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The list of items is either space- or ;-separated. <code class="docutils literal notranslate"><span class="pre">break()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">continue()</span></code> are also available.</p>
+<div class="admonition-loops-in-cmake typealong toggle-shown dropdown admonition">
+<p class="admonition-title">Loops in CMake</p>
+<p>In this typealong, we will show how to use <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a> and lists in CMake.  We
+will work from a <a class="reference download internal" download="" href="../_downloads/31fe6f0bb7efc435e94f4b6b63068bda/03_loops-cxx.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">scaffold</span> <span class="pre">project</span></code></a>.</p>
+<p>The goal is to compile a library from a bunch of source files: some of them
+are to be compiled with <code class="docutils literal notranslate"><span class="pre">-O3</span></code> optimization level, while some others with
+<code class="docutils literal notranslate"><span class="pre">-O2</span></code>.
+We will set the compilation flags as properties on the library target.
+Targets and properties will be discussed at greater length in <a class="reference internal" href="../targets/#targets"><span class="std std-ref">Target-based build systems with CMake</span></a>.</p>
+<p>You can download the <a class="reference download internal" download="" href="../_downloads/a3dad364192e8fab8685eb9bd523e4ef/03_loops-cxx_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete,</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div>
+<div class="section" id="the-build-tree">
+<h3>The build tree<a class="headerlink" href="#the-build-tree" title="Permalink to this headline">¶</a></h3>
+<p>It is instructive to browse the build folder for the project we built in the
+previous typealong:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ tree -L <span class="m">2</span> build
+
+build
+├── CMakeCache.txt
+├── CMakeFiles
+│   ├── <span class="m">3</span>.18.4
+│   ├── cmake.check_cache
+│   ├── CMakeDirectoryInformation.cmake
+│   ├── CMakeOutput.log
+│   ├── CMakeTmp
+│   ├── compute-areas.dir
+│   ├── geometry.dir
+│   ├── Makefile2
+│   ├── Makefile.cmake
+│   ├── progress.marks
+│   └── TargetDirectories.txt
+├── cmake_install.cmake
+├── compute-areas
+├── libgeometry.a
+└── Makefile
+</pre></div>
+</div>
+<p>We note that:</p>
+<ul class="simple">
+<li><p>The project was configured with <code class="docutils literal notranslate"><span class="pre">Makefile</span></code> generator.</p></li>
+<li><p>The cache is a plain-text file <code class="docutils literal notranslate"><span class="pre">CMakeCache.txt</span></code>.</p></li>
+<li><p>For every target in the project, CMake will create a subfolder
+<code class="docutils literal notranslate"><span class="pre">&lt;target&gt;.dir</span></code> under <code class="docutils literal notranslate"><span class="pre">CMakeFiles</span></code>. The intermediate object files are
+stored in these folders, together with compiler flags and link line.</p></li>
+<li><p>The build artifacts, <code class="docutils literal notranslate"><span class="pre">compute-areas</span></code> and <code class="docutils literal notranslate"><span class="pre">libgeometry.a</span></code>,  are stored at
+the root of the build tree.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="printing-messages">
+<h2>Printing messages<a class="headerlink" href="#printing-messages" title="Permalink to this headline">¶</a></h2>
+<p>You will most likely have to engage in debugging your CMake scripts at one point
+or another.  We believe that print-based debugging is the most effective way to
+do so and the main workhorse will be the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/message.html"><span class="xref std std-term"><code class="docutils literal notranslate">message</code></span></a> command:</p>
+<div class="admonition-message signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/message.html"><span class="xref std std-term"><code class="docutils literal notranslate">message</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">message</span><span class="p">(</span><span class="s">[&lt;mode&gt;]</span> <span class="s2">&quot;message to display&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-parameters parameters dropdown admonition">
+<p class="admonition-title">Parameters</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;mode&gt;</span></code></dt><dd><p>What type of message to display, for example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">STATUS</span></code>, for incidental information.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FATAL_ERROR</span></code>, to report an error that prevents further processing and generation.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</div>
+<p><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/message.html"><span class="xref std std-term"><code class="docutils literal notranslate">message</code></span></a> can be a bit awkward to work with, especially when you want to print
+the name <em>and</em> value of a variable.  Including the built-in module
+<code class="docutils literal notranslate"><span class="pre">CMakePrintHelpers</span></code> will make your life easier when debugging, since it
+provides the <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CMakePrintHelpers.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_print_variables</code></span></a> function:</p>
+<div class="admonition-cmake-print-variables signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CMakePrintHelpers.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_print_variables</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_print_variables</span><span class="p">(</span><span class="s">var1</span> <span class="s">var2</span> <span class="s">...</span> <span class="s">varN</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This command accepts an arbitrary number of variables and prints their name and value to standard output.
+For example:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">CMakePrintHelpers</span><span class="p">)</span>
+
+<span class="nb">cmake_print_variables</span><span class="p">(</span><span class="s">CMAKE_C_COMPILER</span> <span class="s">CMAKE_MAJOR_VERSION</span> <span class="s">DOES_NOT_EXIST</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>gives:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>-- CMAKE_C_COMPILER=&quot;/usr/bin/gcc&quot; ; CMAKE_MAJOR_VERSION=&quot;2&quot; ; DOES_NOT_EXIST=&quot;&quot;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="controlling-the-build-with-options">
+<h2>Controlling the build with options<a class="headerlink" href="#controlling-the-build-with-options" title="Permalink to this headline">¶</a></h2>
+<p>We mentioned earlier that the <code class="docutils literal notranslate"><span class="pre">-D</span></code> switch in the command-line interface (CLI)
+of the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> command can be used to pass options, but how do we define these
+options in our <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>?
+That is where the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/option.html"><span class="xref std std-term"><code class="docutils literal notranslate">option</code></span></a> comes into play!</p>
+<div class="admonition-option signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/option.html"><span class="xref std std-term"><code class="docutils literal notranslate">option</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">option</span><span class="p">(</span><span class="s">&lt;variable&gt;</span> <span class="s2">&quot;&lt;help_text&gt;&quot;</span> <span class="s">[value]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With this, you can provide an ON/OFF toggle controllable from the CLI.</p>
+</div>
+<p>By importing the <code class="docutils literal notranslate"><span class="pre">CMakeDependentOption</span></code> module, you can handle cases where
+options are only relevant <em>if</em> other options are already set to specific values:</p>
+<div class="admonition-cmake-dependent-option signature toggle-shown dropdown admonition">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CMakeDependentOption.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_dependent_option</code></span></a></p>
+<blockquote>
+<div><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_dependent_option</span><span class="p">(</span><span class="s">USE_FOO</span> <span class="s2">&quot;Use Foo&quot;</span> <span class="s">ON</span>
+                       <span class="s2">&quot;USE_BAR;NOT USE_ZOT&quot;</span> <span class="s">OFF</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>If the option <code class="docutils literal notranslate"><span class="pre">USE_BAR</span></code> is true and  the option <code class="docutils literal notranslate"><span class="pre">USE_ZOT</span></code> is false, then
+an option <code class="docutils literal notranslate"><span class="pre">USE_FOO</span></code> will be presented to the user and it will be true by
+default. If the condition on <code class="docutils literal notranslate"><span class="pre">USE_BAR</span></code> and <code class="docutils literal notranslate"><span class="pre">USE_ZOT</span></code> is not realized, the
+option is set to false.</p>
+</div>
+<div class="admonition-user-facing-options challenge admonition">
+<p class="admonition-title">User-facing options</p>
+<p>In this exercise, we will work with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/option.html"><span class="xref std std-term"><code class="docutils literal notranslate">option</code></span></a> and <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CMakeDependentOption.html"><span class="xref std std-term"><code class="docutils literal notranslate">cmake_dependent_option</code></span></a>.
+We want to allow the user to decide whether to build a library and whether
+that should be static or shared.</p>
+<ol class="arabic simple">
+<li><p>Add a <code class="docutils literal notranslate"><span class="pre">USE_LIBRARY</span></code> option</p></li>
+<li><p>Add dependent options <code class="docutils literal notranslate"><span class="pre">MAKE_STATIC_LIBRARY</span></code> and <code class="docutils literal notranslate"><span class="pre">MAKE_SHARED_LIBRARY</span></code>.
+They will only be presented if <code class="docutils literal notranslate"><span class="pre">USE_LIBRARY</span></code> is true.</p></li>
+<li><p>Use conditionals to orchestrate the build of the static/shared library.</p></li>
+</ol>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">C++</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Fortran</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>You can download the <a class="reference download internal" download="" href="../_downloads/dd31df7da05d6ceb0792dfbd5283677b/04_options-cxx.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">scaffold</span> <span class="pre">code</span></code></a> and
+the <a class="reference download internal" download="" href="../_downloads/92f464aff441cd81706ed24c0d727d5a/04_options-cxx_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete</span> <span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>You can download the <a class="reference download internal" download="" href="../_downloads/d0a2d7515ca3a41d9e33e2b9896ab4f1/04_options-f.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">scaffold</span> <span class="pre">code</span></code></a> and the <a class="reference download internal" download="" href="../_downloads/3660bb4f040037e8630b8fbc202494c4/04_options-f_solution.tar.bz2"><code class="xref download docutils literal notranslate"><span class="pre">complete,</span>
+<span class="pre">working</span> <span class="pre">example</span></code></a>.</p>
+</div></div>
+</div>
+<div class="admonition-keypoints keypoints admonition">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>CMake offers a full-fledged DSL which empowers you to write complex <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p></li>
+<li><p>Variables have scoping rules.</p></li>
+<li><p>The structure of the project is mirrored in the build folder.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../hello-ctest/" class="btn btn-neutral float-right" title="Creating and running tests with CTest" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../hello-cmake/" class="btn btn-neutral float-left" title="From sources to executables" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, EuroCC National Competence Centre Sweden.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
