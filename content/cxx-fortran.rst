@@ -69,7 +69,7 @@ We will not delve into the details of ``iso_c_binding``,
 suffice it so say that interoperability between basic datatypes, pointers, and
 function call conventions is nowadays well-established. [#iso_c_binding]_
 
-.. challenge:: A Fortran executable using a C/C++ library
+.. exercise:: A Fortran executable using a C/C++ library
 
    In this exercise, you will build a Fortran executable linking to libraries
    written in C++ and the system library ``backtrace``, written in C.
@@ -170,7 +170,7 @@ needed to mangle names as appropriate for the compiler in use:
                          [SYMBOLS [<module>:]<function> ...])
 
 
-.. challenge:: A C/C++ executable using a Fortran library
+.. exercise:: A C/C++ executable using a Fortran library
 
    Your goal is to link a C++ executable to a BLAS/LAPACK library.  The final
    executable will be named ``linear-algebra``: it scales a vector with

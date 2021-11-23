@@ -187,7 +187,7 @@ string equality, and for version comparisons, such as ``VERSION_EQUAL``.
    for further details.
 
 
-.. challenge:: Conditionals in CMake
+.. exercise:: Conditionals in CMake
 
    Modify the ``CMakeLists.txt`` from the previous exercise to build either a
    *static* or a *shared* library depending on the value of the boolean
@@ -360,7 +360,7 @@ options are only relevant *if* other options are already set to specific values:
   option is set to false.
 
 
-.. challenge:: User-facing options
+.. exercise:: User-facing options
 
    In this exercise, we will work with |option| and |cmake_dependent_option|.
    We want to allow the user to decide whether to build a library and whether

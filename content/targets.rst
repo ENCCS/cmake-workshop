@@ -244,7 +244,7 @@ tree will be automatically computed by CMake.
 We can declare targets at any level, not necessarily the root: a target is
 visible at the level at which it is declared and all higher levels.
 
-.. challenge:: Cellular automata
+.. exercise:: Cellular automata
 
    Let's move beyond "Hello, world" and work with a project spanning multiple
    folders. We will implement a relatively simple code to compute and print to

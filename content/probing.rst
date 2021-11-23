@@ -60,7 +60,7 @@ command. You **should not** rely on |execute_process| to update any artifacts at
 **build-time**.
 
 
-.. challenge:: Find a Python module
+.. exercise:: Find a Python module
 
    In this exercise, we'll use |execute_process| to check whether the `cffi
    <https://cffi.readthedocs.io/en/latest/index.html>`_ Python module is
@@ -120,7 +120,7 @@ instances.
    and ``PRE_LINK``) or after (with ``POST_BUILD``)
 
 
-.. challenge:: Before and after build
+.. exercise:: Before and after build
 
    We want to perform some action before and after building a target, in this case a Fortran executable:
 
@@ -155,7 +155,7 @@ CMake provides modules and commands for these purposes:
 
 In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
 
-.. challenge:: Check that a compiler accepts a compiler flag
+.. exercise:: Check that a compiler accepts a compiler flag
 
    Compilers evolve: they add and/or remove flags and sometimes you will face
    the need to test whether some flags are available before using them in your
@@ -178,7 +178,7 @@ In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
    You can download the :download:`complete, working example <code/tarballs/19_check_compiler_flag_solution.tar.bz2>`.
 
 
-.. challenge:: Testing runtime capabilities
+.. exercise:: Testing runtime capabilities
 
    Testing that some features will work properly for your code requires not only
    compiling an object files, but also linking an executable and running it

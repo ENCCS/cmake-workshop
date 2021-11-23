@@ -309,7 +309,7 @@ You can link libraries into executables with |target_link_libraries|:
    dependencies and is much more effective than keeping track of state with
    variables.  We will clarify these concepts in :ref:`targets`.
 
-.. challenge:: Producing libraries
+.. exercise:: Producing libraries
 
    .. tabs::
 

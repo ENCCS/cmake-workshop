@@ -103,7 +103,7 @@ download the header file and adding it to our codebase, we can use
 ``FetchContent`` to satisfy this dependency for us when needed.
 
 
-.. challenge:: Catch2 reloaded
+.. exercise:: Catch2 reloaded
 
    We want to use the Catch2 unit testing framework for our code.  In this
    exercise, we will download the Catch2 project at configure-time from its
@@ -162,7 +162,7 @@ If you write modern C++, pybind11 should be your framework of choice:
 - It has excellent integration with CMake.
 
 
-.. challenge:: Banking code with C++ and Python
+.. exercise:: Banking code with C++ and Python
 
    Our goal is to compile Python wrappers to a small C++ library simulating a
    bank account. The pybind11 dependency will be satisfied at configure-time

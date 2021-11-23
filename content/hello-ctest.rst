@@ -105,7 +105,7 @@ There are two steps to perform to integrate your CMake build system with the CTe
 
    You can download the :download:`complete, working example <code/tarballs/05_hello-ctest.tar.bz2>`.
 
-.. challenge:: Running the tests through a shell script
+.. exercise:: Running the tests through a shell script
 
    Any command can be used to run tests. In this exercise, we will extend the
    previous CMake code to test the main executable within a shell script.
@@ -123,7 +123,7 @@ There are two steps to perform to integrate your CMake build system with the CTe
 
    You can download the :download:`complete, working example <code/tarballs/06_bash-ctest_solution.tar.bz2>`.
 
-.. challenge:: Running the tests through a Python script
+.. exercise:: Running the tests through a Python script
 
    It is much more common nowadays to use Python, rather than shell scripts.  In
    this exercise, we will add two more tests to our project. These new tests
@@ -229,7 +229,7 @@ available properties.
       set_tests_properties(test1 [test2...] PROPERTIES prop1 value1 prop2 value2)
 
 
-.. challenge:: Set labels on tests
+.. exercise:: Set labels on tests
 
    We will run some tests using Python and we want to group them into two categories:
 
@@ -276,7 +276,7 @@ Among the many properties that can be set on tests, we would like to highlight t
   timeout if you want to be more or less tolerant of variations in execution
   time.
 
-.. challenge:: More properties!
+.. exercise:: More properties!
 
    Let's play around with the properties we have just introduced.
 

@@ -130,7 +130,7 @@ A complete list of ``Find<PackageName>.cmake`` can be found from the command-lin
 
    You can download the :download:`complete working example <code/tarballs/22_taskloop_solution.tar.bz2>`.
 
-.. challenge:: Using MPI
+.. exercise:: Using MPI
 
    In this exercise, you will attempt compiling a "Hello, world" program that
    uses the message passing interface (MPI).

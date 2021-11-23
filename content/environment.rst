@@ -68,7 +68,7 @@ such information on the host system with the built-in
    You can download the :download:`complete, working example <code/tarballs/13_processor_solution.tar.bz2>`.
 
 
-.. challenge:: Get to know your host
+.. exercise:: Get to know your host
 
    1. Get the scaffold code from the :download:`previous type-along
       <code/tarballs/13_processor_solution.tar.bz2>`.
@@ -138,7 +138,7 @@ discovering the values for all the necessary compile-time constants.
    Copies the ``<input>`` file to another file ``<output>``, modifying its content.
 
 
-.. challenge:: Configure a file
+.. exercise:: Configure a file
 
    Let's revisit one of the previous exercises. Rather than print the results of
    querying with |cmake_host_system_information|, we want to save the results to
