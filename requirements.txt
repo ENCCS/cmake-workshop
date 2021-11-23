@@ -1,7 +1,7 @@
 Sphinx
-sphinx_book_theme
 sphinx_rtd_theme
 sphinx_rtd_theme_ext_color_contrast
 myst_nb
-sphinx-lesson
+sphinx-lesson ~= 0.8.4
+typing-extensions ~= 3.7.4.3
 sphinxcontrib-bibtex
