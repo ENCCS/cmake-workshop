@@ -50,9 +50,15 @@ deploy their codebases. You will learn how to:
    probing
    targets
    dependencies
-   cxx-fortran
    fetch-content
+   python-bindings
+   tips-and-tricks
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Additional topics
+
+   cxx-fortran
 
 .. see also the schedule in guide.rst
 
@@ -67,8 +73,9 @@ deploy their codebases. You will learn how to:
    30 min ; :doc:`probing`
    40 min ; :doc:`targets`
    40 min ; :doc:`dependencies`
-   40 min ; :doc:`cxx-fortran`
-   30 min ; :doc:`fetch-content`
+   40 min ; :doc:`fetch-content`
+   30 min ; :doc:`python-bindings`
+   30 min ; :doc:`tips-and-tricks`
 
 
 .. toctree::
@@ -161,6 +168,13 @@ Type-along
          project(Hello LANGUAGES CXX)
 
    The content can be hidden by clicking the toggle.
+
+Exercises
+   Each exercise is presented in a separate text box, marked with a hand emoji. Each box introduces the exercise and describes the objectives:
+
+   .. exercise:: Exercise 10
+
+      We will use CMake to build a Fortran library.
 
 
 
