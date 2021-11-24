@@ -1,6 +1,6 @@
 add_library(io)
 
 target_sources(io
-  PUBLIC
+  PRIVATE
     io.f90
   )

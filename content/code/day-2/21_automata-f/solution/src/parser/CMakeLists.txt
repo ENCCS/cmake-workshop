@@ -1,6 +1,6 @@
 add_library(parser)
 
 target_sources(parser
-  PUBLIC
+  PRIVATE
     parser.f90
   )

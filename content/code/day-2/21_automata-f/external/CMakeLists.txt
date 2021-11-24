@@ -1,6 +1,6 @@
 add_library(conversion)
 
 target_sources(conversion
-  PUBLIC
+  PRIVATE
     conversion.f90
   )
