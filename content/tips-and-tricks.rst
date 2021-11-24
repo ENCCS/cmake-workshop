@@ -1,7 +1,7 @@
 .. _tips-and-tricks:
 
-Porting your build system to CMake: tips and tricks
-===================================================
+Using CMake: tips and tricks [#adapt]_
+======================================
 
 .. objectives::
 
@@ -180,6 +180,7 @@ to a different place.
 
 .. rubric:: Footnotes
 
+.. [#adapt] This episode is adapted, with permission, from the `CodeRefinery CMake lesson <https://coderefinery.github.io/cmake-workshop/growing-projects>`_.
 .. [#glob]
 
    A glob would be done using the |file| command. We quote the explanation in
