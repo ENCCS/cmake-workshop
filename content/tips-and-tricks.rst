@@ -1,7 +1,7 @@
 .. _tips-and-tricks:
 
-Using CMake: tips and tricks [#adapt]_
-======================================
+Using CMake: tips and tricks
+============================
 
 .. objectives::
 
@@ -13,7 +13,7 @@ Using CMake: tips and tricks [#adapt]_
 As projects grow, things get more complicated: more possibilities, more corner
 cases, more options to the user, and more developers who are contributing and
 may not oversee the entire CMake structure. In this episode we will mention a
-couple of tools to bring some structure and flow-control into larger projects.
+couple of tools to bring some structure and flow-control into larger projects. [#adapt]_
 
 
 Listing sources or globbing them
