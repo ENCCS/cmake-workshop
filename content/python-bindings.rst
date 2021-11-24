@@ -42,18 +42,18 @@ If you write modern C++, pybind11 should be your framework of choice:
 - It has excellent integration with CMake.
 
 
-.. exercise:: Banking code with C++ and Python
+.. exercise:: Exercise 27: Banking code with C++ and Python
 
    Our goal is to compile Python wrappers to a small C++ library simulating a
    bank account. The pybind11 dependency will be satisfied at configure-time
    using ``FetchContent``.
 
-   Get the :download:`scaffold code <code/tarballs/27_cxx-python.tar.bz2>`.
+   A scaffold for the project is in ``content/code/day-2/27_cxx-python``.
    The source tree is as follows:
 
    .. code-block:: text
 
-      cxx-python
+      27_cxx-python
       └── account
           ├── account.cpp
           ├── account.hpp
@@ -74,7 +74,7 @@ If you write modern C++, pybind11 should be your framework of choice:
       for version 2.6.2 of pybind11.
    #. Configure, build, and run the test.
 
-   You can download the :download:`complete, working example <code/tarballs/27_cxx-python_solution.tar.bz2>`.
+   A working solution is in the ``solution`` subfolder.
 
    **Note** that:
 

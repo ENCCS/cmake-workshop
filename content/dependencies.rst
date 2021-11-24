@@ -128,9 +128,9 @@ A complete list of ``Find<PackageName>.cmake`` can be found from the command-lin
    We can configure and build verbosely. [#verbose]_
    Notice that compiler flags, include directories, and link libraries are properly resolved by CMake.
 
-   You can download the :download:`complete working example <code/tarballs/22_taskloop_solution.tar.bz2>`.
+   You can find the complete working example in ``content/code/day-2/22_taskloop/solution``.
 
-.. exercise:: Using MPI
+.. exercise:: Exercise 23: Using MPI
 
    In this exercise, you will attempt compiling a "Hello, world" program that
    uses the message passing interface (MPI).
@@ -144,23 +144,24 @@ A complete list of ``Find<PackageName>.cmake`` can be found from the command-lin
 
       .. tab:: C++
 
+         The scaffold project is in ``content/code/day-2/23_mpi-cxx``.
          Download the :download:`scaffold code <code/tarballs/23_mpi-cxx.tar.bz2>`.
 
          #. Compile the source file to an executable.
          #. Link against the MPI imported target.
          #. Invoke a verbose build and observe how CMake compiles and links.
 
-         You can download the :download:`complete working example <code/tarballs/23_mpi-cxx_solution.tar.bz2>`.
+         A working example is in the ``solution`` subfolder.
 
       .. tab:: Fortran
 
-         Download the :download:`scaffold code <code/tarballs/23_mpi-f.tar.bz2>`.
+         The scaffold project is in ``content/code/day-2/23_mpi-f``.
 
          #. Compile the source file to an executable.
          #. Link against the MPI imported target.
          #. Invoke a verbose build and observe how CMake compiles and links.
 
-         You can download the :download:`complete working example <code/tarballs/23_mpi-f_solution.tar.bz2>`.
+         A working example is in the ``solution`` subfolder.
 
 
 Alternatives: ``Config`` scripts and ``pkg-config``

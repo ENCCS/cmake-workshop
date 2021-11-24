@@ -187,7 +187,7 @@ string equality, and for version comparisons, such as ``VERSION_EQUAL``.
    for further details.
 
 
-.. exercise:: Conditionals in CMake
+.. exercise:: Exercise 2: Conditionals in CMake
 
    Modify the ``CMakeLists.txt`` from the previous exercise to build either a
    *static* or a *shared* library depending on the value of the boolean
@@ -201,13 +201,15 @@ string equality, and for version comparisons, such as ``VERSION_EQUAL``.
 
       .. tab:: C++
 
-         You can download the :download:`scaffold project <code/tarballs/02_conditionals-cxx.tar.bz2>` and the
-         :download:`complete, working example <code/tarballs/02_conditionals-cxx_solution.tar.bz2>`.
+         You can find a scaffold project in the
+         ``content/code/day-1/02_conditionals-cxx`` folder.
+         A working solution is in the ``solution`` subfolder.
 
       .. tab:: Fortran
 
-         You can download the :download:`scaffold project <code/tarballs/02_conditionals-f.tar.bz2>` and the
-         :download:`complete, working example <code/tarballs/02_conditionals-f_solution.tar.bz2>`.
+         You can find a scaffold project in the
+         ``content/code/day-1/02_conditionals-f`` folder.
+         A working solution is in the ``solution`` subfolder.
 
 
 You can perform the same operation on a collection of items with |foreach|:
@@ -226,8 +228,7 @@ The list of items is either space- or ;-separated. ``break()`` and
 .. typealong:: Loops in CMake
 
    In this typealong, we will show how to use |foreach| and lists in CMake.  We
-   will work from a :download:`scaffold project
-   <code/tarballs/03_loops-cxx.tar.bz2>`.
+   will work from a scaffold project in the ``content/code/day-1/03_loops-cxx`` folder.
 
    The goal is to compile a library from a bunch of source files: some of them
    are to be compiled with ``-O3`` optimization level, while some others with
@@ -235,8 +236,7 @@ The list of items is either space- or ;-separated. ``break()`` and
    We will set the compilation flags as properties on the library target.
    Targets and properties will be discussed at greater length in :ref:`targets`.
 
-   You can download the :download:`complete, working example
-   <code/tarballs/03_loops-cxx_solution.tar.bz2>`.
+   A working solution is in the ``solution`` subfolder.
 
 
 The build tree
@@ -360,7 +360,7 @@ options are only relevant *if* other options are already set to specific values:
   option is set to false.
 
 
-.. exercise:: User-facing options
+.. exercise:: Exercise 4: User-facing options
 
    In this exercise, we will work with |option| and |cmake_dependent_option|.
    We want to allow the user to decide whether to build a library and whether
@@ -375,15 +375,15 @@ options are only relevant *if* other options are already set to specific values:
 
       .. tab:: C++
 
-         You can download the :download:`scaffold code <code/tarballs/04_options-cxx.tar.bz2>` and
-         the :download:`complete working example <code/tarballs/04_options-cxx_solution.tar.bz2>`.
+         You can find a scaffold project in the
+         ``content/code/day-1/04_options-cxx`` folder.
+         A working solution is in the ``solution`` subfolder.
 
       .. tab:: Fortran
 
-         You can download the :download:`scaffold code
-         <code/tarballs/04_options-f.tar.bz2>` and the :download:`complete,
-         working example <code/tarballs/04_options-f_solution.tar.bz2>`.
-
+         You can find a scaffold project in the
+         ``content/code/day-1/04_options-f`` folder.
+         A working solution is in the ``solution`` subfolder.
 
 
 .. keypoints::

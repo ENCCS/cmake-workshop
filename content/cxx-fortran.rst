@@ -69,7 +69,7 @@ We will not delve into the details of ``iso_c_binding``,
 suffice it so say that interoperability between basic datatypes, pointers, and
 function call conventions is nowadays well-established. [#iso_c_binding]_
 
-.. exercise:: A Fortran executable using a C/C++ library
+.. exercise:: Exercise 24: A Fortran executable using a C/C++ library
 
    In this exercise, you will build a Fortran executable linking to libraries
    written in C++ and the system library ``backtrace``, written in C.
@@ -108,7 +108,7 @@ function call conventions is nowadays well-established. [#iso_c_binding]_
       /nix/store/a3syww9igm49zdzq3ibzw9m8ccvsgxla-glibc-2.32/lib/libc.so.6(__libc_start_main+0xed)[0x7f87aa2b1dbd]
       ./build/src/bt-randomgen-example[0x40110a]
 
-   Get the :download:`scaffold code <code/tarballs/24_fortran-cxx.tar.bz2>`.
+   The scaffold project is in ``content/code/day-2/24_fortran-cxx``.
    The project has the following source tree:
 
    .. code-block:: text
@@ -136,7 +136,7 @@ function call conventions is nowadays well-established. [#iso_c_binding]_
    #. Do not forget to verify that the C/C++ and Fortran compilers are compatible!
    #. Try out the executable and **remember** that the build tree *mirrors* the source tree.
 
-   You can download the :download:`complete, working example <code/tarballs/24_fortran-cxx_solution.tar.bz2>`.
+   A working solution is in the ``solution`` subfolder.
 
 
 C/C++ using Fortran
@@ -170,7 +170,7 @@ needed to mangle names as appropriate for the compiler in use:
                          [SYMBOLS [<module>:]<function> ...])
 
 
-.. exercise:: A C/C++ executable using a Fortran library
+.. exercise:: Exercise 25: A C/C++ executable using a Fortran library
 
    Your goal is to link a C++ executable to a BLAS/LAPACK library.  The final
    executable will be named ``linear-algebra``: it scales a vector with
@@ -189,7 +189,8 @@ needed to mangle names as appropriate for the compiler in use:
       info is 0
       check is 4.80085e-12
 
-   Get the :download:`scaffold code <code/tarballs/25_cxx-fortran.tar.bz2>`. The project has the following source tree:
+   The scaffold project is in ``content/code/day-2/25_cxx-fortran``.
+   The project has the following source tree:
 
    .. code-block:: text
 
@@ -213,7 +214,7 @@ needed to mangle names as appropriate for the compiler in use:
       and ``SYMBOLS`` options to the |FortranCInterface_HEADER|.
    #. Try out the executable and **remember** that the build tree *mirrors* the source tree.
 
-   You can download the :download:`complete, working example <code/tarballs/25_cxx-fortran_solution.tar.bz2>`.
+   A working solution is in the ``solution`` subfolder.
 
 
 .. keypoints::

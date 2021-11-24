@@ -40,7 +40,8 @@ customize the creation of artifacts on-the-fly.
    option: we are only interested in reporting what operating system CMake
    discovers and that is independent of programming language.
 
-   You can download the :download:`complete, working example <code/tarballs/12_OS_solution.tar.bz2>`.
+   You can find the complete, working example in
+   ``content/code/day-1/12_OS/solution``.
 
 
 Discovering the processor
@@ -56,7 +57,7 @@ such information on the host system with the built-in
 
       cmake_host_system_information(RESULT variable QUERY <key> ...)
 
-   This commands accepts one or more queries on the host system and returns the result in the ``variable``.
+   This commands accepts one or more queries on the host system and returns the result in the ```variable``.
 
 
 .. typealong:: Processor discovery
@@ -65,23 +66,25 @@ such information on the host system with the built-in
    we are only interested in reporting what CMake discovers about the host
    system and that is independent of programming language.
 
-   You can download the :download:`complete, working example <code/tarballs/13_processor_solution.tar.bz2>`.
+   You can find the complete, working example in
+   ``content/code/day-1/13_processor/solution``.
 
 
-.. exercise:: Get to know your host
+.. exercise:: Exercise 14: Get to know your host
 
-   1. Get the scaffold code from the :download:`previous type-along
-      <code/tarballs/13_processor_solution.tar.bz2>`.
-   2. Open the help page for |cmake_host_system_information|. Either in the browser or in the command-line:
+   The scaffold project is based on the previous typealong and can be found in
+   the ``content/code/day-1/14_ctest-timeout`` folder.
+
+   #. Open the help page for |cmake_host_system_information|. Either in the browser or in the command-line:
 
       .. code-block:: bash
 
          $ cmake --help-command cmake_host_system_information
 
-   3. Extend the scaffold code to query all keys listed in the help page and
+   #. Extend the scaffold code to query all keys listed in the help page and
       print them out.
 
-   You can download the :download:`complete, working example <code/tarballs/14_host_system_information_solution.tar.bz2>`.
+   A working solution is in the ``solution`` subfolder.
 
 
 Platform- and compiler-dependent source code
@@ -108,7 +111,7 @@ Platform- and compiler-dependent source code
    We can achieve this with CMake with a combination of host system
    introspection and the |target_compile_definitions| command.
 
-   You can download the :download:`complete, working example <code/tarballs/15_sys_preproc_solution.tar.bz2>`.
+   A complete, working example is in ``content/code/day-1/15_sys_preproc/solution``.
 
 .. signature:: |target_compile_definitions|
 
@@ -138,29 +141,30 @@ discovering the values for all the necessary compile-time constants.
    Copies the ``<input>`` file to another file ``<output>``, modifying its content.
 
 
-.. exercise:: Configure a file
+.. exercise:: Exercise 16: Configure a file
 
    Let's revisit one of the previous exercises. Rather than print the results of
    querying with |cmake_host_system_information|, we want to save the results to
    a header file and then use it to print the results when running an
    executable.
 
-   1. Get the :download:`scaffold code <code/tarballs/16_configure.tar.bz2>`.
-      The header file ``config.h.in`` contains placeholders for the values that
-      CMake will detect.
-   2. Adapt the ``CMakeLists.txt`` in the previous exercise to compile
+   The scaffold project is in the ``content/code/day-1/16_configure`` folder.
+   The header file ``config.h.in`` contains placeholders for the values that
+   CMake will detect.
+
+   #. Adapt the ``CMakeLists.txt`` in the previous exercise to compile
       ``processor-info.cpp`` into an executable.
-   3. Try building. This should fail, because there is no ``config.h`` file anywhere yet!
-   4. Open the help page for |configure_file|. Either in the browser or in the command-line:
+   #. Try building. This should fail, because there is no ``config.h`` file anywhere yet!
+   #. Open the help page for |configure_file|. Either in the browser or in the command-line:
 
       .. code-block:: bash
 
          $ cmake --help-command configure_file
 
-   5. Query all keys listed in the help page for |cmake_host_system_information|
+   #. Query all keys listed in the help page for |cmake_host_system_information|
       and save them to appropriately named variables.
-   6. Invoke |configure_file| to produce ``config.h`` from ``config.h.in``.
-   7. Try building again. This will fail too, because the header is not in the *include path*. We can fix this with:
+   #. Invoke |configure_file| to produce ``config.h`` from ``config.h.in``.
+   #. Try building again. This will fail too, because the header is not in the *include path*. We can fix this with:
 
       .. code-block:: cmake
 
@@ -169,7 +173,7 @@ discovering the values for all the necessary compile-time constants.
              ${PROJECT_BINARY_DIR}
            )
 
-   You can download the :download:`complete, working example <code/tarballs/16_configure_solution.tar.bz2>`.
+   A complete, working example is in the ``solution`` subfolder.
 
 
 .. keypoints::

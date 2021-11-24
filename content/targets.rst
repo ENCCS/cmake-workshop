@@ -244,7 +244,7 @@ tree will be automatically computed by CMake.
 We can declare targets at any level, not necessarily the root: a target is
 visible at the level at which it is declared and all higher levels.
 
-.. exercise:: Cellular automata
+.. exercise:: Exercise 21: Cellular automata
 
    Let's move beyond "Hello, world" and work with a project spanning multiple
    folders. We will implement a relatively simple code to compute and print to
@@ -285,8 +285,7 @@ visible at the level at which it is declared and all higher levels.
 
       .. tab:: C++
 
-         You can download the :download:`scaffold code <code/tarballs/21_automata-cxx.tar.bz2>`.
-
+         The scaffold project is in ``content/code/day-2/21_automata-cxx``.
          The sources are organized in a tree:
 
          .. code-block:: text
@@ -316,12 +315,11 @@ visible at the level at which it is declared and all higher levels.
             (``${CMAKE_CURRENT_LIST_DIR}/parser.cpp``) or relative
             (``parser.cpp``) paths make any difference?
 
-         Download the :download:`complete working example <code/tarballs/21_automata-cxx_solution.tar.bz2>`.
+         A working example is in the ``solution`` subfolder.
 
       .. tab:: Fortran
 
-         You can download the :download:`scaffold code <code/tarballs/21_automata-f.tar.bz2>`.
-
+         The scaffold project is in ``content/code/day-2/21_automata-f``.
          The sources are organized in a tree:
 
          .. code-block:: text
@@ -349,7 +347,7 @@ visible at the level at which it is declared and all higher levels.
             Fortran modules without further intervention. Where are the ``.mod``
             files?
 
-         Download the :download:`complete working example <code/tarballs/21_automata-f_solution.tar.bz2>`.
+         A working example is in the ``solution`` subfolder.
 
       .. tab:: Bonus
 

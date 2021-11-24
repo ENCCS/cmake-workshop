@@ -60,7 +60,7 @@ command. You **should not** rely on |execute_process| to update any artifacts at
 **build-time**.
 
 
-.. exercise:: Find a Python module
+.. exercise:: Exercise 17: Find a Python module
 
    In this exercise, we'll use |execute_process| to check whether the `cffi
    <https://cffi.readthedocs.io/en/latest/index.html>`_ Python module is
@@ -71,12 +71,10 @@ command. You **should not** rely on |execute_process| to update any artifacts at
       $ python -c "import cffi; print(cffi.__version__)"
 
    Your goal is to replicate the same in CMake.
+   The scaffold code is in ``content/code/day-1/17_find_cffi``.
+   You will have to modify the call to |execute_process| to run the command above.
 
-   1. Get the :download:`scaffold code <code/tarballs/17_find_cffi.tar.bz2>`.
-   2. Modify the call to |execute_process| to run the command above.
-
-   You can download the :download:`complete, working example <code/tarballs/17_find_cffi_solution.tar.bz2>`.
-
+   A working example is in the ``solution`` subfolder.
 
 Note the use of ``find_package(Python REQUIRED)`` to obtain the ``python``
 executable. CMake comes with many modules dedicated to the detection of
@@ -120,7 +118,7 @@ instances.
    and ``PRE_LINK``) or after (with ``POST_BUILD``)
 
 
-.. exercise:: Before and after build
+.. exercise:: Exercise 18: Before and after build
 
    We want to perform some action before and after building a target, in this case a Fortran executable:
 
@@ -129,15 +127,16 @@ instances.
    - After building, we want to check the size of the static allocations in the
      binary, by invoking the ``size`` command. We use the ``static-size.py`` Python script.
 
-   1. Get the :download:`scaffold code <code/tarballs/18_pre_post-f.tar.bz2>`.
-   2. Add CMake commands to build the ``example`` executable from the Fortran
+   The scaffold code is in ``content/code/day-1/18_pre_post-f``.
+
+   #. Add CMake commands to build the ``example`` executable from the Fortran
       sources.  Find the text file with the link line under the build folder.
       Hint: have a look in ``CMakeFiles`` and keep in mind the name you gave to
       the target.
-   3. Call |add_custom_command| with ``PRE_LINK`` to invoke the ``echo.py`` Python script.
-   4. Call |add_custom_command| with ``POST_BUILD`` to invoke the ``static-size.py`` Python script.
+   #. Call |add_custom_command| with ``PRE_LINK`` to invoke the ``echo.py`` Python script.
+   #. Call |add_custom_command| with ``POST_BUILD`` to invoke the ``static-size.py`` Python script.
 
-   You can download the :download:`complete, working example <code/tarballs/18_pre_post-f_solution.tar.bz2>`.
+   A working example is in the ``solution`` subfolder.
 
 
 Testing compilation, linking, and execution
@@ -155,16 +154,17 @@ CMake provides modules and commands for these purposes:
 
 In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
 
-.. exercise:: Check that a compiler accepts a compiler flag
+.. exercise:: Exercise 19: Check that a compiler accepts a compiler flag
 
    Compilers evolve: they add and/or remove flags and sometimes you will face
    the need to test whether some flags are available before using them in your
    build.
 
-   1. Get the :download:`scaffold code <code/tarballs/19_check_compiler_flag.tar.bz2>`.
-   2. Implement a ``CMakeLists.txt`` to build an executable from the
+   The scaffold code is in ``content/code/day-1/19_check_compiler_flag``.
+
+   #. Implement a ``CMakeLists.txt`` to build an executable from the
       ``asan-example.cpp`` source file.
-   3. Check that the address sanitizer flags are available with
+   #. Check that the address sanitizer flags are available with
       |check_cxx_compiler_flag|. The flags to check are ``-fsanitize=address
       -fno-omit-frame-pointer``. Find the command signature with:
 
@@ -172,21 +172,22 @@ In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
 
          $ cmake --help-module CMakeCXXCompilerFlag
 
-   4. If the flags do work, add them to the those used to compile the executable
+   #. If the flags do work, add them to the those used to compile the executable
       target with |target_compile_options|.
 
-   You can download the :download:`complete, working example <code/tarballs/19_check_compiler_flag_solution.tar.bz2>`.
+   A working example is in the ``solution`` subfolder.
 
 
-.. exercise:: Testing runtime capabilities
+.. exercise:: Exercise 20: Testing runtime capabilities
 
    Testing that some features will work properly for your code requires not only
    compiling an object files, but also linking an executable and running it
    successfully.
 
-   1. Get the :download:`scaffold code <code/tarballs/20_check_source_runs.tar.bz2>`.
-   2. Create an executable target from the source file ``use-uuid.cpp``.
-   3. Add a check that linking against the library produces working executables.
+   The scaffold code is in ``content/code/day-1/20_check_source_runs``.
+
+   #. Create an executable target from the source file ``use-uuid.cpp``.
+   #. Add a check that linking against the library produces working executables.
       Use the following C code as test:
 
       .. code-block:: c
@@ -206,11 +207,11 @@ In all cases, ``<LANG>`` can be one of ``CXX``, ``C`` or ``Fortran``.
 
          $ cmake --help-module CheckCSourceRuns
 
-   4. If the test is successful, link executable target against the UUID
+   #. If the test is successful, link executable target against the UUID
       library: use the ``PkgConfig::UUID`` target as argument to
       |target_link_libraries|.
 
-   You can download the :download:`complete, working example <code/tarballs/20_check_source_runs_solution.tar.bz2>`.
+   A working example is in the ``solution`` subfolder.
 
 
 .. keypoints::

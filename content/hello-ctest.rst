@@ -49,12 +49,13 @@ There are two steps to perform to integrate your CMake build system with the CTe
 
 .. typealong:: Your first test project
 
-   We will build a simple library to sum integers and an executable using this library.
-   We will work from a :download:`scaffold project <code/tarballs/05_hello-ctest.tar.bz2>`.
+   We will build a simple library to sum integers and an executable using this
+   library.  We will work from a scaffold project in the
+   ``content/code/day-1/05_hello-ctest`` folder.
 
    .. code-block:: cmake
 
-      cmake_minimum_required(VERSION 3.13)
+      cmake_minimum_required(VERSION 3.14)
 
       project(hello-ctest LANGUAGES CXX)
 
@@ -103,33 +104,33 @@ There are two steps to perform to integrate your CMake build system with the CTe
       $ cmake --build .
       $ ctest
 
-   You can download the :download:`complete, working example <code/tarballs/05_hello-ctest.tar.bz2>`.
+   A working solution is in the ``solution`` subfolder.
 
-.. exercise:: Running the tests through a shell script
+.. exercise:: Exercise 6: Running the tests through a shell script
 
    Any command can be used to run tests. In this exercise, we will extend the
    previous CMake code to test the main executable within a shell script.
+   The scaffold project is in the ``content/code/day-1/06_bash-ctest`` folder.
 
-   1. Get the :download:`scaffold code <code/tarballs/06_bash-ctest.tar.bz2>`.
-   2. Find the appropriate bash executable to run ``test.sh`` with. You should
+   #. Find the appropriate bash executable to run ``test.sh`` with. You should
       use the ``find_program`` command of CMake.
-   3. Add another invocation to |add_test| that will be equivalent to running:
+   #. Add another invocation to |add_test| that will be equivalent to running:
 
       .. code-block:: bash
 
          $ ./test.sh sum_up
 
-   4. Build the project and run CTest.
+   #. Build the project and run CTest.
 
-   You can download the :download:`complete, working example <code/tarballs/06_bash-ctest_solution.tar.bz2>`.
+   A working solution is in the ``solution`` subfolder.
 
-.. exercise:: Running the tests through a Python script
+.. exercise:: Exercise 7: Running the tests through a Python script
 
    It is much more common nowadays to use Python, rather than shell scripts.  In
    this exercise, we will add two more tests to our project. These new tests
    will run the main executable through a Python script.
+   The scaffold project is in the ``content/code/day-1/07_python-ctest`` folder.
 
-   #. Get the :download:`scaffold code <code/tarballs/07_python-ctest.tar.bz2>`.
    #. Find the Python interpreter to run ``test.py``. You should
       use the |find_package| command of CMake.
    #. Add another invocation to |add_test| that will be equivalent to running:
@@ -142,7 +143,7 @@ There are two steps to perform to integrate your CMake build system with the CTe
       another test that uses this option in the command.
    #. Build the project and run CTest.
 
-   You can download the :download:`complete, working example <code/tarballs/07_python-ctest_solution.tar.bz2>`.
+   A working solution is in the ``solution`` subfolder.
 
 The CTest command-line interface
 --------------------------------
@@ -229,14 +230,14 @@ available properties.
       set_tests_properties(test1 [test2...] PROPERTIES prop1 value1 prop2 value2)
 
 
-.. exercise:: Set labels on tests
+.. exercise:: Exercise 8: Set labels on tests
 
    We will run some tests using Python and we want to group them into two categories:
 
    - ``quick`` for tests with a very short execution time.
    - ``long`` for benchmarking tests with a longer execution time.
 
-   Get the :download:`scaffold code <code/tarballs/08_ctest-labels.tar.bz2>`.
+   The scaffold project is in the ``content/code/day-1/08_ctest-labels`` folder.
 
    .. tabs::
 
@@ -258,10 +259,9 @@ available properties.
 
          Try simplifying the repeated calls to |add_test| with a |foreach| loop.
          You might need to apply some filename manipulations: check out the
-         ``file`` command.
+         |file| command.
 
-   You can download the :download:`complete, working example <code/tarballs/08_ctest-labels_solution.tar.bz2>`.
-   
+   A working solution is in the ``solution`` subfolder.
 
 Among the many properties that can be set on tests, we would like to highlight the following:
 
@@ -276,7 +276,7 @@ Among the many properties that can be set on tests, we would like to highlight t
   timeout if you want to be more or less tolerant of variations in execution
   time.
 
-.. exercise:: More properties!
+.. exercise:: Exercises 9, 10, 11: More properties!
 
    Let's play around with the properties we have just introduced.
 
@@ -284,7 +284,8 @@ Among the many properties that can be set on tests, we would like to highlight t
 
       .. tab:: WILL_FAIL
 
-         Get the :download:`scaffold code <code/tarballs/09_ctest-will-fail.tar.bz2>`.
+         The scaffold project is in the
+         ``content/code/day-1/09_ctest-will-fail`` folder.
 
          1. Create a project with no language.
          2. Find the Python interpreter.
@@ -295,11 +296,12 @@ Among the many properties that can be set on tests, we would like to highlight t
          ``WILL_FAIL`` property to true and observe what changes when running
          the tests.
 
-         You can download the :download:`complete, working example <code/tarballs/09_ctest-will-fail_solution.tar.bz2>`.
+         A working solution is in the ``solution`` subfolder.
 
       .. tab:: COST
 
-         Get the :download:`scaffold code <code/tarballs/10_ctest-cost.tar.bz2>`.
+         The scaffold project is in the
+         ``content/code/day-1/10_ctest-cost`` folder.
 
          1. Enable testing in the ``CMakeLists.txt`` file.
          2. Add tests running each of the scripts in the ``test`` folder.
@@ -307,11 +309,12 @@ Among the many properties that can be set on tests, we would like to highlight t
          4. Re-run the tests and observe how CTest orders their execution.
          5. Now set the ``COST`` property. What has changed when re-running the tests.
 
-         You can download the :download:`complete, working example <code/tarballs/10_ctest-cost_solution.tar.bz2>`.
+         A working solution is in the ``solution`` subfolder.
 
       .. tab:: TIMEOUT
 
-         Get the :download:`scaffold code <code/tarballs/11_ctest-timeout.tar.bz2>`.
+         The scaffold project is in the
+         ``content/code/day-1/11_ctest-timeout`` folder.
 
          1. Create a project with no language.
          2. Find the Python interpreter.
@@ -322,8 +325,7 @@ Among the many properties that can be set on tests, we would like to highlight t
          Now set the ``TIMEOUT`` property to a value *less* than what you just
          observed and re-run the tests.
 
-         You can download the :download:`complete, working example <code/tarballs/11_ctest-timeout_solution.tar.bz2>`.
-
+         A working solution is in the ``solution`` subfolder.
 
 For a complete list of properties that can be set on tests search for
 "Properties on Tests" in the output of:

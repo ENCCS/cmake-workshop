@@ -21,12 +21,12 @@ Listing sources or globbing them
 
 In all our examples we have listed all sources when defining targets.
 
-In CMake you can glob patters (e.g. all files that end with ``*.cpp``) without
-listing them explicitly. This is tempting but do not do this. The reason is
-that CMake cannot track dependency changes when you add files after you have
-configured.
+In CMake, you can glob patters (e.g. all files that end with ``*.cpp``) without
+listing them explicitly. This is tempting, but we advice **against** doing this.
+The reason is that CMake cannot *guarantee* correct tracking dependency changes
+when you add files after you have configured. [#glob]_
 
-Listing files explicitly also allows to "grep" for them in the CMake code to
+Listing files explicitly also allows to ``grep`` for them in the CMake code to
 see where a modification is likely needed. This can help colleagues in our
 projects who are not familiar with CMake to find out where to change things.
 
@@ -60,7 +60,7 @@ Organizing files into modules
 
 Modules are collections of functions and macros and are either CMake- or user-defined.
 CMake comes with a rich ecosystem of modules and you will probably write a few
-of your own to encapulate frequently used functions or macros in your CMake
+of your own to encapsulate frequently used functions or macros in your CMake
 scripts.
 
 We have seen this module earlier today:
@@ -97,14 +97,14 @@ exist.
 Functions and macros
 --------------------
 
-**Functions** and **macros** are build on top of the basic built-in commands
+**Functions** and **macros** are built on top of the basic built-in commands
 and are either CMake- or user-defined.  These prove useful to avoid repetition
 in your CMake scripts.  The difference between a function and a macro is their
 *scope*:
 
-1. Functions have their own scope: variables defined inside a function are not
+#. Functions have their own scope: variables defined inside a function are not
    propagated back to the caller.
-2. Macros do not have their own scope: variables from the parent scope can be
+#. Macros do not have their own scope: variables from the parent scope can be
    modified and new variables in the parent scope can be set.
 
 Prefer functions over macros to minimize side-effects.
@@ -161,8 +161,8 @@ Order and side effects
 When portioning your project into modules, design them in a way so that order
 does not matter (much).
 
-This is easier with functions than with macros and easier with targets than
-with variables.
+This is easier with functions than with macros and easier with targets than with
+variables.
 
 Avoid variables with parent or global scope. Encapsulate and prefer separation
 of concerns.
@@ -172,8 +172,24 @@ Where to keep generated files
 -----------------------------
 
 CMake allows us to generate files at configure- or build-time.  When generating
-files, always generate into the build folder, never outside the build folder.
+files, we recommend to **always** generate into the build folder, never outside.
 
 The reason is that you always want to maintain the possibility to configure
 different builds with the same source without having to copy the entire project
 to a different place.
+
+.. rubric:: Footnotes
+
+.. [#glob]
+
+   A glob would be done using the |file| command. We quote the explanation in
+   the official documentation as to why it is generally not safe to use the
+   ``GLOB`` subcommand:
+
+      If no ``CMakeLists.txt`` file changes when a source is added or removed
+      then the generated build system cannot know when to ask CMake to
+      regenerate. The ``CONFIGURE_DEPENDS`` flag may not work reliably on all
+      generators, or if a new generator is added in the future that cannot
+      support it, projects using it will be stuck. Even if
+      ``CONFIGURE_DEPENDS`` works reliably, there is still a cost to perform
+      the check on every rebuild.
