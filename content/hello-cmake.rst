@@ -16,8 +16,8 @@ From sources to executables
    - Learn to distinguish between *configuration*, *generation*, and *build* time.
 
 
-What is CMake?
---------------
+What is CMake and why should you care?
+--------------------------------------
 
 Software is everywhere and so are build systems. Whenever you run a piece of
 software,  anything from calendar apps to computationally-intensive programs,
@@ -30,7 +30,6 @@ achieve when the appropriate build tools are invoked.
 The DSL is platform- *and* compiler-agnostic: you can reuse the same CMake
 scripts to obtain *native* build systems on any platform.
 
-
 .. figure:: img/build-systems.svg
    :align: center
 
@@ -40,6 +39,13 @@ scripts to obtain *native* build systems on any platform.
    CMake abstracts the process of generating the ``Makefile``-s away into a
    generic DSL.
 
+A CMake-based build system:
+
+- can bring your software closer to being platform- *and* compiler-agnostic.
+- has good support within many integrated development environments (IDEs).
+- automatically tracks and propagates internal dependencies in your project.
+- is built on top of well-maintained functionality for automated dependency
+  detection.
 
 Hello, CMake!
 -------------
