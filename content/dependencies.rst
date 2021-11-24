@@ -145,7 +145,6 @@ A complete list of ``Find<PackageName>.cmake`` can be found from the command-lin
       .. tab:: C++
 
          The scaffold project is in ``content/code/day-2/23_mpi-cxx``.
-         Download the :download:`scaffold code <code/tarballs/23_mpi-cxx.tar.bz2>`.
 
          #. Compile the source file to an executable.
          #. Link against the MPI imported target.
