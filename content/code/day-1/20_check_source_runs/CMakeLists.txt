@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.14)
 
 # the project uses both C++ and C
 project(check_source_runs LANGUAGES CXX C)
