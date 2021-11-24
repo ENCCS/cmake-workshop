@@ -143,6 +143,44 @@ Help on a specific built-in module can be obtained with:
    $ cmake --help-module CMakePrintHelpers
 
 
+The build tree
+--------------
+
+It is instructive to browse the build folder for the project we built in the
+previous typealong:
+
+.. code-block:: bash
+
+   $ tree -L 2 build
+
+   build
+   ├── CMakeCache.txt
+   ├── CMakeFiles
+   │   ├── 3.18.4
+   │   ├── cmake.check_cache
+   │   ├── CMakeDirectoryInformation.cmake
+   │   ├── CMakeOutput.log
+   │   ├── CMakeTmp
+   │   ├── compute-areas.dir
+   │   ├── geometry.dir
+   │   ├── Makefile2
+   │   ├── Makefile.cmake
+   │   ├── progress.marks
+   │   └── TargetDirectories.txt
+   ├── cmake_install.cmake
+   ├── compute-areas
+   ├── libgeometry.a
+   └── Makefile
+
+We note that:
+
+- The project was configured with ``Makefile`` generator.
+- The cache is a plain-text file ``CMakeCache.txt``.
+- For every target in the project, CMake will create a subfolder
+  ``<target>.dir`` under ``CMakeFiles``. The intermediate object files are
+  stored in these folders, together with compiler flags and link line.
+- The build artifacts, ``compute-areas`` and ``libgeometry.a``,  are stored at
+  the root of the build tree.
 
 
 Flow control
@@ -237,46 +275,6 @@ The list of items is either space- or ;-separated. ``break()`` and
    Targets and properties will be discussed at greater length in :ref:`targets`.
 
    A working solution is in the ``solution`` subfolder.
-
-
-The build tree
-++++++++++++++
-
-It is instructive to browse the build folder for the project we built in the
-previous typealong:
-
-.. code-block:: bash
-
-   $ tree -L 2 build
-
-   build
-   ├── CMakeCache.txt
-   ├── CMakeFiles
-   │   ├── 3.18.4
-   │   ├── cmake.check_cache
-   │   ├── CMakeDirectoryInformation.cmake
-   │   ├── CMakeOutput.log
-   │   ├── CMakeTmp
-   │   ├── compute-areas.dir
-   │   ├── geometry.dir
-   │   ├── Makefile2
-   │   ├── Makefile.cmake
-   │   ├── progress.marks
-   │   └── TargetDirectories.txt
-   ├── cmake_install.cmake
-   ├── compute-areas
-   ├── libgeometry.a
-   └── Makefile
-
-We note that:
-
-- The project was configured with ``Makefile`` generator.
-- The cache is a plain-text file ``CMakeCache.txt``.
-- For every target in the project, CMake will create a subfolder
-  ``<target>.dir`` under ``CMakeFiles``. The intermediate object files are
-  stored in these folders, together with compiler flags and link line.
-- The build artifacts, ``compute-areas`` and ``libgeometry.a``,  are stored at
-  the root of the build tree.
 
 
 Printing messages
