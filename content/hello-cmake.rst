@@ -167,6 +167,14 @@ There are few things to note here:
    invocation of the build tools.
 
 
+.. callout:: Put your ``CMakeLists.txt`` under version control
+
+   All CMake-related files will evolve together with your codebase. It's a good
+   idea to put them under version control. On the contrary, any of the
+   *generated* native build-system files, *e.g.* ``Makefile``-s, should not be
+   version-controlled.
+
+
 .. typealong:: The command-line interface to CMake
 
    Let us get acquainted with the CMake and especially its command-line interface.
