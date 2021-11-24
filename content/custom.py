@@ -45,6 +45,7 @@ COMMANDS = [
     "try_run",
     "add_test",
     "set_tests_properties",
+    "file",
     "set",
     "include",
     "get_property",
