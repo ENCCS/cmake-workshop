@@ -114,7 +114,7 @@ About the course
 This lesson material is developed by the `EuroCC National Competence Center
 Sweden (ENCCS) <https://enccs.se/>`_ and taught in ENCCS workshops. It is aimed
 at researchers and developers who might have had some exposure to `CMake`_ and
-want to learn how to use it effectively. This lesson targets **CMake >=3.14**.
+want to learn how to use it effectively. This lesson targets **CMake >=3.18**.
 Each lesson episode has clearly defined learning objectives and includes
 multiple exercises along with solutions, and is therefore also useful for
 self-learning.

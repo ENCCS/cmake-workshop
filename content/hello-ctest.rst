@@ -55,7 +55,7 @@ There are two steps to perform to integrate your CMake build system with the CTe
 
    .. code-block:: cmake
 
-      cmake_minimum_required(VERSION 3.14)
+      cmake_minimum_required(VERSION 3.18)
 
       project(hello-ctest LANGUAGES CXX)
 

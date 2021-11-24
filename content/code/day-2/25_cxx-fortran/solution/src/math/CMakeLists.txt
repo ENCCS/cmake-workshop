@@ -26,5 +26,5 @@ target_include_directories(math
 
 target_link_libraries(math
   PUBLIC
-    ${LAPACK_LIBRARIES}
+    LAPACK::LAPACK
   )

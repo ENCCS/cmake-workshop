@@ -3,7 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - cffi
-  - cmake
+  - cmake >=3.18
   - compilers
   - graphviz
   - libblas
@@ -12,4 +12,4 @@ dependencies:
   - openmpi
   - ninja
   - pkg-config
-  - python >=3.6
+  - python >=3.8

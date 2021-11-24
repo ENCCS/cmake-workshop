@@ -85,7 +85,7 @@ Hello, CMake!
 
       .. code-block:: cmake
 
-         cmake_minimum_required(VERSION 3.14)
+         cmake_minimum_required(VERSION 3.18)
 
    3. Next, we declare our project and its programming language:
 
