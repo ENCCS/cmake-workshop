@@ -1,13 +1,5 @@
-add_library(evolution)
+# FIXME create library from the sources in this folder
+add_library(...)
 
-target_sources(evolution
-  PRIVATE
-    evolution.cpp
-  PUBLIC
-    evolution.hpp
-  )
-
-target_include_directories(evolution
-  PUBLIC
-    ${CMAKE_CURRENT_LIST_DIR}
-  )
+# FIXME add this folder to include directories for this project
+target_include_directories(...)

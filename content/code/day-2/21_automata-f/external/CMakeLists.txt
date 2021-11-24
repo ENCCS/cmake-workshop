@@ -1,6 +1,2 @@
-add_library(conversion)
-
-target_sources(conversion
-  PRIVATE
-    conversion.f90
-  )
+# FIXME add library
+add_library(...)

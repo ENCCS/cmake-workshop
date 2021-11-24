@@ -1,15 +1,8 @@
-add_executable(automata main.cpp)
+# FIXME add automata executable from main.f90
+add_executable(...)
 
-add_subdirectory(evolution)
-add_subdirectory(initial)
-add_subdirectory(io)
-add_subdirectory(parser)
+# FIXME add subdirectories for each sub-library
+add_subdirectory(...)
 
-target_link_libraries(automata
-  PRIVATE
-    conversion
-    evolution
-    initial
-    io
-    parser
-  )
+# FIXME link libraries to the executable
+target_link_libraries(...)

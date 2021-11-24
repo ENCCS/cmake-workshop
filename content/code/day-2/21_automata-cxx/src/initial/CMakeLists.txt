@@ -1,13 +1,5 @@
-add_library(initial)
+# FIXME create library from the sources in this folder
+add_library(...)
 
-target_sources(initial
-  PRIVATE
-    initial.cpp
-  PUBLIC
-    initial.hpp
-  )
-
-target_include_directories(initial
-  PUBLIC
-    ${CMAKE_CURRENT_LIST_DIR}
-  )
+# FIXME add this folder to include directories for this project
+target_include_directories(...)
