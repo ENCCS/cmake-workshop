@@ -16,13 +16,13 @@ program example
   integer :: step
 
   ! parse arguments
-  num_steps = get_arg_as_int(1)
-  length = get_arg_as_int(2)
+  length = get_arg_as_int(1)
+  num_steps = get_arg_as_int(2)
   rule_decimal = get_arg_as_int(3)
 
   ! print information about parameters
-  print *, "number of steps: ", num_steps
   print *, "length: ", length
+  print *, "number of steps: ", num_steps
   print *, "rule: ", rule_decimal
 
   ! obtain binary representation for the rule
