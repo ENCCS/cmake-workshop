@@ -14,10 +14,6 @@ Mixing Python and compiled languages
    - Learn how fetched content can be used natively within your build system.
 
 
-
-Mixing C++ and Python with pybind11
-+++++++++++++++++++++++++++++++++++
-
 Python is an extremely flexible dynamic programming language. Since Python
 itself is written in the C programming language, it is possible to write
 *extension* modules in a compiled language. One gets all the flexibility, while
@@ -26,7 +22,20 @@ Many frameworks are available to bridge the gap between compiled languages and
 Python. All of them rely on some form of automatic code generation:
 
 - `SWIG <http://swig.org/>`_. Possibly the framework with the longest history.
+- `CFFI <https://cffi.readthedocs.io/en/latest/index.html>`_. Works with C and
+  Fortran.
 - `Cython <https://cython.org/>`_. Works with C and can require a lot of effort.
+
+Mixing C/Fortran and Python with CFFI
++++++++++++++++++++++++++++++++++++++
+
+With CFFI,
+
+Mixing C++ and Python with pybind11
++++++++++++++++++++++++++++++++++++
+
+If you are writing C++, you have even more choice of binding frameworks:
+
 - `Boost.Python
   <https://www.boost.org/doc/libs/1_75_0/libs/python/doc/html/index.html>`_.
   Tailored for C++ and relies on template metaprogramming to generate bindings
@@ -34,7 +43,7 @@ Python. All of them rely on some form of automatic code generation:
 - `pybind11 <https://pybind11.readthedocs.io/en/stable/index.html>`_. Same
   philosophy as Boost.Python, but designed for C++11 and beyond.
 
-If you write modern C++, pybind11 should be your framework of choice:
+If you write *modern C++*, pybind11 should be your framework of choice:
 
 - It is a header-only library and thus a rather easy dependency to satisfy.
 - The binding code will be quite compact: you won't have to maintain an
@@ -76,22 +85,14 @@ If you write modern C++, pybind11 should be your framework of choice:
 
    A working solution is in the ``solution`` subfolder.
 
-   **Note** that:
+   .. note::
 
-   - The ``pybind11_add_module`` function is a convenience wrapper to
-     |add_library| to generate Python extension modules. It is offered by
-     pybind11 and you can read more about it `here
-     <https://pybind11.readthedocs.io/en/stable/compiling.html#pybind11-add-module>`_.
-   - The special syntax used in the definition of the test command will set
-     the location of the Python extension as an environment variable.
-
-
-.. warning::
-
-   ``FetchContent`` is a powerful module in your CMake toolbox. **Beware!**
-   Satisfying *every* dependency of your code in this way will make the duration
-   of both the configuration and build stages balloon.
-
+      - The ``pybind11_add_module`` function is a convenience wrapper to
+        |add_library| to generate Python extension modules. It is offered by
+        pybind11 and you can read more about it `here
+        <https://pybind11.readthedocs.io/en/stable/compiling.html#pybind11-add-module>`_.
+      - The special syntax used in the definition of the test command will set
+        the location of the Python extension as an environment variable.
 
 
 .. keypoints::
