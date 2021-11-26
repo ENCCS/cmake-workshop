@@ -32,18 +32,16 @@ if(USE_LIBRARY)
   message(STATUS "Compile sources into a STATIC library? ${MAKE_STATIC_LIBRARY}")
   message(STATUS "Compile sources into a SHARED library? ${MAKE_SHARED_LIBRARY}")
 
+  add_executable(hello-world hello-world.cpp)
+
   if(MAKE_SHARED_LIBRARY)
     add_library(message SHARED ${_sources})
-
-    add_executable(hello-world hello-world.cpp)
 
     target_link_libraries(hello-world PRIVATE message)
   endif()
 
   if(MAKE_STATIC_LIBRARY)
     add_library(message STATIC ${_sources})
-
-    add_executable(hello-world hello-world.cpp)
 
     target_link_libraries(hello-world PRIVATE message)
   endif()

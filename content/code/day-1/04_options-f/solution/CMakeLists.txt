@@ -27,20 +27,18 @@ if(USE_LIBRARY)
   message(STATUS "Compile sources into a STATIC library? ${MAKE_STATIC_LIBRARY}")
   message(STATUS "Compile sources into a SHARED library? ${MAKE_SHARED_LIBRARY}")
 
+  add_executable(hello-world hello-world.f90)
+
   if(MAKE_SHARED_LIBRARY)
-    add_library(message SHARED message.f90)
+    add_library(message-shared SHARED message.f90)
 
-    add_executable(hello-world hello-world.f90)
-
-    target_link_libraries(hello-world PRIVATE message)
+    target_link_libraries(hello-world PRIVATE message-shared)
   endif()
 
   if(MAKE_STATIC_LIBRARY)
-    add_library(message STATIC message.f90)
+    add_library(message-static STATIC message.f90)
 
-    add_executable(hello-world hello-world.f90)
-
-    target_link_libraries(hello-world PRIVATE message)
+    target_link_libraries(hello-world PRIVATE message-static)
   endif()
 else()
   add_executable(hello-world hello-world.f90 message.f90)
