@@ -6,9 +6,8 @@ project(libraries LANGUAGES CXX)
 
 # generate a library from sources
 add_library(message
-  STATIC
-    Message.hpp
-    Message.cpp
+  Message.hpp
+  Message.cpp
   )
 
 add_executable(hello-world hello-world.cpp)

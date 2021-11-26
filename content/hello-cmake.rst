@@ -347,13 +347,7 @@ You can link libraries into executables with |target_link_libraries|:
 
          A working solution is in the ``solution`` subfolder.
 
-   What kind of library did you get? Static or shared? Try configuring the project as follows:
-
-   .. code-block:: bash
-
-      $ cmake -S. -Bbuild -GNinja -DBUILD_SHARED_LIBS=ON
-
-   The ``BUILD_SHARED_LIBS`` variable influences the default behavior of |add_library|.
+   What kind of library did you get? Static or shared?
 
 .. keypoints::
 
