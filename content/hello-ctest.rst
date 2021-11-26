@@ -121,11 +121,24 @@ There are two steps to perform to integrate your CMake build system with the CTe
 
    #. Find the appropriate bash executable to run ``test.sh`` with. You should
       use the ``find_program`` command of CMake.
+
+      .. code-block:: cmake
+
+         find_program(BASH_EXECUTABLE NAMES bash REQUIRED)
+
+      The ``BASH_EXECUTABLE`` variable will be the shell program.
+
    #. Add another invocation to |add_test| that will be equivalent to running:
 
       .. code-block:: bash
 
          $ ./test.sh sum_up
+
+      Hints:
+
+      - Use the absolute location of ``test.sh``.
+      - You can use the generator expression syntax to give the location of the
+        executable: ``$<TARGET_FILE:sum_up>``.
 
    #. Build the project and run CTest.
 
@@ -139,12 +152,25 @@ There are two steps to perform to integrate your CMake build system with the CTe
    The scaffold project is in the ``content/code/day-1/07_python-ctest`` folder.
 
    #. Find the Python interpreter to run ``test.py``. You should
-      use the |find_package| command of CMake.
+      use the |find_package| command of CMake:
+
+      .. code-block:: cmake
+
+         find_package(Python REQUIRED)
+
+      The interpreter will be available in the ``Python_EXECUTABLE`` variable.
+
    #. Add another invocation to |add_test| that will be equivalent to running:
 
       .. code-block:: bash
 
          $ python test.py --executable sum_up
+
+      Hints:
+
+      - Use the absolute location of ``test.py``.
+      - You can use the generator expression syntax to give the location of the
+        executable: ``$<TARGET_FILE:sum_up>``.
 
    #. The ``test.py`` script accepts a ``--short`` command-line option. Add
       another test that uses this option in the command.
@@ -250,7 +276,13 @@ available properties.
 
       .. tab:: Labeling
 
-         1. Find the Python interpreter.
+         1. Find the Python interpreter:
+
+            .. code-block:: cmake
+
+               find_package(Python REQUIRED)
+
+            The interpreter will be available in the ``Python_EXECUTABLE`` variable.
          2. Enable testing.
          3. Add the six tests in the ``test`` folder. Give each of them a unique name.
          4. Use |set_tests_properties| to set labels for the tests:
