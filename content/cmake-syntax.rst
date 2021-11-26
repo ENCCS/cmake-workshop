@@ -12,6 +12,9 @@ CMake syntax
 
 .. objectives::
 
+   - Learn how to define variables with |set| and use them with the ``${}``
+     operator for `variable references
+     <https://cmake.org/cmake/help/latest/manual/cmake-language.7.html#variable-references>`_.
    - Learn the syntax for conditionals in CMake: |if| - ``elseif`` - ``else`` - ``endif``
    - Learn the syntax for loops in CMake: |foreach|
    - Learn how CMake structures build artifacts.
@@ -50,8 +53,20 @@ Variables in CMake are always of string type, but certain commands can interpret
 them as other types.  If you want to declare a *list* variable, you will have to
 provide it as a ;-separated string. Lists can be manipulated with the ``list``
 family of commands.
-You can inspect the value of a variable by *dereferencing* it with the ``${}``
-operator, as in bash shell.
+You can inspect the value of any variable by *dereferencing* it with the ``${}``
+operator, as in bash shell. For example, the following snippet sets the content
+of the ``hello`` variable and then prints it:
+
+.. code-block:: cmake
+
+   set(hello "world")
+   message("hello ${hello}")
+
+Two things to note about *variable references*:
+
+- if the variable within the ``${}`` operator is not set, you will get an empty string.
+- you  can *nest* variable references: ``${outer_${inner_variable}_variable}``.
+  They will be evaluated from the inside out.
 
 One of the most confusing aspects in CMake is the scoping of variables. There are three variable scopes in the DSL:
 
@@ -60,7 +75,7 @@ One of the most confusing aspects in CMake is the scoping of variables. There ar
 - Directory. In effect when processing a ``CMakeLists.txt`` in a directory:
   variables in the parent folder will be available, but any that is |set| in the
   current folder will not be propagated to the parent.
-- Cache. These variables are **persistent** across calls to ``cmake`` and
+- Cache. These variables are ***persistent** across calls to ``cmake`` and
   available to all scopes in the project.
   Modifying a cache variable requires using a special form of the |set| function:
 
