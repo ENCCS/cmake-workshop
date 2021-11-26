@@ -73,9 +73,10 @@ such information on the host system with the built-in
 .. exercise:: Exercise 14: Get to know your host
 
    The scaffold project is based on the previous typealong and can be found in
-   the ``content/code/day-1/14_ctest-timeout`` folder.
+   the ``content/code/day-1/14_host_system_information`` folder.
 
-   #. Open the help page for |cmake_host_system_information|. Either in the browser or in the command-line:
+   #. Open the help page for |cmake_host_system_information|. Either in the
+      browser or in the command-line:
 
       .. code-block:: bash
 
@@ -140,6 +141,17 @@ discovering the values for all the necessary compile-time constants.
 
    Copies the ``<input>`` file to another file ``<output>``, modifying its content.
 
+.. parameters::
+
+   ``<input>``
+       Path to the input file containing placeholders (``@placeholder@``) to be
+       replaced by the contents of the corresponding CMake variable. A relative
+       path is treated with respect to the value of
+       ``CMAKE_CURRENT_SOURCE_DIR``.
+   ``<output>``
+       Path to the output file or directory. A relative path is treated with
+       respect to the value of ``CMAKE_CURRENT_BINARY_DIR``.
+
 
 .. exercise:: Exercise 16: Configure a file
 
@@ -148,23 +160,33 @@ discovering the values for all the necessary compile-time constants.
    a header file and then use it to print the results when running an
    executable.
 
-   The scaffold project is in the ``content/code/day-1/16_configure`` folder.
-   The header file ``config.h.in`` contains placeholders for the values that
-   CMake will detect.
+   The source code for this project is in the
+   ``content/code/day-1/16_configure`` folder.  The header file ``config.h.in``
+   contains placeholders for the values that we will detect using  CMake: u
+   number of physical cores, total physical memory, OS name, and OS platform.
 
-   #. Adapt the ``CMakeLists.txt`` in the previous exercise to compile
-      ``processor-info.cpp`` into an executable.
-   #. Try building. This should fail, because there is no ``config.h`` file anywhere yet!
-   #. Open the help page for |configure_file|. Either in the browser or in the command-line:
+   #. Copy-paste the ``CMakeLists.txt`` from the
+      ``content/code/day-1/14_host_system_information`` folder.
+   #. Adapt the ``CMakeLists.txt`` to compile ``processor-info.cpp`` into an
+      executable with |add_executable|.
+   #. Try building. This should fail, because there is no ``config.h`` file
+      anywhere yet!
+   #. Open the help page for |configure_file|. Either in the browser or in the
+      command-line:
 
       .. code-block:: bash
 
          $ cmake --help-command configure_file
 
-   #. Query all keys listed in the help page for |cmake_host_system_information|
-      and save them to appropriately named variables.
-   #. Invoke |configure_file| to produce ``config.h`` from ``config.h.in``.
-   #. Try building again. This will fail too, because the header is not in the *include path*. We can fix this with:
+   #. Query the keys (number of physical cores, total physical memory, OS name,
+      and OS platform) using the corresponding names listed in the help page for
+      |cmake_host_system_information| and save them to appropriately named
+      variables.
+   #. Invoke |configure_file| to produce ``config.h`` from ``config.h.in``.  The
+      configured file will be saved in the build folder, *i.e.*
+      ``PROJECT_BINARY_DIR``.
+   #. Try building again. This will fail too, because the header is not in the
+      *include path*. We can fix this with:
 
       .. code-block:: cmake
 
