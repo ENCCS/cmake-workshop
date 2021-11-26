@@ -17,6 +17,13 @@ Creating and running tests with CTest
 Testing is an essential activity in the development cycle. A well-designed test
 suite will help you detect bugs and can also facilitate the onboarding of new
 developers.
+
+.. figure:: img/ctest.svg
+   :align: center
+
+   CTest is part of the CMake suite of programs. It is a *test runner*. You can
+   handle your test suite definition, execution, and reporting through it.
+
 In this episode, we will look into how to use CTest to define and run our tests.
 
 Adding tests to your project
