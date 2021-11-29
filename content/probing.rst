@@ -123,7 +123,7 @@ instances.
    We want to perform some action before and after building a target, in this case a Fortran executable:
 
    - Before building, we want to read the link line, as produced by CMake, and
-     echo it to standard output. We use the ``echo.py`` Python script.
+     echo it to standard output. We use the ``echo-file.py`` Python script.
    - After building, we want to check the size of the static allocations in the
      binary, by invoking the ``size`` command. We use the ``static-size.py`` Python script.
 
@@ -133,7 +133,7 @@ instances.
       sources.  Find the text file with the link line under the build folder.
       Hint: have a look in ``CMakeFiles`` and keep in mind the name you gave to
       the target.
-   #. Call |add_custom_command| with ``PRE_LINK`` to invoke the ``echo.py`` Python script.
+   #. Call |add_custom_command| with ``PRE_LINK`` to invoke the ``echo-file.py`` Python script.
    #. Call |add_custom_command| with ``POST_BUILD`` to invoke the ``static-size.py`` Python script.
 
    A working example is in the ``solution`` subfolder.
