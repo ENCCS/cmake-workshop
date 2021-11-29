@@ -205,14 +205,19 @@ for, steps 2 and 3 can be automated within a CMake build system.
 
          .. code-block:: text
 
-            28_cxx-cffi
-            └── account
-                ├── account.cpp
-                ├── account.hpp
-                └── test.py
+            28_fortran-cffi/
+            ├── account
+            │   ├── account.cpp
+            │   ├── account.hpp
+            │   ├── c_cpp_interface.cpp
+            │   ├── account.h
+            │   ├── cffi_builder.py
+            │   ├── CMakeLists.txt
+            │   ├── __init__.py
+            │   └── test.py
+            └── CMakeLists.txt
 
-         #. Create a ``CMakeLists.txt`` in the root of the program, with minimum
-            CMake requirement and project.
+         #. Declare a project using C++.
          #. Find the Python with |find_package|. Request at least version 3.6 with the
             ``REQUIRED`` keyword and the interpreter and development headers with the
             ``COMPONENTS`` keyword. Refer to the documentation:
@@ -221,10 +226,9 @@ for, steps 2 and 3 can be automated within a CMake build system.
 
                $ cmake --help-module FindPython | less
 
-         #. Enable testing and add the ``account`` folder.
+         #. Add the ``account`` folder and enable testing.
          #. Complete the scaffold ``CMakeLists.txt`` in the ``account`` folder,
-            following the ``FIXME`` prompts. We want to download the released tarball
-            for version 2.6.2 of pybind11.
+            following the ``FIXME`` prompts.
          #. Configure, build, and run the test.
 
          A working solution is in the ``solution`` subfolder.
@@ -232,8 +236,4 @@ for, steps 2 and 3 can be automated within a CMake build system.
 
 .. keypoints::
 
-   - CMake lets you satisfy dependencies *on-the-fly*.
-   - You can do so at build-time with ``ExternalProject``, but you need to adopt
-     a superbuild framework.
-   - At configure-time, you can use the ``FetchContent`` module: it can only be
-     applied with dependencies that also use CMake.
+   - CMake can simplify the build system for complex, multi-language projects.

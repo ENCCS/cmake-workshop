@@ -26,7 +26,7 @@ add_custom_target(
 Python_add_library(_pyaccount
   MODULE
     c_cpp_interface.cpp
-    cpp_implementation.cpp
+    account.cpp
     ${PROJECT_BINARY_DIR}/generated/_pyaccount.c
   )
 
