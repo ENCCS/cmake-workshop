@@ -55,6 +55,7 @@ deploy their codebases. You will learn how to:
    tips-and-tricks
 
 .. toctree::
+   :hidden:
    :maxdepth: 1
    :caption: Additional topics
 
