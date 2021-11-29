@@ -24,6 +24,11 @@ We decided to:
 
 **Day 1 - Monday 29 November 2021**
 
+- The flow in :ref:`cmake-syntax` was not great due to the fact that I
+  (@robertodr) had not double-checked carefully after rearranging the exercises.
+- We had to skip the :ref:`environment` episode due to lack of time.
+  This will be moved to "Additional topics" in the next iterations.
+
 .. csv-table::
    :widths: auto
    :align: center

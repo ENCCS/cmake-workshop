@@ -46,7 +46,6 @@ deploy their codebases. You will learn how to:
    hello-cmake
    cmake-syntax
    hello-ctest
-   environment
    probing
    targets
    dependencies
@@ -59,6 +58,7 @@ deploy their codebases. You will learn how to:
    :maxdepth: 1
    :caption: Additional topics
 
+   environment
    cxx-fortran
 
 .. see also the schedule in guide.rst
