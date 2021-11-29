@@ -22,10 +22,13 @@ add_custom_target(
     ${PROJECT_BINARY_DIR}/generated/_pyaccount.c
   )
 
+# add dependency between _pyaccount target and pyaccount-builder custom target
+add_dependencies(_pyaccount pyaccount-builder)
+
+# FIXME add python module from Fortran implementation and generated C wrapper 
 Python_add_library(_pyaccount
   MODULE
-    account.f90
-    ${PROJECT_BINARY_DIR}/generated/_pyaccount.c
+    ...
   )
 
 target_include_directories(_pyaccount
@@ -33,8 +36,6 @@ target_include_directories(_pyaccount
     ${CMAKE_CURRENT_LIST_DIR}  # where account.h lives
     ${CMAKE_CURRENT_BINARY_DIR}  # where account_export.h lives
   )
-
-add_dependencies(_pyaccount pyaccount-builder)
 
 # copy __init__.py to build folder
 file(COPY __init__.py DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
