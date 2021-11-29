@@ -6,12 +6,12 @@ Mixing Python and compiled languages
 
 .. questions::
 
-   - Is there a way to automatically satisfy the dependencies of our code?
+   - How can we handle multi-language projects with CMake?
 
 .. objectives::
 
-   - Learn how to download your dependencies at configure-time with ``FetchContent``.
-   - Learn how fetched content can be used natively within your build system.
+   - Learn how to build pybind11 Python bindings.
+   - Learn how to build CFFI Python bindings.
 
 
 Python is a flexible dynamic programming language. Since Python
