@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.18)
 
 # project name and supported languages
-project(recipe-06 LANGUAGES CXX C Fortran)
+project(bank_fortran LANGUAGES Fortran C)
 
 # require C++14
 set(CMAKE_CXX_STANDARD 14)

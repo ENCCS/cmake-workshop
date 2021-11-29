@@ -24,7 +24,7 @@ add_custom_target(
 
 Python_add_library(_pyaccount
   MODULE
-    implementation/fortran_implementation.f90
+    account.f90
     ${PROJECT_BINARY_DIR}/generated/_pyaccount.c
   )
 
