@@ -25,7 +25,8 @@ add_custom_target(
 # add python module from Fortran implementation and generated C wrapper
 Python_add_library(_pyaccount
   MODULE
-    account.f90
+    c_cpp_interface.cpp
+    cpp_implementation.cpp
     ${PROJECT_BINARY_DIR}/generated/_pyaccount.c
   )
 
@@ -46,3 +47,4 @@ include(GenerateExportHeader)
 generate_export_header(_pyaccount
   BASE_NAME account
   )
+

@@ -1,8 +1,8 @@
 # define minimum cmake version
 cmake_minimum_required(VERSION 3.18)
 
-# project name and supported languages
-project(bank LANGUAGES Fortran C)
+# project name and supported language
+project(bank LANGUAGES CXX C)
 
 # require C++14
 set(CMAKE_CXX_STANDARD 14)

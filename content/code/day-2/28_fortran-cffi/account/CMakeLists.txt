@@ -22,14 +22,14 @@ add_custom_target(
     ${PROJECT_BINARY_DIR}/generated/_pyaccount.c
   )
 
-# add dependency between _pyaccount target and pyaccount-builder custom target
-add_dependencies(_pyaccount pyaccount-builder)
-
 # FIXME add python module from Fortran implementation and generated C wrapper 
 Python_add_library(_pyaccount
   MODULE
     ...
   )
+
+# add dependency between _pyaccount target and pyaccount-builder custom target
+add_dependencies(_pyaccount pyaccount-builder)
 
 target_include_directories(_pyaccount
   PRIVATE

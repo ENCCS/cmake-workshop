@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.18)
 
 # FIXME declare a project using Fortran and C 
-project(bank_fortran ...)
+project(bank ...)
 
 # FIXME require python package. We will need the interpreter and development
 # components
