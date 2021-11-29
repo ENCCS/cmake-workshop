@@ -2,14 +2,16 @@ name: Build Notebook Container
 
 on:
   push:
-    paths:
-      - environment.yml
-      - apt.txt
-      - .github/workflows/binder.yml
+  workflow_dispatch:
+
+concurrency:
+  group: latest-repo2docker-group
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Run repo2docker
     steps:
 
     - name: checkout files in repo
@@ -21,4 +23,5 @@ jobs:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         DOCKER_REGISTRY: ghcr.io
-        MYBINDERORG_CACHE: true
+        MYBINDERORG_TAG: ${{ github.event.ref }}
+        PUBLIC_REGISTRY_CHECK: true
