@@ -50,7 +50,7 @@ process(es) when invoking the ``cmake`` command.  This is achieved with the
 
    Executes one or more child processes.  The standard output and standard error
    streams are recorded into ``OUTPUT_VARIABLE`` and ``ERROR_VARIABLE``,
-   respetively. The result of the last child process is saved into
+   respectively. The result of the last child process is saved into
    ``RESULT_VARIABLE``.
 
 
