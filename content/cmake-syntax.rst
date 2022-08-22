@@ -118,7 +118,7 @@ The difference between a function and a macro is their *scope*:
 
 1. Functions have their own scope: variables defined inside a function are not
    propagated back to the caller.
-2. Macros do not have thei own scope: variables from the parent scope can be
+2. Macros do not have their own scope: variables from the parent scope can be
    modified and new variables in the parent scope can be set.
 
 
