@@ -6,3 +6,8 @@ target_sources(evolution
     ancestors.f90
     evolution.f90
   )
+
+target_include_directories(evolution
+  INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+  )
