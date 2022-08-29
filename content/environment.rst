@@ -57,7 +57,7 @@ such information on the host system with the built-in
 
       cmake_host_system_information(RESULT variable QUERY <key> ...)
 
-   This commands accepts one or more queries on the host system and returns the result in the ```variable``.
+   This commands accepts one or more queries on the host system and returns the result in the ``variable``.
 
 
 .. typealong:: Processor discovery

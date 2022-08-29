@@ -68,15 +68,14 @@ deploy their codebases. You will learn how to:
    :delim: ;
 
    30 min ; :doc:`hello-cmake`
-   30 min ; :doc:`cmake-syntax`
-   30 min ; :doc:`hello-ctest`
-   30 min ; :doc:`environment`
-   30 min ; :doc:`probing`
+   40 min ; :doc:`cmake-syntax`
+   40 min ; :doc:`hello-ctest`
+   40 min ; :doc:`probing`
    40 min ; :doc:`targets`
-   40 min ; :doc:`dependencies`
+   30 min ; :doc:`dependencies`
    40 min ; :doc:`fetch-content`
-   30 min ; :doc:`python-bindings`
-   30 min ; :doc:`tips-and-tricks`
+   35 min ; :doc:`python-bindings`
+   20 min ; :doc:`tips-and-tricks`
 
 
 .. toctree::

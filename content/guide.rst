@@ -12,11 +12,56 @@ Learning outcomes
 - Safely and effectively build mixed-language projects (Python+C/C++,
   Python+Fortran, Fortran+C/C++)
 
+Third iteration
+^^^^^^^^^^^^^^^
+We decided to:
+
+- Move the :ref:`environment` episode under the "Additional topics" header.
+  We had to skip due to lack of time in the previous iteration.
+
+**Day 1 - Thursday 1 September 2022**
+
+.. csv-table::
+   :widths: auto
+   :align: center
+   :delim: ;
+
+    9:00 -  9:10 ; Welcome and introduction to the training course
+    9:10 -  9:40 ; :ref:`hello-cmake`
+    9:40 -  9:45 ; Break
+    9:45 - 10:25 ; :ref:`cmake-syntax`
+   10:25 - 10:35 ; Break
+   10:35 - 11:15 ; :ref:`hello-ctest`
+   11:15 - 11:25 ; Break
+   11:25 - 12:05 ; :ref:`probing`
+   12:05 - 12:10 ; Break
+   12:10 - 12:30 ; Wrap-up
+
+**Day 2 - Friday 2 September 2022**
+
+.. csv-table::
+   :widths: auto
+   :align: center
+   :delim: ;
+
+
+    9:00 -  9:10 ; What did we cover yesterday?
+    9:10 -  9:50 ; :ref:`targets`
+    9:50 - 10:00 ; Break
+   10:00 - 10:30 ; :ref:`dependencies`
+   10:30 - 10:35 ; Break
+   10:35 - 11:15 ; :ref:`fetch-content`
+   11:15 - 11:25 ; Break
+   11:25 - 12:00 ; :ref:`python-bindings`
+   12:00 - 12:10 ; Break
+   12:10 - 12:30 ; :ref:`tips-and-tricks`
+   12:30 - 13:00 ; :ref:`tips-and-tricks`
+
 Second iteration
 ^^^^^^^^^^^^^^^^
 We decided to:
 
-- Move the :ref:`cxx-fortran` episode to an "Additional material" section.
+- Move the :ref:`cxx-fortran` episode to an "Additional topics" section.
 - Add the separate episode :ref:`python-bindings` to show how to manage
   Python+compiled language projects.
 - Add the :ref:`tips-and-tricks` episode to summarize best practices.
