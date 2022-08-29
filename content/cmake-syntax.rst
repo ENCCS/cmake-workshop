@@ -70,12 +70,15 @@ Two things to note about *variable references*:
 
 One of the most confusing aspects in CMake is the scoping of variables. There are three variable scopes in the DSL:
 
-- Function. In effect when a variable is |set| within a function: the variable
+Function
+  In effect when a variable is |set| within a function: the variable
   will be visible within the function, but not outside.
-- Directory. In effect when processing a ``CMakeLists.txt`` in a directory:
+Directory
+  In effect when processing a ``CMakeLists.txt`` in a directory:
   variables in the parent folder will be available, but any that is |set| in the
   current folder will not be propagated to the parent.
-- Cache. These variables are ***persistent** across calls to ``cmake`` and
+Cache
+  These variables are **persistent** across calls to ``cmake`` and
   available to all scopes in the project.
   Modifying a cache variable requires using a special form of the |set| function:
 
@@ -111,7 +114,7 @@ You can find a complete list of available commands with:
 
    $ cmake --help-command-list
 
-**Functions** and **macros** are build on top of the basic built-in commands and
+**Functions** and **macros** are built on top of the basic built-in commands and
 are either CMake- or user-defined.
 These prove useful to avoid repetition in your CMake scripts.
 The difference between a function and a macro is their *scope*:
@@ -156,46 +159,6 @@ Help on a specific built-in module can be obtained with:
 .. code-block:: bash
 
    $ cmake --help-module CMakePrintHelpers
-
-
-The build tree
---------------
-
-It is instructive to browse the build folder for the project we built in the
-previous typealong:
-
-.. code-block:: bash
-
-   $ tree -L 2 build
-
-   build
-   ├── CMakeCache.txt
-   ├── CMakeFiles
-   │   ├── 3.18.4
-   │   ├── cmake.check_cache
-   │   ├── CMakeDirectoryInformation.cmake
-   │   ├── CMakeOutput.log
-   │   ├── CMakeTmp
-   │   ├── compute-areas.dir
-   │   ├── geometry.dir
-   │   ├── Makefile2
-   │   ├── Makefile.cmake
-   │   ├── progress.marks
-   │   └── TargetDirectories.txt
-   ├── cmake_install.cmake
-   ├── compute-areas
-   ├── libgeometry.a
-   └── Makefile
-
-We note that:
-
-- The project was configured with ``Makefile`` generator.
-- The cache is a plain-text file ``CMakeCache.txt``.
-- For every target in the project, CMake will create a subfolder
-  ``<target>.dir`` under ``CMakeFiles``. The intermediate object files are
-  stored in these folders, together with compiler flags and link line.
-- The build artifacts, ``compute-areas`` and ``libgeometry.a``,  are stored at
-  the root of the build tree.
 
 
 Flow control
@@ -291,13 +254,50 @@ The list of items is either space- or ;-separated. ``break()`` and
 
    A working solution is in the ``solution`` subfolder.
 
+   It is instructive to browse the build folder for the project:
+
+   .. code-block:: bash
+
+      $ tree -L 2 build
+
+      build
+      ├── CMakeCache.txt
+      ├── CMakeFiles
+      │   ├── 3.18.4
+      │   ├── cmake.check_cache
+      │   ├── CMakeDirectoryInformation.cmake
+      │   ├── CMakeOutput.log
+      │   ├── CMakeTmp
+      │   ├── compute-areas.dir
+      │   ├── geometry.dir
+      │   ├── Makefile2
+      │   ├── Makefile.cmake
+      │   ├── progress.marks
+      │   └── TargetDirectories.txt
+      ├── cmake_install.cmake
+      ├── compute-areas
+      ├── libgeometry.a
+      └── Makefile
+
+   We note that:
+
+   - The project was configured with ``Makefile`` generator.
+   - The cache is a plain-text file ``CMakeCache.txt``.
+   - For every target in the project, CMake will create a subfolder
+     ``<target>.dir`` under ``CMakeFiles``. The intermediate object files are
+     stored in these folders, together with compiler flags and link line.
+   - The build artifacts, ``compute-areas`` and ``libgeometry.a``,  are stored at
+     the root of the build tree.
+
+
+
 
 Printing messages
 -----------------
 
 You will most likely have to engage in debugging your CMake scripts at one point
-or another.  We believe that print-based debugging is the most effective way to
-do so and the main workhorse will be the |message| command:
+or another.  Print-based debugging is the most effective way to
+do so and the main workhorse for this will be the |message| command:
 
 .. signature:: |message|
 
@@ -325,7 +325,8 @@ provides the |cmake_print_variables| function:
 
       cmake_print_variables(var1 var2 ... varN)
 
-   This command accepts an arbitrary number of variables and prints their name and value to standard output.
+   This command accepts an arbitrary number of variables and prints their name
+   *and* value to standard output.
    For example:
 
    .. code-block:: cmake
