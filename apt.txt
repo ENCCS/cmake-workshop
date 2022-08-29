@@ -1,3 +1,4 @@
 emacs-nox
 nano
+tree
 vim-nox
