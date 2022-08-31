@@ -36,9 +36,10 @@ Targets
 
 A target is declared by either |add_executable| or |add_library|: thus, in broad
 terms, a target maps to a build artifact in the project. [#custom_targets]_
-Any target has a collection of **properties**, which define *how* the build
-artifact should be produced **and** *how* it should be used by other dependent
-targets in the project.
+Any target has a collection of **properties**, which define:
+
+* *how* the build artifact should be produced, **and**
+* *how* it should be used by other targets in the project that depend on it.
 
 .. figure:: img/target.svg
    :align: center
@@ -138,6 +139,73 @@ There are additional commands in the ``target_*`` family:
 .. code-block:: bash
 
    $ cmake --help-command-link | grep "^target_"
+
+
+.. typealong:: Understanding visibility levels
+
+   Let's make the difference between ``PRIVATE``, ``PUBLIC``, and ``INTERFACE``
+   visibility levels a little less abstract.
+
+   You can find the file with the complete source code and solution in the
+   ``content/code/day-2/29_visibility-levels/solution`` folder.
+
+   Here we want to compile a C++ library and an executable:
+
+   * The library code is in the ``account`` subfolder. It consists of one source
+     and one header file.  The header file ``account.hpp`` and the shared
+     library are needed to produce the ``bank`` executable. We also want to use
+     the ``-ffast-math`` compiler flag and propagate it throughout the project.
+   * The executable code is in ``bank.cpp``. It includes ``account.hpp``.
+
+   Thus:
+
+   1. The ``account`` target declares the ``account.cpp`` source file as ``PRIVATE``:
+
+      .. code-block:: cmake
+
+         target_sources(account
+           PRIVATE
+             account.cpp
+           )
+
+      since it is only needed to produce the shared library.
+   2. The ``-ffast-math`` is instead ``PUBLIC``:
+
+      .. code-block:: cmake
+
+         target_compile_options(account
+           PUBLIC
+             "-ffast-math"
+           )
+
+      since it needs to be propagated to all targets consuming ``account``.
+   3. The ``account`` folder is an include directory with ``INTERFACE``
+      visibility:
+
+      .. code-block:: cmake
+
+         target_include_directories(account
+           INTERFACE
+             ${CMAKE_CURRENT_SOURCE_DIR}
+           )
+
+      since only targets consuming ``account`` need to know where
+      ``account.hpp`` is located.
+
+.. callout:: Rule of thumb for visibility settings
+
+   When working out which visibility settings to use for the properties of your
+   targets you can refer to the following table:
+
+      ==============  ================ ============
+        Who needs?             Others
+      --------------  -----------------------------
+       Target            **YES**           **NO**
+      ==============  ================ ============
+        **YES**       ``PUBLIC``       ``PRIVATE``
+        **NO**        ``INTERFACE``     N/A
+      ==============  ================ ============
+
 
 Properties
 ++++++++++
