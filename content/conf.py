@@ -124,3 +124,10 @@ def setup(app):
     for obj in DIRECTIVES:
         app.add_directive(obj.get_cssname(), obj)
     app.add_css_file("overrides.css")
+
+import os
+if os.environ.get('GITHUB_REF', '') == 'refs/heads/main':
+    html_js_files = [
+        ('https://plausible.io/js/script.js', {"data-domain": "enccs.github.io/cmake-workshop", "defer": "\
+defer"}),
+    ]    
