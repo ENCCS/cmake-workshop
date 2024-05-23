@@ -150,9 +150,10 @@ There are few things to note here:
       ``LANGUAGES``
           Languages in the project.
 
-2. The case of CMake commands and variables does not matter: the DSL is
+2. The case of CMake commands does not matter: the DSL is
    case-insensitive. However, the plain-text files that CMake parses **must be
-   called** ``CMakeLists.txt`` and the case matters!
+   called** ``CMakeLists.txt`` and the case matters! The variable names are
+   also case sensitive!
 3. The command to add executables to the build system is, unsurprisingly, |add_executable|:
 
    .. signature:: |add_executable|
