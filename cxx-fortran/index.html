@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mixing C++ and Fortran &mdash; CMake Workshop</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script data-domain="enccs.github.io/cmake-workshop" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Quick Reference" href="../quick-reference/" />
+    <link rel="prev" title="Detecting your environment" href="../environment/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            CMake Workshop
+              <img src="../_static/ENCCS.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/">Setting up your system</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../hello-cmake/">From sources to executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-syntax/">CMake syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-ctest/">Creating and running tests with CTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../probing/">Probing compilation, linking, and execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../targets/">Target-based build systems with CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Finding and using dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fetch-content/">Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python-bindings/">Mixing Python and compiled languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tips-and-tricks/">Using CMake: tips and tricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional topics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../environment/">Detecting your environment</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Mixing C++ and Fortran</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#fortran-using-c-c">Fortran using C/C++</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c-c-using-fortran">C/C++ using Fortran</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography/">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor’s guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">CMake Workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Mixing C++ and Fortran</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ENCCS/cmake-workshop/blob/main/content/cxx-fortran.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mixing-c-and-fortran">
+<span id="cxx-fortran"></span><h1>Mixing C++ and Fortran<a class="headerlink" href="#mixing-c-and-fortran" title="Permalink to this heading"></a></h1>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>Can we use CMake to build mixed-language projects?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Learn how the built-in <code class="docutils literal notranslate"><span class="pre">FortranCInterface</span></code> module can help you work with
+projects mixing Fortran and C/C++.</p></li>
+</ul>
+</div>
+<p>CMake has native support for many programming languages. At the time of writing,
+C, C++, Fortran, CUDA, Objective-C, ISPC, and ASM are officially supported.
+When programming applications and libraries in a scientific context, it is often
+required to mix components written in different languages. This is mostly true
+because legacy, tried-and-true components are extremely hard to replace by
+non-professional programmers.
+In this episode, we will show how to mix Fortran and C/C++.</p>
+<p>In order to use multiple languages in your project, you can declare it within
+the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/project.html"><span class="xref std std-term"><code class="docutils literal notranslate">project</code></span></a> command:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">project</span><span class="p">(</span><span class="s">my-project</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">CXX</span><span class="w"> </span><span class="s">Fortran</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Languages can also be declared later on in your <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> with
+invocations to the <code class="docutils literal notranslate"><span class="pre">enable_language</span></code> command.
+You can specify sources in multiple languages for any given executable or
+library target. CMake will resolve which compiler to use for each based on their
+extension: for example <code class="docutils literal notranslate"><span class="pre">.f90</span></code> will use the Fortran compiler, without
+preprocessor.
+Linking of mixed-language targets will be performed through the compiler of the
+language with the highest priority. In C/Fortran projects, the Fortran compiler
+will call the linker; in C++/Fortran projects, the C++ compiler will do the
+honors.</p>
+<p>The workhorse module for mixing C/C++ and Fortran is the built-in
+<code class="docutils literal notranslate"><span class="pre">FortranCInterface</span></code> module.  Whether you are working in Fortran and linking a
+C/C++ library or viceversa, you should <strong>always</strong> check that the compilers for
+the two languages are able to talk to each other.
+That is where the <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FortranCInterface.html"><span class="xref std std-term"><code class="docutils literal notranslate">FortranCInterface_VERIFY</code></span></a> function comes into play:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">FortranCInterface</span><span class="p">)</span>
+
+<span class="c"># if you are working with C and Fortran</span>
+<span class="nb">FortranCInterface_VERIFY</span><span class="p">()</span>
+
+<span class="c"># if you are working with C++ and Fortran</span>
+<span class="nb">FortranCInterface_VERIFY</span><span class="p">(</span><span class="s">CXX</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="fortran-using-c-c">
+<h2>Fortran using C/C++<a class="headerlink" href="#fortran-using-c-c" title="Permalink to this heading"></a></h2>
+<p>If you are using Fortran2003 (and beyond), it is fairly straightforward to
+employ C/C++ libraries. The <code class="docutils literal notranslate"><span class="pre">iso_c_binding</span></code> built-in module was indeed
+mandated by the standards’ committee starting from the 2003 edition, and
+provides a standardized interface between C, the <em>de facto lingua franca</em> of
+programming, and Fortran.
+We will not delve into the details of <code class="docutils literal notranslate"><span class="pre">iso_c_binding</span></code>,
+suffice it so say that interoperability between basic datatypes, pointers, and
+function call conventions is nowadays well-established. <a class="footnote-reference brackets" href="#iso-c-binding" id="id1">1</a></p>
+<div class="admonition-exercise-24-a-fortran-executable-using-a-c-c-library exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercise 24: A Fortran executable using a C/C++ library</p>
+<p>In this exercise, you will build a Fortran executable linking to libraries
+written in C++ and the system library <code class="docutils literal notranslate"><span class="pre">backtrace</span></code>, written in C.</p>
+<p>The final executable, <code class="docutils literal notranslate"><span class="pre">bt-randomgen-example</span></code>, will print a few random
+integers, produced by the C++ library, and a backtrace, obtained from the C
+library. This is a sample output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bt-randomgen-example
+
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">20</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">13</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">30</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">24</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">40</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">31</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">33</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">28</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">33</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">13</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">11</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">40</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">     </span><span class="m">7</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">28</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">     </span><span class="m">5</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">27</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">     </span><span class="m">4</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">39</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">38</span>
+<span class="w"> </span>Get<span class="w"> </span>a<span class="w"> </span>random<span class="w"> </span>number<span class="w">    </span><span class="m">39</span>
+Printing<span class="w"> </span>backtrace
+./build/src/bt-randomgen-example<span class="o">[</span>0x401316<span class="o">]</span>
+./build/src/bt-randomgen-example<span class="o">[</span>0x401369<span class="o">]</span>
+/nix/store/a3syww9igm49zdzq3ibzw9m8ccvsgxla-glibc-2.32/lib/libc.so.6<span class="o">(</span>__libc_start_main+0xed<span class="o">)[</span>0x7f87aa2b1dbd<span class="o">]</span>
+./build/src/bt-randomgen-example<span class="o">[</span>0x40110a<span class="o">]</span>
+</pre></div>
+</div>
+<p>The scaffold project is in <code class="docutils literal notranslate"><span class="pre">content/code/day-2/24_fortran-cxx</span></code>.
+The project has the following source tree:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fortran-cxx/
+└── src
+    ├── bt-randomgen-example.f90
+    ├── interfaces
+    │   ├── interface_backtrace.f90
+    │   ├── interface_randomgen.f90
+    │   └── randomgen.cpp
+    └── utils
+        └── util_strings.f90
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> files where necessary. You can either declare
+Fortran, C++, and C as project languages, or enable C++ and C in the
+<code class="docutils literal notranslate"><span class="pre">interfaces</span></code> folder.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">src</span></code> folder, create an executable from the
+<code class="docutils literal notranslate"><span class="pre">bt-randomgen-example.f90</span></code> file. This executable will have to be linked
+to the libraries created in the <code class="docutils literal notranslate"><span class="pre">utils</span></code> and <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> folders.</p></li>
+<li><p>Modify the scaffold <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the <code class="docutils literal notranslate"><span class="pre">interfaces</span></code> folder to
+build a shared library from the C++ and Fortran sources. <strong>Beware</strong>, for
+CMake to resolve Fortran modules dependencies, you need to specify the
+corresponding sources with <code class="docutils literal notranslate"><span class="pre">PUBLIC</span></code> visibility level.</p></li>
+<li><p>Do not forget to verify that the C/C++ and Fortran compilers are compatible!</p></li>
+<li><p>Try out the executable and <strong>remember</strong> that the build tree <em>mirrors</em> the source tree.</p></li>
+</ol>
+<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div>
+</section>
+<section id="c-c-using-fortran">
+<h2>C/C++ using Fortran<a class="headerlink" href="#c-c-using-fortran" title="Permalink to this heading"></a></h2>
+<p>Whenever a mix of C/C++ and Fortran is necessary, one needs to be aware of some
+fundamental differences between the languages:</p>
+<ul class="simple">
+<li><p>Fortran arrays are column-major.</p></li>
+<li><p>All function arguments are passed by-reference.</p></li>
+<li><p>Fortran compilers <em>mangle</em> function names. Usually by adding an underscore at the end.</p></li>
+<li><p>Fortran is case-insensitive.</p></li>
+</ul>
+<p>Fortran90 introduced a number of modern features: <em>modules</em>, <em>function
+overloading</em>, and <em>user-defined types</em>. These features further complicate
+interoperability: they require compilers to perform more extensive <a class="reference external" href="https://en.wikipedia.org/wiki/Name_mangling">name
+mangling</a>. As the mangling is not
+standard-mandated, each vendor can decide how to perform it.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">FortranCInterface</span></code> module fortunately comes to the rescue! The function
+<a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FortranCInterface.html"><span class="xref std std-term"><code class="docutils literal notranslate">FortranCInterface_HEADER</code></span></a> will generate a header file with all the macros
+needed to mangle names as appropriate for the compiler in use:</p>
+<div class="admonition-fortrancinterface-header signature toggle-shown dropdown admonition" id="signature-0">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FortranCInterface.html"><span class="xref std std-term"><code class="docutils literal notranslate">FortranCInterface_HEADER</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">FortranCInterface_HEADER</span><span class="p">(</span><span class="s">&lt;file&gt;</span>
+<span class="w">                   </span><span class="s">[MACRO_NAMESPACE</span><span class="w"> </span><span class="s">&lt;macro-ns&gt;]</span>
+<span class="w">                   </span><span class="s">[SYMBOL_NAMESPACE</span><span class="w"> </span><span class="s">&lt;ns&gt;]</span>
+<span class="w">                   </span><span class="s">[SYMBOLS</span><span class="w"> </span><span class="s">[&lt;module&gt;:]&lt;function&gt;</span><span class="w"> </span><span class="s">...]</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-parameters parameters dropdown admonition" id="parameters-0">
+<p class="admonition-title">Parameters</p>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">&lt;file&gt;</span></code></dt><dd><p>Name of the header file with name mangling macros:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define FortranCInterface_GLOBAL (name,NAME) ...</span>
+<span class="cp">#define FortranCInterface_GLOBAL_(name,NAME) ...</span>
+<span class="cp">#define FortranCInterface_MODULE (mod,name, MOD,NAME) ...</span>
+<span class="cp">#define FortranCInterface_MODULE_(mod,name, MOD,NAME) ...</span>
+</pre></div>
+</div>
+<p>These can be used for global (module) symbols. Use the macros ending with
+an underscore to mangle symbols containing underscores.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">MACRO_NAMESPACE</span></code></dt><dd><p>Optional, to replace the default <code class="docutils literal notranslate"><span class="pre">FortranCInterface_</span></code> prefix with a
+given namespace <code class="docutils literal notranslate"><span class="pre">&lt;macro-ns&gt;</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SYMBOLS</span></code></dt><dd><p>Optional, list of symbols to mangle automatically with C preprocessor
+definitions.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">SYMBOL_NAMESPACE</span></code></dt><dd><p>Optional, prefix all preprocessor definitions generated by the
+<code class="docutils literal notranslate"><span class="pre">SYMBOLS</span></code> option with a given namespace <code class="docutils literal notranslate"><span class="pre">&lt;ns&gt;</span></code>.</p>
+</dd>
+</dl>
+</div>
+<div class="admonition-exercise-25-a-c-c-executable-using-a-fortran-library exercise important admonition" id="exercise-1">
+<p class="admonition-title">Exercise 25: A C/C++ executable using a Fortran library</p>
+<p>Your goal is to link a C++ executable to a BLAS/LAPACK library.  The final
+executable will be named <code class="docutils literal notranslate"><span class="pre">linear-algebra</span></code>: it scales a vector with
+<code class="docutils literal notranslate"><span class="pre">DSCAL</span></code> and performs a linear solve with <code class="docutils literal notranslate"><span class="pre">DGESV</span></code>.  We assume the
+BLAS/LAPACK library to be written in Fortran.  This means that the symbols
+for <code class="docutils literal notranslate"><span class="pre">DSCAL</span></code> and <code class="docutils literal notranslate"><span class="pre">DGESV</span></code> are mangled in a compiler-dependent way.
+The <code class="docutils literal notranslate"><span class="pre">linear-algebra</span></code> executable will accept the dimension of the square
+matrix and vector as command-line input, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>linear-algebra<span class="w"> </span><span class="m">1000</span>
+
+C_DSCAL<span class="w"> </span><span class="k">done</span>
+C_DGESV<span class="w"> </span><span class="k">done</span>
+info<span class="w"> </span>is<span class="w"> </span><span class="m">0</span>
+check<span class="w"> </span>is<span class="w"> </span><span class="m">4</span>.80085e-12
+</pre></div>
+</div>
+<p>The scaffold project is in <code class="docutils literal notranslate"><span class="pre">content/code/day-2/25_cxx-fortran</span></code>.
+The project has the following source tree:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cxx-fortran/
+├── README.md
+└── src
+    ├── linear-algebra.cpp
+    └── math
+        ├── CxxBLAS.cpp
+        ├── CxxBLAS.hpp
+        ├── CxxLAPACK.cpp
+        └── CxxLAPACK.hpp
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Inspect the contents of the C++ sources in the <code class="docutils literal notranslate"><span class="pre">math</span></code> subfolder. They
+refer to a <code class="docutils literal notranslate"><span class="pre">fc_mangle.h</span></code> header file, which is not part of the project,
+as it will be automatically generated.</p></li>
+<li><p>Create an executable from the <code class="docutils literal notranslate"><span class="pre">linear-algebra.cpp</span></code> source file.</p></li>
+<li><p>Complete the scaffold <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> in the <code class="docutils literal notranslate"><span class="pre">math</span></code> subfolder. In
+particular, you want to check compatibility of compilers and generate the
+<code class="docutils literal notranslate"><span class="pre">fc_mangle.h</span></code> header. Hint: you will have to use the
+<code class="docutils literal notranslate"><span class="pre">SYMBOLS</span></code> option to the <a class="reference internal" href="https://cmake.org/cmake/help/latest/module/FortranCInterface.html"><span class="xref std std-term"><code class="docutils literal notranslate">FortranCInterface_HEADER</code></span></a>.</p></li>
+<li><p>Try out the executable and <strong>remember</strong> that the build tree <em>mirrors</em> the source tree.</p></li>
+</ol>
+<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>Always check whether the Fortran and C/C++ compilers you are using are
+interoperable.</p></li>
+<li><p>Fortran name-mangling header files for C/C++ can be conveniently
+autogenerated by CMake.</p></li>
+</ul>
+</div>
+<p class="rubric">Footnotes</p>
+<dl class="footnote brackets">
+<dt class="label" id="iso-c-binding"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>You can find out more about <code class="docutils literal notranslate"><span class="pre">iso_c_binding</span></code> and Fortran/C interoperability
+in the <a class="reference external" href="https://gcc.gnu.org/onlinedocs/gfortran/Interoperability-with-C.html">GNU Fortran manual</a>.</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../environment/" class="btn btn-neutral float-left" title="Detecting your environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../quick-reference/" class="btn btn-neutral float-right" title="Quick Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, EuroCC National Competence Centre Sweden.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

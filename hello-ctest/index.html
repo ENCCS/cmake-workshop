@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creating and running tests with CTest &mdash; CMake Workshop</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script src="../_static/tabs.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script data-domain="enccs.github.io/cmake-workshop" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Probing compilation, linking, and execution" href="../probing/" />
+    <link rel="prev" title="CMake syntax" href="../cmake-syntax/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            CMake Workshop
+              <img src="../_static/ENCCS.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/">Setting up your system</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hello-cmake/">From sources to executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-syntax/">CMake syntax</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Creating and running tests with CTest</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#adding-tests-to-your-project">Adding tests to your project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-ctest-command-line-interface">The CTest command-line interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-properties-labels-timeout-and-cost">Test properties: labels, timeout, and cost</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../probing/">Probing compilation, linking, and execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../targets/">Target-based build systems with CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Finding and using dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fetch-content/">Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python-bindings/">Mixing Python and compiled languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tips-and-tricks/">Using CMake: tips and tricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../environment/">Detecting your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cxx-fortran/">Mixing C++ and Fortran</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography/">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor’s guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">CMake Workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Creating and running tests with CTest</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ENCCS/cmake-workshop/blob/main/content/hello-ctest.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="creating-and-running-tests-with-ctest">
+<span id="hello-ctest"></span><h1>Creating and running tests with CTest<a class="headerlink" href="#creating-and-running-tests-with-ctest" title="Permalink to this heading"></a></h1>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How can we handle the testing stage of our project with CMake?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Learn how to produce test executables with CMake.</p></li>
+<li><p>Learn how to run your tests through CTest.</p></li>
+</ul>
+</div>
+<p>Testing is an essential activity in the development cycle. A well-designed test
+suite will help you detect bugs and can also facilitate the onboarding of new
+developers.</p>
+<figure class="align-center" id="id1">
+<img alt="../_images/ctest.svg" src="../_images/ctest.svg" /><figcaption>
+<p><span class="caption-text">CTest is part of the CMake suite of programs. It is a <em>test runner</em>. You can
+handle your test suite definition, execution, and reporting through it.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>In this episode, we will look into how to use CTest to define and run our tests.</p>
+<section id="adding-tests-to-your-project">
+<h2>Adding tests to your project<a class="headerlink" href="#adding-tests-to-your-project" title="Permalink to this heading"></a></h2>
+<p>In CMake and CTest, a test is any command returning an exit code. It does not
+really matter how the command is issued or what is run: it can be a C++
+executable or a Python script. As long as the execution returns a zero or
+non-zero exit code, CMake will be able to classify the test as succeeded or
+failed, respectively.</p>
+<p>There are two steps to perform to integrate your CMake build system with the CTest tool:</p>
+<ol class="arabic simple">
+<li><p>Call the <code class="docutils literal notranslate"><span class="pre">enable_testing</span></code> command. This takes no arguments.</p></li>
+<li><p>Add tests with the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_test.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_test</code></span></a> command.</p></li>
+</ol>
+<div class="admonition-add-test signature toggle-shown dropdown admonition" id="signature-0">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_test.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_test</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_test</span><span class="p">(</span><span class="s">NAME</span><span class="w"> </span><span class="s">&lt;name&gt;</span><span class="w"> </span><span class="s">COMMAND</span><span class="w"> </span><span class="s">&lt;command&gt;</span><span class="w"> </span><span class="s">[&lt;arg&gt;...]</span>
+<span class="w">   </span><span class="s">[CONFIGURATIONS</span><span class="w"> </span><span class="s">&lt;config&gt;...]</span>
+<span class="w">   </span><span class="s">[WORKING_DIRECTORY</span><span class="w"> </span><span class="s">&lt;dir&gt;]</span>
+<span class="w">   </span><span class="s">[COMMAND_EXPAND_LISTS]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This command accepts <em>named arguments</em>, only <code class="docutils literal notranslate"><span class="pre">NAME</span></code> and <code class="docutils literal notranslate"><span class="pre">COMMAND</span></code> are
+mandatory.  The former specifies the identifying name of the test, while the
+latter sets up what command to run.</p>
+</div>
+<div class="admonition-your-first-test-project typealong toggle-shown dropdown admonition" id="typealong-0">
+<p class="admonition-title">Your first test project</p>
+<p>We will build a simple library to sum integers and an executable using this
+library.  We will work from a scaffold project in the
+<code class="docutils literal notranslate"><span class="pre">content/code/day-1/05_hello-ctest</span></code> folder.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.18</span><span class="p">)</span>
+
+<span class="nb">project</span><span class="p">(</span><span class="s">hello-ctest</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">CXX</span><span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD</span><span class="w"> </span><span class="s">14</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_EXTENSIONS</span><span class="w"> </span><span class="s">OFF</span><span class="p">)</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_STANDARD_REQUIRED</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+
+<span class="nb">add_library</span><span class="p">(</span><span class="s">sum_integers</span><span class="w"> </span><span class="s">sum_integers.cpp</span><span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span><span class="s">sum_up</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">sum_up</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">sum_integers</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Alongside the library and the main executable, we will also produce an
+executable to test the <code class="docutils literal notranslate"><span class="pre">sum_integers</span></code> library.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_executable</span><span class="p">(</span><span class="s">cpp_test</span><span class="w"> </span><span class="s">test.cpp</span><span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">cpp_test</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">sum_integers</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is now time to set up CTest:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">enable_testing</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>and declare our test, by specifying which command to run:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_test</span><span class="p">(</span>
+<span class="w">  </span><span class="s">NAME</span><span class="w"> </span><span class="s">cpp_test</span>
+<span class="w">  </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">$&lt;</span><span class="nv">TARGET_FILE:cpp_test</span><span class="o">&gt;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Note the use of <a class="reference external" href="https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html">generator expression (gen-exp)</a>
+to avoid specifying the complete path to the executable <code class="docutils literal notranslate"><span class="pre">cpp_test</span></code>.</p>
+<p>We can now compile and run our test:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>-S.<span class="w"> </span>-Bbuild
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+$<span class="w"> </span>cmake<span class="w"> </span>--build<span class="w"> </span>.
+$<span class="w"> </span>ctest
+</pre></div>
+</div>
+<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div>
+<div class="admonition-exercise-6-running-the-tests-through-a-shell-script exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercise 6: Running the tests through a shell script</p>
+<p>Any command can be used to run tests. In this exercise, we will extend the
+previous CMake code to test the main executable within a shell script.
+The scaffold project is in the <code class="docutils literal notranslate"><span class="pre">content/code/day-1/06_bash-ctest</span></code> folder.</p>
+<ol class="arabic">
+<li><p>Find the appropriate bash executable to run <code class="docutils literal notranslate"><span class="pre">test.sh</span></code> with. You should
+use the <code class="docutils literal notranslate"><span class="pre">find_program</span></code> command of CMake.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_program</span><span class="p">(</span><span class="s">BASH_EXECUTABLE</span><span class="w"> </span><span class="s">NAMES</span><span class="w"> </span><span class="s">bash</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">BASH_EXECUTABLE</span></code> variable will be the shell program.</p>
+</li>
+<li><p>Add another invocation to <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_test.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_test</code></span></a> that will be equivalent to running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./test.sh<span class="w"> </span>sum_up
+</pre></div>
+</div>
+<p>Hints:</p>
+<ul class="simple">
+<li><p>Use the absolute location of <code class="docutils literal notranslate"><span class="pre">test.sh</span></code>.</p></li>
+<li><p>You can use the generator expression syntax to give the location of the
+executable: <code class="docutils literal notranslate"><span class="pre">$&lt;TARGET_FILE:sum_up&gt;</span></code>.</p></li>
+</ul>
+</li>
+<li><p>Build the project and run CTest.</p></li>
+</ol>
+<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div>
+<div class="admonition-exercise-7-running-the-tests-through-a-python-script exercise important admonition" id="exercise-1">
+<p class="admonition-title">Exercise 7: Running the tests through a Python script</p>
+<p>It is much more common nowadays to use Python, rather than shell scripts.  In
+this exercise, we will add two more tests to our project. These new tests
+will run the main executable through a Python script.
+The scaffold project is in the <code class="docutils literal notranslate"><span class="pre">content/code/day-1/07_python-ctest</span></code> folder.</p>
+<ol class="arabic">
+<li><p>Find the Python interpreter to run <code class="docutils literal notranslate"><span class="pre">test.py</span></code>. You should
+use the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> command of CMake:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">Python</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The interpreter will be available in the <code class="docutils literal notranslate"><span class="pre">Python_EXECUTABLE</span></code> variable.</p>
+</li>
+<li><p>Add another invocation to <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_test.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_test</code></span></a> that will be equivalent to running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>test.py<span class="w"> </span>--executable<span class="w"> </span>sum_up
+</pre></div>
+</div>
+<p>Hints:</p>
+<ul class="simple">
+<li><p>Use the absolute location of <code class="docutils literal notranslate"><span class="pre">test.py</span></code>.</p></li>
+<li><p>You can use the generator expression syntax to give the location of the
+executable: <code class="docutils literal notranslate"><span class="pre">$&lt;TARGET_FILE:sum_up&gt;</span></code>.</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">test.py</span></code> script accepts a <code class="docutils literal notranslate"><span class="pre">--short</span></code> command-line option. Add
+another test that uses this option in the command.</p></li>
+<li><p>Build the project and run CTest.</p></li>
+</ol>
+<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div>
+</section>
+<section id="the-ctest-command-line-interface">
+<h2>The CTest command-line interface<a class="headerlink" href="#the-ctest-command-line-interface" title="Permalink to this heading"></a></h2>
+<div class="admonition-how-to-use-ctest-effectively typealong toggle-shown dropdown admonition" id="typealong-1">
+<p class="admonition-title">How to use CTest effectively.</p>
+<p>We will now demonstrate the CTest command-line interface (CLI) using the
+solution of the previous exercise.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ctest</span></code> command is part of the CMake installation. We can find help on its usage with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ctest<span class="w"> </span>--help
+</pre></div>
+</div>
+<p><strong>Remember</strong>, to run your tests through CTest, you will first need to move
+into the build folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+$<span class="w"> </span>ctest
+</pre></div>
+</div>
+<p>This will run all the tests in your test suite.
+You can list the names of the tests in the test suite with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ctest<span class="w"> </span>-N
+</pre></div>
+</div>
+<p>Verbosity options are also quite helpful, especially when debugging failures.
+With <code class="docutils literal notranslate"><span class="pre">--output-on-failure</span></code>, CTest will print to screen the output of
+failing tests.
+If you would like to print to screen the full invocation for every test, use
+the <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> option.
+You can select <em>subsets</em> of test to run:</p>
+<ul class="simple">
+<li><p>By <em>name</em>, with the <code class="docutils literal notranslate"><span class="pre">-R</span> <span class="pre">&lt;regex&gt;</span></code> flag. Any test whose <em>name</em> can be
+captured by the passed regex will be run.  The <code class="docutils literal notranslate"><span class="pre">-RE</span> <span class="pre">&lt;regex&gt;</span></code> option
+<em>excludes</em> tests by name using a regex.</p></li>
+<li><p>By <em>label</em>, with the <code class="docutils literal notranslate"><span class="pre">-L</span> <span class="pre">&lt;regex&gt;</span></code> flag. Any test whose <em>labels</em> can be
+captured by the passed regex will be run.  The <code class="docutils literal notranslate"><span class="pre">-LE</span> <span class="pre">&lt;regex&gt;</span></code> option
+<em>excludes</em> tests by label using a regex.</p></li>
+<li><p>By <em>number</em>, with the <code class="docutils literal notranslate"><span class="pre">-I</span> <span class="pre">[Start,End,Stride,test#,test#|Test</span> <span class="pre">file]</span></code> flag.
+This is usually not the most convenient option for selecting subsets of
+tests.</p></li>
+</ul>
+<p>It is possible to rerun failed tests with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ctest<span class="w"> </span>--rerun-failed
+</pre></div>
+</div>
+<p>Finally, you can parallelize test execution:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>ctest<span class="w"> </span>-j<span class="w"> </span>N
+$<span class="w"> </span>ctest<span class="w"> </span>--parallel<span class="w"> </span>N
+</pre></div>
+</div>
+<p><strong>Beware!</strong> The order of execution of tests is not guaranteed: if some tests
+are interdependent, you will have to explicitly state that in your build
+system.</p>
+</div>
+</section>
+<section id="test-properties-labels-timeout-and-cost">
+<h2>Test properties: labels, timeout, and cost<a class="headerlink" href="#test-properties-labels-timeout-and-cost" title="Permalink to this heading"></a></h2>
+<p>When you use <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_test.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_test</code></span></a>, you give a unique name to each test. As we have seen,
+you can use these names to filter which tests to run in the suite. This can be
+extremely valuable when the test suite is large and you really only need to run
+few of the many tests.
+However, the naming mechanism does not allow to easily group tests. We could in
+principle add a suffix to all tests in a given group and then filter them with
+an appropriate regex, but what if we had multiple groups to which tests could
+belong. This is a very common situation in practice!
+Fortunately, we can set <strong>properties</strong> on tests and labels are among the
+available properties.</p>
+<div class="admonition-set-tests-properties signature toggle-shown dropdown admonition" id="signature-1">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set_tests_properties.html"><span class="xref std std-term"><code class="docutils literal notranslate">set_tests_properties</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">set_tests_properties</span><span class="p">(</span><span class="s">test1</span><span class="w"> </span><span class="s">[test2...]</span><span class="w"> </span><span class="s">PROPERTIES</span><span class="w"> </span><span class="s">prop1</span><span class="w"> </span><span class="s">value1</span><span class="w"> </span><span class="s">prop2</span><span class="w"> </span><span class="s">value2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition-exercise-8-set-labels-on-tests exercise important admonition" id="exercise-2">
+<p class="admonition-title">Exercise 8: Set labels on tests</p>
+<p>We will run some tests using Python and we want to group them into two categories:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">quick</span></code> for tests with a very short execution time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">long</span></code> for benchmarking tests with a longer execution time.</p></li>
+</ul>
+<p>The scaffold project is in the <code class="docutils literal notranslate"><span class="pre">content/code/day-1/08_ctest-labels</span></code> folder.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Labeling</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Bonus</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><ol class="arabic">
+<li><p>Find the Python interpreter:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">Python</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The interpreter will be available in the <code class="docutils literal notranslate"><span class="pre">Python_EXECUTABLE</span></code> variable.</p>
+</li>
+<li><p>Enable testing.</p></li>
+<li><p>Add the six tests in the <code class="docutils literal notranslate"><span class="pre">test</span></code> folder. Give each of them a unique name.</p></li>
+<li><p>Use <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/set_tests_properties.html"><span class="xref std std-term"><code class="docutils literal notranslate">set_tests_properties</code></span></a> to set labels for the tests:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">feature-a.py</span></code>, <code class="docutils literal notranslate"><span class="pre">feature-b.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">feature-c.py</span></code> should be
+in the <code class="docutils literal notranslate"><span class="pre">quick</span></code> group.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">feature-d.py</span></code>, <code class="docutils literal notranslate"><span class="pre">benchmark-a.py</span></code>, and <code class="docutils literal notranslate"><span class="pre">benchmark-b.py</span></code>
+should be in the <code class="docutils literal notranslate"><span class="pre">long</span></code> group.</p></li>
+</ul>
+</li>
+<li><p>Check that everything works as expected</p></li>
+</ol>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Try simplifying the repeated calls to <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_test.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_test</code></span></a> with a <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/foreach.html"><span class="xref std std-term"><code class="docutils literal notranslate">foreach</code></span></a> loop.
+You might need to apply some filename manipulations: check out the
+<a class="reference internal" href="https://cmake.org/cmake/help/latest/command/file.html"><span class="xref std std-term"><code class="docutils literal notranslate">file</code></span></a> command.</p>
+</div></div>
+<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div>
+<p>Among the many properties that can be set on tests, we would like to highlight the following:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">WILL_FAIL</span></code>. CTest will mark tests as passed when the corresponding command
+returns with a non-zero exit code. Use this property to test for expected
+failures.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">COST</span></code>. The first time you run your tests, CTest will save the run time of
+each. In this way, subsequent runs of the test suite will start by executing
+the longest running tests first. You can influence this behavior by declaring
+up front the “cost” of each test.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TIMEOUT</span></code>. Some tests might run for a long time: you can set an explicit
+timeout if you want to be more or less tolerant of variations in execution
+time.</p></li>
+</ul>
+<div class="admonition-exercises-9-10-11-more-properties exercise important admonition" id="exercise-3">
+<p class="admonition-title">Exercises 9, 10, 11: More properties!</p>
+<p>Let’s play around with the properties we have just introduced.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">WILL_FAIL</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">COST</button><button aria-controls="panel-1-1-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-2" name="1-2" role="tab" tabindex="-1">TIMEOUT</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>The scaffold project is in the
+<code class="docutils literal notranslate"><span class="pre">content/code/day-1/09_ctest-will-fail</span></code> folder.</p>
+<ol class="arabic simple">
+<li><p>Create a project with no language.</p></li>
+<li><p>Find the Python interpreter.</p></li>
+<li><p>Enable testing.</p></li>
+<li><p>Add a test running the <code class="docutils literal notranslate"><span class="pre">test.py</span></code> script.</p></li>
+</ol>
+<p>Try to run the tests and observe what happens.  Now set the
+<code class="docutils literal notranslate"><span class="pre">WILL_FAIL</span></code> property to true and observe what changes when running
+the tests.</p>
+<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>The scaffold project is in the
+<code class="docutils literal notranslate"><span class="pre">content/code/day-1/10_ctest-cost</span></code> folder.</p>
+<ol class="arabic simple">
+<li><p>Enable testing in the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p></li>
+<li><p>Add tests running each of the scripts in the <code class="docutils literal notranslate"><span class="pre">test</span></code> folder.</p></li>
+<li><p>Run the tests in parallel and observe how long their execution takes.</p></li>
+<li><p>Re-run the tests and observe how CTest orders their execution.</p></li>
+<li><p>Now set the <code class="docutils literal notranslate"><span class="pre">COST</span></code> property. What has changed when re-running the tests.</p></li>
+</ol>
+<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div><div aria-labelledby="tab-1-1-2" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-2" name="1-2" role="tabpanel" tabindex="0"><p>The scaffold project is in the
+<code class="docutils literal notranslate"><span class="pre">content/code/day-1/11_ctest-timeout</span></code> folder.</p>
+<ol class="arabic simple">
+<li><p>Create a project with no language.</p></li>
+<li><p>Find the Python interpreter.</p></li>
+<li><p>Enable testing.</p></li>
+<li><p>Add a test running the <code class="docutils literal notranslate"><span class="pre">test.py</span></code> script.</p></li>
+</ol>
+<p>Try to run the tests and observe how long the test takes to execute.
+Now set the <code class="docutils literal notranslate"><span class="pre">TIMEOUT</span></code> property to a value <em>less</em> than what you just
+observed and re-run the tests.</p>
+<p>A working solution is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div></div>
+</div>
+<p>For a complete list of properties that can be set on tests search for
+“Properties on Tests” in the output of:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-properties
+</pre></div>
+</div>
+<p>or visit the CMake documentation <a class="reference external" href="https://cmake.org/cmake/help/v3.19/manual/cmake-properties.7.html#properties-on-tests">online</a>.</p>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>Any custom command can be defined as a test in CMake.</p></li>
+<li><p>Tests can be run through CTest.</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../cmake-syntax/" class="btn btn-neutral float-left" title="CMake syntax" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../probing/" class="btn btn-neutral float-right" title="Probing compilation, linking, and execution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, EuroCC National Competence Centre Sweden.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

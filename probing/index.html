@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Probing compilation, linking, and execution &mdash; CMake Workshop</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script data-domain="enccs.github.io/cmake-workshop" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Target-based build systems with CMake" href="../targets/" />
+    <link rel="prev" title="Creating and running tests with CTest" href="../hello-ctest/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            CMake Workshop
+              <img src="../_static/ENCCS.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/">Setting up your system</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hello-cmake/">From sources to executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-syntax/">CMake syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-ctest/">Creating and running tests with CTest</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Probing compilation, linking, and execution</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#running-custom-commands-at-configure-time">Running custom commands at <em>configure-time</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-commands-for-your-targets">Custom commands for your targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-compilation-linking-and-execution">Testing compilation, linking, and execution</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../targets/">Target-based build systems with CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Finding and using dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fetch-content/">Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python-bindings/">Mixing Python and compiled languages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tips-and-tricks/">Using CMake: tips and tricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../environment/">Detecting your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cxx-fortran/">Mixing C++ and Fortran</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography/">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor’s guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">CMake Workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Probing compilation, linking, and execution</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ENCCS/cmake-workshop/blob/main/content/probing.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="probing-compilation-linking-and-execution">
+<span id="probing"></span><h1>Probing compilation, linking, and execution<a class="headerlink" href="#probing-compilation-linking-and-execution" title="Permalink to this heading"></a></h1>
+<div class="admonition-questions questions admonition" id="questions-0">
+<p class="admonition-title">Questions</p>
+<ul class="simple">
+<li><p>How can you add custom steps to your build system with CMake?</p></li>
+</ul>
+</div>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Learn how and when to use <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a></p></li>
+<li><p>Learn how to use <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_command.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_command</code></span></a> with targets.</p></li>
+<li><p>Learn how to test compilation, linking, and execution.</p></li>
+</ul>
+</div>
+<p>CMake lets you run arbitrary commands at any stage in the project lifecycle.
+This is yet another mechanism for fine-grained customization and we will discuss
+some of the options in this episode.</p>
+<section id="running-custom-commands-at-configure-time">
+<h2>Running custom commands at <em>configure-time</em><a class="headerlink" href="#running-custom-commands-at-configure-time" title="Permalink to this heading"></a></h2>
+<p>The most straightforward method is to explicitly run one (or more) child
+process(es) when invoking the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> command.  This is achieved with the
+<a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a> command.</p>
+<div class="admonition-execute-process signature toggle-shown dropdown admonition" id="signature-0">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">execute_process</span><span class="p">(</span><span class="s">COMMAND</span><span class="w"> </span><span class="s">&lt;cmd1&gt;</span><span class="w"> </span><span class="s">[args1...]]</span>
+<span class="w">                </span><span class="s">[COMMAND</span><span class="w"> </span><span class="s">&lt;cmd2&gt;</span><span class="w"> </span><span class="s">[args2...]</span><span class="w"> </span><span class="s">[...]]</span>
+<span class="w">                </span><span class="s">[WORKING_DIRECTORY</span><span class="w"> </span><span class="s">&lt;directory&gt;]</span>
+<span class="w">                </span><span class="s">[TIMEOUT</span><span class="w"> </span><span class="s">&lt;seconds&gt;]</span>
+<span class="w">                </span><span class="s">[RESULT_VARIABLE</span><span class="w"> </span><span class="s">&lt;variable&gt;]</span>
+<span class="w">                </span><span class="s">[RESULTS_VARIABLE</span><span class="w"> </span><span class="s">&lt;variable&gt;]</span>
+<span class="w">                </span><span class="s">[OUTPUT_VARIABLE</span><span class="w"> </span><span class="s">&lt;variable&gt;]</span>
+<span class="w">                </span><span class="s">[ERROR_VARIABLE</span><span class="w"> </span><span class="s">&lt;variable&gt;]</span>
+<span class="w">                </span><span class="s">[INPUT_FILE</span><span class="w"> </span><span class="s">&lt;file&gt;]</span>
+<span class="w">                </span><span class="s">[OUTPUT_FILE</span><span class="w"> </span><span class="s">&lt;file&gt;]</span>
+<span class="w">                </span><span class="s">[ERROR_FILE</span><span class="w"> </span><span class="s">&lt;file&gt;]</span>
+<span class="w">                </span><span class="s">[OUTPUT_QUIET]</span>
+<span class="w">                </span><span class="s">[ERROR_QUIET]</span>
+<span class="w">                </span><span class="s">[OUTPUT_STRIP_TRAILING_WHITESPACE]</span>
+<span class="w">                </span><span class="s">[ERROR_STRIP_TRAILING_WHITESPACE]</span>
+<span class="w">                </span><span class="s">[ENCODING</span><span class="w"> </span><span class="s">&lt;name&gt;]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Executes one or more child processes.  The standard output and standard error
+streams are recorded into <code class="docutils literal notranslate"><span class="pre">OUTPUT_VARIABLE</span></code> and <code class="docutils literal notranslate"><span class="pre">ERROR_VARIABLE</span></code>,
+respectively. The result of the last child process is saved into
+<code class="docutils literal notranslate"><span class="pre">RESULT_VARIABLE</span></code>.</p>
+</div>
+<p>It is important to note that any command invoked through <code class="docutils literal notranslate"><span class="pre">execute_process</span></code>
+will only be run at <strong>configure-time</strong>, <em>i.e.</em> when running the <code class="docutils literal notranslate"><span class="pre">cmake</span></code>
+command. You <strong>should not</strong> rely on <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a> to update any artifacts at
+<strong>build-time</strong>.</p>
+<div class="admonition-exercise-17-find-a-python-module exercise important admonition" id="exercise-0">
+<p class="admonition-title">Exercise 17: Find a Python module</p>
+<p>In this exercise, we’ll use <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a> to check whether the <a class="reference external" href="https://cffi.readthedocs.io/en/latest/index.html">cffi</a> Python module is
+installed in your environment. On the command line, you would do:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import cffi; print(cffi.__version__)&quot;</span>
+</pre></div>
+</div>
+<p>Your goal is to replicate the same in CMake.
+The scaffold code is in <code class="docutils literal notranslate"><span class="pre">content/code/day-1/17_find_cffi</span></code>.
+You will have to modify the call to <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a> to run the command above.</p>
+<p>A working example is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div>
+<p>Note the use of <code class="docutils literal notranslate"><span class="pre">find_package(Python</span> <span class="pre">REQUIRED)</span></code> to obtain the <code class="docutils literal notranslate"><span class="pre">python</span></code>
+executable. CMake comes with many modules dedicated to the detection of
+dependencies, such as Python. These are conventionally called
+<code class="docutils literal notranslate"><span class="pre">Find&lt;dependency&gt;.cmake</span></code> and you can inspect their documentation with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-module<span class="w"> </span>FindPython<span class="w"> </span><span class="p">|</span><span class="w"> </span>more
+</pre></div>
+</div>
+<p>We will revisit uses of <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/find_package.html"><span class="xref std std-term"><code class="docutils literal notranslate">find_package</code></span></a> later on in <a class="reference internal" href="../dependencies/#dependencies"><span class="std std-ref">Finding and using dependencies</span></a>.</p>
+</section>
+<section id="custom-commands-for-your-targets">
+<h2>Custom commands for your targets<a class="headerlink" href="#custom-commands-for-your-targets" title="Permalink to this heading"></a></h2>
+<p>As mentioned, the main problem of <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/execute_process.html"><span class="xref std std-term"><code class="docutils literal notranslate">execute_process</code></span></a> is that it will run a
+command at <em>configure-time</em>, when the <code class="docutils literal notranslate"><span class="pre">cmake</span></code> command is first invoked.
+It is thus <em>not</em> a viable alternative if we intend to perform some specific
+actions depending on targets or make the result of the custom commands a
+dependency for other targets.
+Both cases have real-world examples, such as when using automatically generated
+code. The CMake command <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_command.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_command</code></span></a> can be used in some of this
+instances.</p>
+<div class="admonition-add-custom-command signature toggle-shown dropdown admonition" id="signature-1">
+<p class="admonition-title"><a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_command.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_command</code></span></a></p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_custom_command</span><span class="p">(</span><span class="s">TARGET</span><span class="w"> </span><span class="s">&lt;target&gt;</span>
+<span class="w">             </span><span class="s">PRE_BUILD</span><span class="w"> </span><span class="s">|</span><span class="w"> </span><span class="s">PRE_LINK</span><span class="w"> </span><span class="s">|</span><span class="w"> </span><span class="s">POST_BUILD</span>
+<span class="w">             </span><span class="s">COMMAND</span><span class="w"> </span><span class="s">command1</span><span class="w"> </span><span class="s">[ARGS]</span><span class="w"> </span><span class="s">[args1...]</span>
+<span class="w">             </span><span class="s">[COMMAND</span><span class="w"> </span><span class="s">command2</span><span class="w"> </span><span class="s">[ARGS]</span><span class="w"> </span><span class="s">[args2...]</span><span class="w"> </span><span class="s">...]</span>
+<span class="w">             </span><span class="s">[BYPRODUCTS</span><span class="w"> </span><span class="s">[files...]]</span>
+<span class="w">             </span><span class="s">[WORKING_DIRECTORY</span><span class="w"> </span><span class="s">dir]</span>
+<span class="w">             </span><span class="s">[COMMENT</span><span class="w"> </span><span class="s">comment]</span>
+<span class="w">             </span><span class="s">[VERBATIM]</span><span class="w"> </span><span class="s">[USES_TERMINAL]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Add one or more custom commands to a target, such as a library or an
+executable.  The commands can be executed before linking (with <code class="docutils literal notranslate"><span class="pre">PRE_BUILD</span></code>
+and <code class="docutils literal notranslate"><span class="pre">PRE_LINK</span></code>) or after (with <code class="docutils literal notranslate"><span class="pre">POST_BUILD</span></code>)</p>
+</div>
+<div class="admonition-exercise-18-before-and-after-build exercise important admonition" id="exercise-1">
+<p class="admonition-title">Exercise 18: Before and after build</p>
+<p>We want to perform some action before and after building a target, in this case a Fortran executable:</p>
+<ul class="simple">
+<li><p>Before building, we want to read the link line, as produced by CMake, and
+echo it to standard output. We use the <code class="docutils literal notranslate"><span class="pre">echo-file.py</span></code> Python script.</p></li>
+<li><p>After building, we want to check the size of the static allocations in the
+binary, by invoking the <code class="docutils literal notranslate"><span class="pre">size</span></code> command. We use the <code class="docutils literal notranslate"><span class="pre">static-size.py</span></code> Python script.</p></li>
+</ul>
+<p>The scaffold code is in <code class="docutils literal notranslate"><span class="pre">content/code/day-1/18_pre_post-f</span></code>.</p>
+<ol class="arabic simple">
+<li><p>Add CMake commands to build the <code class="docutils literal notranslate"><span class="pre">example</span></code> executable from the Fortran
+sources.  Find the text file with the link line under the build folder.
+Hint: have a look in <code class="docutils literal notranslate"><span class="pre">CMakeFiles</span></code> and keep in mind the name you gave to
+the target.</p></li>
+<li><p>Call <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_command.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_command</code></span></a> with <code class="docutils literal notranslate"><span class="pre">PRE_LINK</span></code> to invoke the <code class="docutils literal notranslate"><span class="pre">echo-file.py</span></code> Python script.</p></li>
+<li><p>Call <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/add_custom_command.html"><span class="xref std std-term"><code class="docutils literal notranslate">add_custom_command</code></span></a> with <code class="docutils literal notranslate"><span class="pre">POST_BUILD</span></code> to invoke the <code class="docutils literal notranslate"><span class="pre">static-size.py</span></code> Python script.</p></li>
+</ol>
+<p>A working example is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div>
+</section>
+<section id="testing-compilation-linking-and-execution">
+<h2>Testing compilation, linking, and execution<a class="headerlink" href="#testing-compilation-linking-and-execution" title="Permalink to this heading"></a></h2>
+<p>We also want to be able to run checks on our compilers and linkers. Or check whether a certain library can be used correctly before attempting to build our own artifacts.
+CMake provides modules and commands for these purposes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Check&lt;LANG&gt;CompilerFlag</span></code> providing the <code class="docutils literal notranslate"><span class="pre">check_&lt;LANG&gt;_compiler_flag</span></code>
+function, to check whether a compiler flag is valid for the compiler in use.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Check&lt;LANG&gt;SourceCompiles</span></code> providing the <code class="docutils literal notranslate"><span class="pre">check_&lt;LANG&gt;_source_compiles</span></code>.
+Which check whether a given source file compiles with the compiler in use.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Check&lt;LANG&gt;SourceRuns</span></code> providing the <code class="docutils literal notranslate"><span class="pre">check_&lt;LANG&gt;_source_runs</span></code>, to make
+sure that a given source snippet compiles, links, and runs.</p></li>
+</ul>
+<p>In all cases, <code class="docutils literal notranslate"><span class="pre">&lt;LANG&gt;</span></code> can be one of <code class="docutils literal notranslate"><span class="pre">CXX</span></code>, <code class="docutils literal notranslate"><span class="pre">C</span></code> or <code class="docutils literal notranslate"><span class="pre">Fortran</span></code>.</p>
+<div class="admonition-exercise-19-check-that-a-compiler-accepts-a-compiler-flag exercise important admonition" id="exercise-2">
+<p class="admonition-title">Exercise 19: Check that a compiler accepts a compiler flag</p>
+<p>Compilers evolve: they add and/or remove flags and sometimes you will face
+the need to test whether some flags are available before using them in your
+build.</p>
+<p>The scaffold code is in <code class="docutils literal notranslate"><span class="pre">content/code/day-1/19_check_compiler_flag</span></code>.</p>
+<ol class="arabic">
+<li><p>Implement a <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> to build an executable from the
+<code class="docutils literal notranslate"><span class="pre">asan-example.cpp</span></code> source file.</p></li>
+<li><p>Check that the address sanitizer flags are available with
+<a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CheckCXXCompilerFlag.html"><span class="xref std std-term"><code class="docutils literal notranslate">check_cxx_compiler_flag</code></span></a>. The flags to check are <code class="docutils literal notranslate"><span class="pre">-fsanitize=address</span>
+<span class="pre">-fno-omit-frame-pointer</span></code>. Find the command signature with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-module<span class="w"> </span>CMakeCXXCompilerFlag
+</pre></div>
+</div>
+</li>
+<li><p>If the flags do work, add them to the those used to compile the executable
+target with <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_compile_options.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_compile_options</code></span></a>.</p></li>
+</ol>
+<p>A working example is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div>
+<div class="admonition-exercise-20-testing-runtime-capabilities exercise important admonition" id="exercise-3">
+<p class="admonition-title">Exercise 20: Testing runtime capabilities</p>
+<p>Testing that some features will work properly for your code requires not only
+compiling an object files, but also linking an executable and running it
+successfully.</p>
+<p>The scaffold code is in <code class="docutils literal notranslate"><span class="pre">content/code/day-1/20_check_source_runs</span></code>.</p>
+<ol class="arabic">
+<li><p>Create an executable target from the source file <code class="docutils literal notranslate"><span class="pre">use-uuid.cpp</span></code>.</p></li>
+<li><p>Add a check that linking against the library produces working executables.
+Use the following C code as test:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;uuid/uuid.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">argv</span><span class="p">[])</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">uuid_t</span><span class="w"> </span><span class="n">uuid</span><span class="p">;</span>
+<span class="w">  </span><span class="n">uuid_generate</span><span class="p">(</span><span class="n">uuid</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="https://cmake.org/cmake/help/latest/module/CheckCSourceRuns.html"><span class="xref std std-term"><code class="docutils literal notranslate">check_c_source_runs</code></span></a> requires the test source code to be passed in as
+a <em>string</em>. Find the command signature with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cmake<span class="w"> </span>--help-module<span class="w"> </span>CheckCSourceRuns
+</pre></div>
+</div>
+</li>
+<li><p>If the test is successful, link executable target against the UUID
+library: use the <code class="docutils literal notranslate"><span class="pre">PkgConfig::UUID</span></code> target as argument to
+<a class="reference internal" href="https://cmake.org/cmake/help/latest/command/target_link_libraries.html"><span class="xref std std-term"><code class="docutils literal notranslate">target_link_libraries</code></span></a>.</p></li>
+</ol>
+<p>A working example is in the <code class="docutils literal notranslate"><span class="pre">solution</span></code> subfolder.</p>
+</div>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>You can customize the build system by executing custom commands.</p></li>
+<li><p>CMake offers commands to probe compilation, linking, and execution.</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../hello-ctest/" class="btn btn-neutral float-left" title="Creating and running tests with CTest" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../targets/" class="btn btn-neutral float-right" title="Target-based build systems with CMake" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, EuroCC National Competence Centre Sweden.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

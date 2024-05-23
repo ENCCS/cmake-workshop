@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using CMake: tips and tricks &mdash; CMake Workshop</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/overrides.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script data-domain="enccs.github.io/cmake-workshop" defer="defer" src="https://plausible.io/js/script.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Detecting your environment" href="../environment/" />
+    <link rel="prev" title="Mixing Python and compiled languages" href="../python-bindings/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            CMake Workshop
+              <img src="../_static/ENCCS.jpg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/">Setting up your system</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The lesson</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../hello-cmake/">From sources to executables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cmake-syntax/">CMake syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hello-ctest/">Creating and running tests with CTest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../probing/">Probing compilation, linking, and execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../targets/">Target-based build systems with CMake</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dependencies/">Finding and using dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fetch-content/">Automated dependency handling with <code class="docutils literal notranslate"><span class="pre">FetchContent</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python-bindings/">Mixing Python and compiled languages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using CMake: tips and tricks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#listing-sources-or-globbing-them">Listing sources or globbing them</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#options-and-flow-control">Options and flow control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#organizing-files-into-modules">Organizing files into modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#variables-vs-targets">Variables vs. targets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#functions-and-macros">Functions and macros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-to-list-sources-and-tests">Where to list sources and tests?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#order-and-side-effects">Order and side effects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#where-to-keep-generated-files">Where to keep generated files</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional topics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../environment/">Detecting your environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cxx-fortran/">Mixing C++ and Fortran</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../quick-reference/">Quick Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zbibliography/">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../guide/">Instructor’s guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">CMake Workshop</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Using CMake: tips and tricks</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/ENCCS/cmake-workshop/blob/main/content/tips-and-tricks.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-cmake-tips-and-tricks">
+<span id="tips-and-tricks"></span><h1>Using CMake: tips and tricks<a class="headerlink" href="#using-cmake-tips-and-tricks" title="Permalink to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Learn what tools exist to structure projects as they grow.</p></li>
+<li><p>Discuss the value of localizing scope and avoiding side effects.</p></li>
+<li><p>Recognize more maintainable and less maintainable patterns.</p></li>
+</ul>
+</div>
+<p>As projects grow, things get more complicated: more possibilities, more corner
+cases, more options to the user, and more developers who are contributing and
+may not oversee the entire CMake structure. In this episode we will mention a
+couple of tools to bring some structure and flow-control into larger projects. <a class="footnote-reference brackets" href="#adapt" id="id1">1</a></p>
+<section id="listing-sources-or-globbing-them">
+<h2>Listing sources or globbing them<a class="headerlink" href="#listing-sources-or-globbing-them" title="Permalink to this heading"></a></h2>
+<p>In all our examples we have listed all sources when defining targets.</p>
+<p>In CMake, you can glob patters (e.g. all files that end with <code class="docutils literal notranslate"><span class="pre">*.cpp</span></code>) without
+listing them explicitly. This is tempting, but we advice <strong>against</strong> doing this.
+The reason is that CMake cannot <em>guarantee</em> correct tracking dependency changes
+when you add files after you have configured. <a class="footnote-reference brackets" href="#glob" id="id2">2</a></p>
+<p>Listing files explicitly also allows to <code class="docutils literal notranslate"><span class="pre">grep</span></code> for them in the CMake code to
+see where a modification is likely needed. This can help colleagues in our
+projects who are not familiar with CMake to find out where to change things.</p>
+</section>
+<section id="options-and-flow-control">
+<h2>Options and flow control<a class="headerlink" href="#options-and-flow-control" title="Permalink to this heading"></a></h2>
+<p>You may want to give the user the possibility to decide whether they want to
+enable an option or not.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># by default this one will be ON</span>
+<span class="nb">option</span><span class="p">(</span><span class="s">ENABLE_MPI</span><span class="w"> </span><span class="s2">&quot;Configure for MPI parallelization&quot;</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span>
+
+<span class="nb">if</span><span class="p">(</span><span class="s">ENABLE_MPI</span><span class="p">)</span>
+<span class="w">  </span><span class="nb">find_package</span><span class="p">(</span><span class="s">MPI</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">COMPONENTS</span><span class="w"> </span><span class="s">Fortran</span><span class="p">)</span>
+<span class="nb">else</span><span class="p">()</span>
+<span class="w">  </span><span class="nb">message</span><span class="p">(</span><span class="s">STATUS</span><span class="w"> </span><span class="s2">&quot;no problem, building without MPI&quot;</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now the user can decide:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>cmake<span class="w"> </span>-S.<span class="w"> </span>-Bbuild<span class="w"> </span>-DENABLE_MPI<span class="o">=</span>OFF
+</pre></div>
+</div>
+</section>
+<section id="organizing-files-into-modules">
+<h2>Organizing files into modules<a class="headerlink" href="#organizing-files-into-modules" title="Permalink to this heading"></a></h2>
+<p>Modules are collections of functions and macros and are either CMake- or user-defined.
+CMake comes with a rich ecosystem of modules and you will probably write a few
+of your own to encapsulate frequently used functions or macros in your CMake
+scripts.</p>
+<p>We have seen this module earlier today:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">CMakePrintHelpers</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can collect related CMake-code into a file called <code class="docutils literal notranslate"><span class="pre">my_lengthy_code.cmake</span></code>
+and then include it in another CMake code:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">include</span><span class="p">(</span><span class="s">my_lengthy_code</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This can help organizing projects that are growing out of hand and separate
+concerns.</p>
+</section>
+<section id="variables-vs-targets">
+<h2>Variables vs. targets<a class="headerlink" href="#variables-vs-targets" title="Permalink to this heading"></a></h2>
+<p>In <a class="reference internal" href="../targets/#targets"><span class="std std-ref">Target-based build systems with CMake</span></a> we have motivated why targets are preferable over variables.</p>
+<p>When you portion your project into modules, then variable declaration impose an
+order and the risk is high that somebody will not know about the implicit order
+and reorder modules one day and the behavior will change.</p>
+<p>Try to minimize the use of user-defined variables. They can point to a
+sub-optimal solution and a better, more state-less, declarative, solution may
+exist.</p>
+</section>
+<section id="functions-and-macros">
+<h2>Functions and macros<a class="headerlink" href="#functions-and-macros" title="Permalink to this heading"></a></h2>
+<p><strong>Functions</strong> and <strong>macros</strong> are built on top of the basic built-in commands
+and are either CMake- or user-defined.  These prove useful to avoid repetition
+in your CMake scripts.  The difference between a function and a macro is their
+<em>scope</em>:</p>
+<ol class="arabic simple">
+<li><p>Functions have their own scope: variables defined inside a function are not
+propagated back to the caller.</p></li>
+<li><p>Macros do not have their own scope: variables from the parent scope can be
+modified and new variables in the parent scope can be set.</p></li>
+</ol>
+<p>Prefer functions over macros to minimize side-effects.</p>
+</section>
+<section id="where-to-list-sources-and-tests">
+<h2>Where to list sources and tests?<a class="headerlink" href="#where-to-list-sources-and-tests" title="Permalink to this heading"></a></h2>
+<p>Some projects collect all sources in one file, all tests in another
+file, and carry them across in variables:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>project/
+├── CMakeLists.txt
+├── cmake
+|   ├── sources.cmake
+|   ├── tests.cmake
+|   └── definitions.cmake
+├── external
+└── src
+    ├── evolution
+    ├── initial
+    ├── io
+    └── parser
+</pre></div>
+</div>
+<p>Do this instead (sources, definitions, and tests defined in the “closest” <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>project/
+├── CMakeLists.txt
+├── external
+│   ├── CMakeLists.txt
+└── src
+    ├── CMakeLists.txt
+    ├── evolution
+    │   ├── CMakeLists.txt
+    ├── initial
+    │   ├── CMakeLists.txt
+    ├── io
+    │   ├── CMakeLists.txt
+    └── parser
+        └── CMakeLists.txt
+</pre></div>
+</div>
+<p>The reason is that this will minimize side-effects, ordering effects, and
+simplify maintenance for those who want to add or rename source files: they can
+do it in one place, close to where they are coding.</p>
+</section>
+<section id="order-and-side-effects">
+<h2>Order and side effects<a class="headerlink" href="#order-and-side-effects" title="Permalink to this heading"></a></h2>
+<p>When portioning your project into modules, design them in a way so that order
+does not matter (much).</p>
+<p>This is easier with functions than with macros and easier with targets than with
+variables.</p>
+<p>Avoid variables with parent or global scope. Encapsulate and prefer separation
+of concerns.</p>
+</section>
+<section id="where-to-keep-generated-files">
+<h2>Where to keep generated files<a class="headerlink" href="#where-to-keep-generated-files" title="Permalink to this heading"></a></h2>
+<p>CMake allows us to generate files at configure- or build-time.  When generating
+files, we recommend to <strong>always</strong> generate into the build folder, never outside.</p>
+<p>The reason is that you always want to maintain the possibility to configure
+different builds with the same source without having to copy the entire project
+to a different place.</p>
+<p class="rubric">Footnotes</p>
+<dl class="footnote brackets">
+<dt class="label" id="adapt"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>This episode is adapted, with permission, from the <a class="reference external" href="https://coderefinery.github.io/cmake-workshop/growing-projects">CodeRefinery CMake lesson</a>.</p>
+</dd>
+<dt class="label" id="glob"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>A glob would be done using the <a class="reference internal" href="https://cmake.org/cmake/help/latest/command/file.html"><span class="xref std std-term"><code class="docutils literal notranslate">file</code></span></a> command. We quote the explanation in
+the official documentation as to why it is generally not safe to use the
+<code class="docutils literal notranslate"><span class="pre">GLOB</span></code> subcommand:</p>
+<blockquote>
+<div><p>If no <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file changes when a source is added or removed
+then the generated build system cannot know when to ask CMake to
+regenerate. The <code class="docutils literal notranslate"><span class="pre">CONFIGURE_DEPENDS</span></code> flag may not work reliably on all
+generators, or if a new generator is added in the future that cannot
+support it, projects using it will be stuck. Even if
+<code class="docutils literal notranslate"><span class="pre">CONFIGURE_DEPENDS</span></code> works reliably, there is still a cost to perform
+the check on every rebuild.</p>
+</div></blockquote>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../python-bindings/" class="btn btn-neutral float-left" title="Mixing Python and compiled languages" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../environment/" class="btn btn-neutral float-right" title="Detecting your environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, EuroCC National Competence Centre Sweden.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

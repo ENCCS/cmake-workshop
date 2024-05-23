@@ -1,0 +1,15 @@
+name: cmake-workshop
+channels:
+  - conda-forge
+dependencies:
+  - cffi
+  - cmake >=3.18
+  - compilers
+  - graphviz
+  - libblas
+  - liblapack
+  - libuuid
+  - openmpi
+  - ninja
+  - pkg-config
+  - python >=3.8
